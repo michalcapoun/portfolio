@@ -160,33 +160,46 @@ span {
   border: 2px solid var(--main-color);
 }
 
-.projects {
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-color);
+  width: 50px;
+}
+
+.work {
   background: var(--bg-color);
   color: black;
 }
-.projects h2 {
+.work h2 {
   margin-bottom: 5rem;
   color: black;
 }
-.projects-container {
+.work-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   gap: 2rem;
 }
-.projects-box {
+.work-box {
   border: 3px solid var(--main-color);
   height: 300px;
   border-radius: 1em;
   cursor: pointer;
   transition: 0.3s ease;
 }
-.projects-box:hover {
+.work-box:hover {
   background: var(--main-color);
   color: white;
   transform: scale(1.03);
 }
-.projects-box .projects-info {
+.work-box .work-info {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -194,11 +207,11 @@ span {
   align-items: baseline;
   padding: 5rem;
 }
-.projects-info h4 {
+.work-info h4 {
   font-size: 36px;
   font-weight: 500;
 }
-.projects-info p {
+.work-info p {
   margin-top: 2rem;
   font-size: 20px;
   font-weight: 400;
