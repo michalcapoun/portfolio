@@ -159,3 +159,48 @@ span {
   color: var(--main-color);
   border: 2px solid var(--main-color);
 }
+
+.projects {
+  background: var(--bg-color);
+  color: black;
+}
+.projects h2 {
+  margin-bottom: 5rem;
+  color: black;
+}
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: 2rem;
+}
+.projects-box {
+  border: 3px solid var(--main-color);
+  height: 300px;
+  border-radius: 1em;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.projects-box:hover {
+  background: var(--main-color);
+  color: white;
+  transform: scale(1.03);
+}
+.projects-box .projects-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+  align-items: baseline;
+  padding: 5rem;
+}
+.projects-info h4 {
+  font-size: 36px;
+  font-weight: 500;
+}
+.projects-info p {
+  margin-top: 2rem;
+  font-size: 20px;
+  font-weight: 400;
+  margin: auto;
+}
