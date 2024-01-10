@@ -316,15 +316,6 @@ section {
   flex-direction: column;
 }
 
-/* .article-container {
-  display: flex;
-  text-align: initial;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 2.5rem;
-  justify-content: space-around;
-} */
-
 .article {
   display: flex;
   width: 10rem;
@@ -368,4 +359,31 @@ section {
 
 .article-container article {
   text-align: left;
+}
+
+/* work */
+
+#work {
+  position: relative;
+}
+
+.color-container {
+  border-color: rgb(163, 163, 163);
+  background: rgb(255, 255, 255);
+}
+
+.work-img {
+  border-radius: 2rem;
+  width: 90%;
+  height: 90%;
+}
+
+.work-title {
+  margin: 1rem;
+  color: black;
+}
+
+.work-btn {
+  color: black;
+  border-color: rgb(163, 163, 163);
 }
