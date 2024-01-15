@@ -12,7 +12,7 @@
     />
   </head>
   <body>
-    <nav class="desktop-nav">
+    <nav id="desktop-nav">
       <div class="logo">Michal Čapoun</div>
       <div>
         <ul class="nav-links">
@@ -24,7 +24,7 @@
       </div>
     </nav>
 
-    <nav class="hamburger-nav">
+    <nav id="hamburger-nav">
       <div class="logo">Michal Čapoun</div>
       <div class="hamburger-menu">
         <div class="hamburger-icon" onclick="toggleMenu()">
@@ -38,20 +38,19 @@
           <li><a href="#work" onclick="toggleMenu()">Work</a></li>
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
-      </div>
+    </div>
     </nav>
 
     <section id="profile">
       <div class="section-pic-container">
         <img
-          src="assets/hero-low-res.png"
+          src="assets/hero.png"
           alt="Michal Čapoun profile picture"
         />
       </div>
       <div class="section-text">
         <p class="section-text-p1">My name is</p>
         <h1 class="title">Michal Čapoun</h1>
-        <p class="section-text-p1">and I am</p>
         <h1 class="section-text-p2">Software Developer</h1>
         <div class="btn-containter">
           <button
@@ -64,7 +63,7 @@
             Contact Me
           </button>
         </div>
-        <div class="socials-container"></div>
+        <div id="socials-container"></div>
         <a
           class="icon"
           href="https://www.linkedin.com/in/michalcapoun/"
@@ -84,7 +83,7 @@
         <div class="section-pic-container">
           <img
             src="assets/hero-low-res.png"
-            alt="Profile picture"
+            alt=""
             class="about-pic"
           />
         </div>
@@ -165,8 +164,6 @@
             <a href="https://github.com/michalcapoun/foxhub" target="_blank">
               <button class="btn btn-color-2 work-btn">GitHub</button>
           </a>
-          </div>
-          <div class="btn-container">
             <a href="https://foxhub.gfapp.eu" target="_blank">
               <button class="btn btn-color-2 work-btn">Live Version</button>
           </a>
@@ -181,8 +178,6 @@
             <a href="https://github.com/michalcapoun/dragonaid" target="_blank">
               <button class="btn btn-color-2 work-btn">GitHub</button>
           </a>
-          </div>
-          <div class="btn-container">
             <a href="https://dragonaid.cloud/" target="_blank">
               <button class="btn btn-color-2 work-btn">Live Version</button>
           </a>
@@ -197,8 +192,6 @@
             <a href="https://github.com/michalcapoun/foxhub" target="_blank">
               <button class="btn btn-color-2 work-btn">GitHub</button>
           </a>
-          </div>
-          <div class="btn-container">
             <a href="https://foxhub.gfapp.eu" target="_blank">
               <button class="btn btn-color-2 work-btn">Live Version</button>
           </a>
@@ -214,7 +207,7 @@
       <div class="contact-info-upper-container">
         <div class="contact-info-container">
           <i class='bx bx-envelope' ></i>
-          <p><a href="mailto:example@gmail.com">example@gmail.com</a></p>
+          <p><a href="mailto:example@gmail.com">contact@michalcapoun.cz</a></p>
         </div>
         <div class="contact-info-container">
           <i class='bx bxl-linkedin-square' ></i>
@@ -224,7 +217,7 @@
     </section>
 
     <footer>
-      <p>Copyright &#169; 2024 Michal Čapoun, All Rights Reserved</p>
+      <p>Copyright &#169; 2024 Michal Čapoun</p>
     </footer>
 
     <script src="script.js"></script>
