@@ -9,10 +9,10 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .desktop-nav {
+  #desktop-nav {
     display: none;
   }
-  .hamburger-nav {
+  #hamburger-nav {
     display: flex;
   }
   #tech,

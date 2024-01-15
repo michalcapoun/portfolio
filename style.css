@@ -9,14 +9,11 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  margin-top: 5vh;
 }
 
 html {
   scroll-behavior: smooth;
-}
-
-p {
-  color: rgb(85, 85, 85);
 }
 
 /* transition */
@@ -34,12 +31,23 @@ nav,
 }
 
 nav {
-  justify-content: space-around;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  justify-content: space-between;
   align-items: center;
+  padding: 0 2rem;
   height: 5vh;
+  box-sizing: border-box;
 }
 
 .nav-links {
+  display: flex;
   gap: 2rem;
   list-style: none;
   font-size: 1.5rem;
@@ -68,13 +76,13 @@ a:hover {
 
 /* hamburger menu */
 
-.hamburger-nav {
+#hamburger-nav {
   display: none;
 }
 
 .hamburger-menu {
   position: relative;
-  display: block;
+  display: inline-block;
 }
 
 .hamburger-icon {
@@ -111,7 +119,7 @@ a:hover {
   font-size: 1.5rem;
   color: black;
   text-decoration: none;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.3 ease-in-out;
 }
 
 .menu-links li {
@@ -149,8 +157,8 @@ a:hover {
 /* sections */
 
 section {
-  padding-top: 4vh;
-  height: 96vh;
+  /* padding-top: 4vh;
+  height: 96vh; */
   margin: 0 10rem;
   box-sizing: border-box;
   min-height: fit-content;
@@ -166,7 +174,7 @@ section {
   display: flex;
   justify-content: center;
   gap: 5rem;
-  height: 80vh;
+  /* height: 80vh; */
 }
 
 .section-pic-container {
@@ -199,7 +207,7 @@ section {
   text-align: center;
 }
 
-.socials-container {
+#socials-container {
   display: flex;
   justify-content: center;
   margin-top: 1rem;
@@ -216,6 +224,7 @@ section {
 
 .btn-container {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 1rem;
 }
@@ -230,7 +239,7 @@ section {
 
 .btn-color-1,
 .btn-color-2 {
-  border: rgb(53, 53, 53) 0.1rem solid;
+  border: black 0.1rem solid;
 }
 
 .btn-color-1:hover,
@@ -240,12 +249,13 @@ section {
 
 .btn-color-1,
 .btn-color-2:hover {
-  background: rgb(53, 53, 53);
+  background: black;
   color: white;
 }
 
 .btn-color-1:hover {
-  background: rgb(0, 0, 0);
+  background: white;
+  color: black;
 }
 
 .btn-color-2 {
@@ -253,14 +263,10 @@ section {
 }
 
 .btn-color-2:hover {
-  border: rgb(255, 255, 255) 0.1rem solid;
+  border: white 0.1rem solid;
 }
 
-.btn-container {
-  gap: 1rem;
-}
-
-/* about */
+/* about section */
 
 #about {
   position: relative;
@@ -270,6 +276,16 @@ section {
   gap: 2rem;
   margin-bottom: 2rem;
   margin-top: 2rem;
+}
+
+.details-container {
+  padding: 1.5rem;
+  flex: 1;
+  background: white;
+  border-radius: 2rem;
+  border: black 0.1rem solid;
+  border-color: black;
+  text-align: center;
 }
 
 .about-details-container {
@@ -288,7 +304,6 @@ section {
 
 .section-container {
   gap: 4rem;
-  height: 80%;
 }
 
 .section-pic-container {
@@ -297,7 +312,7 @@ section {
   margin: auto 0;
 }
 
-/* tech */
+/* tech section */
 
 #tech {
   position: relative;
@@ -335,16 +350,6 @@ section {
   vertical-align: middle;
 }
 
-.details-container {
-  padding: 1.5rem;
-  flex: 1;
-  background: white;
-  border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
-  text-align: center;
-}
-
 .article-container article h3 {
   display: inline-flex;
   align-items: center;
@@ -368,8 +373,8 @@ section {
 }
 
 .color-container {
-  border-color: rgb(163, 163, 163);
-  background: rgb(255, 255, 255);
+  border-color: black;
+  background: white;
 }
 
 .work-img {
@@ -385,25 +390,24 @@ section {
 
 .work-btn {
   color: black;
-  border-color: rgb(163, 163, 163);
+  border-color: black;
 }
 
-/* contact */
+/* contact section */
 
 #contact {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 70vh;
+  /* height: 70vh; */
 }
 
 .contact-info-upper-container {
   display: flex;
   justify-content: center;
   border-radius: 2rem;
-  border: rgb(53, 53, 53) 0.1rem solid;
-  border-color: rgb(163, 163, 163);
-  background: (250, 250, 250);
+  border: black 0.1rem solid;
+  background: white;
   margin: 2rem auto;
   padding: 0.5rem;
 }
