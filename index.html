@@ -17,7 +17,6 @@
       <div>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
-          <li><a href="#tech">Tech</a></li>
           <li><a href="#work">Work</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
@@ -34,24 +33,28 @@
         </div>
         <ul class="menu-links">
           <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#tech" onclick="toggleMenu()">Tech</a></li>
           <li><a href="#work" onclick="toggleMenu()">Work</a></li>
           <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
         </ul>
-    </div>
+      </div>
     </nav>
 
-    <section id="profile">
+    <section id="about">
       <div class="section-pic-container">
-        <img
-          src="assets/hero.png"
-          alt="Michal Čapoun profile picture"
-        />
+        <img src="assets/hero.png" alt="Michal Čapoun profile picture" />
       </div>
       <div class="section-text">
         <p class="section-text-p1">My name is</p>
         <h1 class="title">Michal Čapoun</h1>
         <h1 class="section-text-p2">Software Developer</h1>
+        <div class="about-container">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
+            unde inventore delectus quasi laboriosam aut deserunt facilis,
+            reiciendis, magni tempora totam quod neque, ipsa hic recusandae
+            illum libero id quia.
+          </p>
+        </div>
         <div class="btn-containter">
           <button
             class="btn btn-color-2"
@@ -68,136 +71,78 @@
           class="icon"
           href="https://www.linkedin.com/in/michalcapoun/"
           target="_blank"
-          ><i class="bx bxl-linkedin-square"></i
+          ><i class="bx bxl-linkedin-square"> </i
         ></a>
         <a class="icon" href="https://github.com/michalcapoun" target="_blank"
-          ><i class="bx bxl-github"></i
+          ><i class="bx bxl-github"> </i
         ></a>
-      </div>
-    </section>
-
-    <section id="about">
-      <p class="section-text-p1">Get to know more</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section-pic-container">
-          <img
-            src="assets/hero-low-res.png"
-            alt=""
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-          <div class="text-container">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Cupiditate magnam dolor ex ipsam eligendi! Magnam explicabo in
-              atque aperiam eos odit quaerat fugit consequuntur dignissimos,
-              autem ipsum perspiciatis blanditiis laborum!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="tech">
-      <p class="section-text-p1">Explore My</p>
-      <h1 class="title">Tech</h1>
-      <div class="tech-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="tech-sub-title">Frontend</h2>
-            <div class="article-container">
-              <article>
-                <h3>HTML</h3>
-              </article>
-              <article>
-                <h3>CSS</h3>
-              </article>
-              <article>
-                <h3>JavaScript</h3>
-              </article>
-              <article>
-                <h3>TypeScript</h3>
-              </article>
-              <article>
-                <h3>Angular</h3>
-              </article>
-            </div>
-          </div>
-          <div class="details-container">
-            <h2 class="tech-sub-title">Backend</h2>
-            <div class="article-container">
-              <article>
-                <h3>Java</h3>
-              </article>
-              <article>
-                <h3>Spring</h3>
-              </article>
-              <article>
-                <h3>MySQL</h3>
-              </article>
-              <article>
-                <h3>Node JS</h3>
-              </article>
-              <article>
-                <h3>Git</h3>
-              </article>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
     <section id="work">
       <p class="section-text-p1">Browse My</p>
       <h1 class="title">Work</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="#" alt="" class="project-img">
+      <div class="tech-details-container">
+        <div class="about-container">
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="#" alt="" class="project-img" />
+            </div>
+            <h2 class="tech-sub-title work-title">FoxHub</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
+              nisi repellendus perspiciatis dolores libero sed optio, corrupti
+              porro enim aliquid architecto quas consectetur deserunt ullam non
+              neque. Quas, iusto explicabo.
+            </p>
+            <div class="btn-container">
+              <a href="https://github.com/michalcapoun/foxhub" target="_blank"
+                >GitHub
+              </a>
+              <a href="https://foxhub.gfapp.eu" target="_blank">Live Version</a>
+            </div>
           </div>
-          <h2 class="tech-sub-title work-title">FoxHub</h2>
-          <div class="btn-container">
-            <a href="https://github.com/michalcapoun/foxhub" target="_blank">
-              <button class="btn btn-color-2 work-btn">GitHub</button>
-          </a>
-            <a href="https://foxhub.gfapp.eu" target="_blank">
-              <button class="btn btn-color-2 work-btn">Live Version</button>
-          </a>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="#" alt="" class="project-img" />
+            </div>
+            <h2 class="tech-sub-title work-title">Portfolio</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
+              nisi repellendus perspiciatis dolores libero sed optio, corrupti
+              porro enim aliquid architecto quas consectetur deserunt ullam non
+              neque. Quas, iusto explicabo.
+            </p>
+            <div class="btn-container">
+              <a href="https://github.com/michalcapoun/foxhub" target="_blank"
+                >GitHub
+              </a>
+              <a href="https://foxhub.gfapp.eu" target="_blank">Live Version</a>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img src="#" alt="" class="project-img" />
+            </div>
+            <h2 class="tech-sub-title work-title">DragonAid</h2>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
+              nisi repellendus perspiciatis dolores libero sed optio, corrupti
+              porro enim aliquid architecto quas consectetur deserunt ullam non
+              neque. Quas, iusto explicabo.
+            </p>
+            <div class="btn-container">
+              <a
+                href="https://github.com/michalcapoun/dragonaid"
+                target="_blank"
+                >GitHub
+              </a>
+              <a href="https://dragonaid.cloud/" target="_blank"
+                >Live Version
+              </a>
+            </div>
           </div>
         </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="#" alt="" class="project-img">
-          </div>
-          <h2 class="tech-sub-title work-title">DragonAid</h2>
-          <div class="btn-container">
-            <a href="https://github.com/michalcapoun/dragonaid" target="_blank">
-              <button class="btn btn-color-2 work-btn">GitHub</button>
-          </a>
-            <a href="https://dragonaid.cloud/" target="_blank">
-              <button class="btn btn-color-2 work-btn">Live Version</button>
-          </a>
-          </div>
-        </div>
-        <div class="details-container color-container">
-          <div class="article-container">
-            <img src="#" alt="" class="project-img">
-          </div>
-          <h2 class="tech-sub-title work-title">Project Three</h2>
-          <div class="btn-container">
-            <a href="https://github.com/michalcapoun/foxhub" target="_blank">
-              <button class="btn btn-color-2 work-btn">GitHub</button>
-          </a>
-            <a href="https://foxhub.gfapp.eu" target="_blank">
-              <button class="btn btn-color-2 work-btn">Live Version</button>
-          </a>
-          </div>
-        </div>
-      </div>
       </div>
     </section>
 
@@ -206,12 +151,14 @@
       <h1 class="title">Contact Me</h1>
       <div class="contact-info-upper-container">
         <div class="contact-info-container">
-          <i class='bx bx-envelope' ></i>
+          <i class="bx bx-envelope"></i>
           <p><a href="mailto:example@gmail.com">contact@michalcapoun.cz</a></p>
         </div>
         <div class="contact-info-container">
-          <i class='bx bxl-linkedin-square' ></i>
-          <p><a href="https://www.linkedin.com/in/michalcapoun/">LinkedIn</a></p>
+          <i class="bx bxl-linkedin-square"></i>
+          <p>
+            <a href="https://www.linkedin.com/in/michalcapoun/">LinkedIn</a>
+          </p>
         </div>
       </div>
     </section>
