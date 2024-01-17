@@ -3,8 +3,12 @@
     height: 83vh;
     margin-bottom: 6rem;
   }
-  .about-containers {
+  .about-container {
     flex-wrap: wrap;
+  }
+  #contact,
+  #work {
+    height: fit-content;
   }
 }
 
@@ -30,14 +34,12 @@
   section {
     margin: 0 5%;
   }
-
   .section-pic-container {
     width: 275px;
     height: 275px;
     margin: 0 auto 2rem;
   }
-
-  .about-containers {
+  .about-container {
     margin-top: 0;
   }
 }
@@ -58,7 +60,7 @@
     height: fit-content;
     margin-bottom: 2rem;
   }
-  .about-containers,
+  .about-container,
   .contact-info-upper-container,
   .btn-container {
     flex-wrap: wrap;
@@ -75,6 +77,11 @@
   }
   .logo {
     font-size: 1.5rem;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
   }
   .section-pic-container {
     width: auto;
