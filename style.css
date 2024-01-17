@@ -331,6 +331,10 @@ section {
   gap: 2rem;
 }
 
+.coming-soon {
+  filter: blur(5px);
+}
+
 /* contact section */
 
 #contact {
