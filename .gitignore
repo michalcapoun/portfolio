@@ -13,3 +13,7 @@ Thumbs.db
 
 # Archive files
 *.7z
+
+*.pdf
+*.png
+*.jpg
