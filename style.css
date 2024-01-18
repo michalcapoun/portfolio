@@ -37,11 +37,11 @@ nav {
   width: 100%;
   z-index: 1000;
   background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(2px);
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
-  height: 5vh;
+  height: 6vh;
   box-sizing: border-box;
 }
 
@@ -188,35 +188,14 @@ section {
   padding: 1rem;
   width: 8rem;
   border-radius: 2rem;
-}
-
-.btn-color-1,
-.btn-color-2 {
+  background: none;
   border: black 0.1rem solid;
 }
 
-.btn-color-1:hover,
-.btn-color-2:hover {
-  cursor: pointer;
-}
-
-.btn-color-1,
-.btn-color-2:hover {
+.btn:hover {
+  border: white 0.1rem solid;
   background: black;
   color: white;
-}
-
-.btn-color-1:hover {
-  background: white;
-  color: black;
-}
-
-.btn-color-2 {
-  background: none;
-}
-
-.btn-color-2:hover {
-  border: white 0.1rem solid;
 }
 
 /* about section */
@@ -225,7 +204,6 @@ section {
   display: flex;
   justify-content: center;
   gap: 5rem;
-  height: 80vh;
 }
 
 .section-pic-container {
@@ -271,13 +249,7 @@ section {
   margin-top: 2rem;
 }
 
-.about-details-container {
-  justify-content: center;
-  flex-direction: column;
-}
-
-.about-container,
-.about-details-container {
+.about-container {
   display: flex;
 }
 
@@ -318,7 +290,6 @@ section {
 }
 
 .tech-sub-title {
-  color: rgb(85, 85, 85);
   font-weight: 600;
   font-size: 2rem;
   margin-bottom: 2rem;
@@ -333,6 +304,23 @@ section {
 
 .coming-soon {
   filter: blur(5px);
+}
+
+.article-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.article-container p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: white;
+  font-weight: 600;
+  -webkit-text-stroke: 2px black;
 }
 
 /* contact section */
