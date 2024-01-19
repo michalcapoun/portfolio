@@ -38,8 +38,6 @@ nav {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(2px);
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
@@ -61,7 +59,7 @@ a {
 }
 
 a:hover {
-  color: grey;
+  color: black;
   text-decoration: underline;
   text-underline-offset: 0.5rem;
   text-decoration-color: rgb(181, 181, 181);
@@ -159,6 +157,7 @@ a:hover {
 
 section {
   padding-top: 6vh;
+  margin: 0 1%;
   flex: 0 0 100vh;
   box-sizing: border-box;
   min-height: fit-content;
@@ -285,7 +284,7 @@ section {
 }
 
 .details-container {
-  padding: 1.5rem;
+  padding: 0.5rem;
   background: white;
   border-radius: 2rem;
   border: black 0.1rem solid;
@@ -373,4 +372,17 @@ section {
 
 footer p {
   text-align: center;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.2);
+  /* border-radius: 16px; */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.glass-effect:hover {
+  background: rgba(173, 216, 230, 0.3); /* Light blue color with transparency */
+  color: black;
 }
