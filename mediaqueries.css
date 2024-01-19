@@ -31,9 +31,6 @@
   .section-container {
     height: fit-content;
   }
-  section {
-    margin: 0 5%;
-  }
   .section-pic-container {
     width: 275px;
     height: 275px;
