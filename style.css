@@ -78,15 +78,10 @@ header {
   font-size: 1.5rem;
 }
 
-/* .nav-link {
-  color: black;
-  text-decoration: none;
+.nav-link.active {
+  color: blue;
+  font-weight: bold;
 }
-
-.active-link {
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
-} */
 
 a {
   color: black;
@@ -160,10 +155,10 @@ a:hover {
   text-decoration: none;
   transition: all 0.3 ease-in-out;
 }
-
+/* 
 .menu-links li {
   list-style: none;
-}
+} */
 
 .menu-links.open {
   max-height: 300px;
