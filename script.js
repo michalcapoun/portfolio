@@ -33,7 +33,7 @@ const updateActiveNavbarLink = () => {
       currentPosition <= targetSection.offsetTop + targetSection.offsetHeight;
 
     if (isInSectionView && index !== currentActiveIndex) {
-      navbarLinks.forEach((l) => l.classList.remove("active"));
+      navbarLinks.forEach((el) => el.classList.remove("active"));
       link.classList.add("active");
       currentActiveIndex = index;
     } else if (!isInSectionView && index === currentActiveIndex) {
