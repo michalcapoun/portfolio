@@ -1,7 +1,34 @@
-function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
+// HAMBURGER MENU
 
-  menu.classList.toggle("open");
-  icon.classList.toggle("open");
-}
+document.addEventListener("DOMContentLoaded", function () {
+  var hamburger = document.querySelector(".hamburger-icon");
+  var menuLinks = document.querySelector(".menu-links");
+
+  hamburger.addEventListener("click", function () {
+    menuLinks.classList.toggle("open");
+  });
+
+  document.querySelectorAll(".nav-link").forEach(function (link) {
+    link.addEventListener("click", function () {
+      menuLinks.classList.remove("open");
+    });
+  });
+});
+
+// NAVBAR
+
+document.querySelectorAll("nav-link").forEach((link) => {
+  link.addEventListener("click", function () {
+    document
+      .querySelectorAll("nav-link")
+      .forEach((l) => l.classList.remove("active-link"));
+
+    this.classList.add("active-link");
+  });
+});
+
+window.addEventListener("scroll", function () {
+  document
+    .querySelectorAll(".nav-link")
+    .forEach((link) => link.classList.remove("active-link"));
+});
