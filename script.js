@@ -15,23 +15,48 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// NAVBAR
+// NAVBAR SCROLL EFFECT
 
-document.querySelectorAll("nav-link").forEach((link) => {
-  link.addEventListener("click", function () {
-    document
-      .querySelectorAll("nav-link")
-      .forEach((l) => l.classList.remove("active-link"));
+const selectElements = (selector, selectAll = false) => {
+  selector = selector.trim();
+  return selectAll
+    ? [...document.querySelectorAll(selector)]
+    : document.querySelector(selector);
+};
 
-    this.classList.add("active-link");
+const addScrollListener = (element, listener) => {
+  element.addEventListener("scroll", listener);
+};
+
+let navbarLinks = selectElements("#desktop-header .nav-link", true);
+
+let currentActiveIndex = -1;
+
+const updateActiveNavbarLink = () => {
+  const scrollOffset = 200;
+  const currentPosition = window.scrollY + scrollOffset;
+
+  navbarLinks.forEach((link, index) => {
+    const targetSection = selectElements(link.hash);
+    if (!link.hash || !targetSection) return;
+
+    const isInSectionView =
+      currentPosition >= targetSection.offsetTop &&
+      currentPosition <= targetSection.offsetTop + targetSection.offsetHeight;
+
+    if (isInSectionView && index !== currentActiveIndex) {
+      navbarLinks.forEach((l) => l.classList.remove("active"));
+      link.classList.add("active");
+      currentActiveIndex = index;
+    } else if (!isInSectionView && index === currentActiveIndex) {
+      link.classList.remove("active");
+      currentActiveIndex = -1;
+    }
   });
-});
+};
 
-window.addEventListener("scroll", function () {
-  document
-    .querySelectorAll(".nav-link")
-    .forEach((link) => link.classList.remove("active-link"));
-});
+window.addEventListener("load", updateActiveNavbarLink);
+addScrollListener(document, updateActiveNavbarLink);
 
 // ABOUT BUTTONS
 
