@@ -400,6 +400,19 @@ section {
   font-size: 25px;
 }
 
+#copyMessage {
+  position: absolute;
+  top: 60px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#phoneNumber {
+  cursor: pointer;
+}
+
 /* footer */
 
 #footer {
