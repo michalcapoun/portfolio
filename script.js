@@ -1,8 +1,8 @@
 // HAMBURGER MENU
 
 document.addEventListener("DOMContentLoaded", function () {
-  var hamburger = document.querySelector(".hamburger-icon");
-  var menuLinks = document.querySelector(".menu-links");
+  const hamburger = document.querySelector(".hamburger-icon");
+  const menuLinks = document.querySelector(".menu-links");
 
   hamburger.addEventListener("click", function () {
     menuLinks.classList.toggle("open");
@@ -17,19 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // NAVBAR SCROLL EFFECT
 
-const selectElements = (selector, selectAll = false) => {
-  selector = selector.trim();
-  return selectAll
-    ? [...document.querySelectorAll(selector)]
-    : document.querySelector(selector);
-};
-
-const addScrollListener = (element, listener) => {
-  element.addEventListener("scroll", listener);
-};
-
-let navbarLinks = selectElements("#desktop-header .nav-link", true);
-
+const navbarLinks = document.querySelectorAll("#desktop-header .nav-link");
 let currentActiveIndex = -1;
 
 const updateActiveNavbarLink = () => {
@@ -37,7 +25,7 @@ const updateActiveNavbarLink = () => {
   const currentPosition = window.scrollY + scrollOffset;
 
   navbarLinks.forEach((link, index) => {
-    const targetSection = selectElements(link.hash);
+    const targetSection = document.querySelector(link.hash);
     if (!link.hash || !targetSection) return;
 
     const isInSectionView =
@@ -56,7 +44,7 @@ const updateActiveNavbarLink = () => {
 };
 
 window.addEventListener("load", updateActiveNavbarLink);
-addScrollListener(document, updateActiveNavbarLink);
+window.addEventListener("scroll", updateActiveNavbarLink);
 
 // ABOUT BUTTONS
 
@@ -70,5 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   contactMeBtn.addEventListener("click", () => {
     location.href = "#contact";
+  });
+});
+
+// CONTACT COPY PHONE NUMBER
+
+document.getElementById("phoneNumber").addEventListener("click", function () {
+  navigator.clipboard.writeText(this.innerText).then(() => {
+    const message = document.getElementById("copyMessage");
+    message.style.display = "block";
+
+    setTimeout(() => {
+      message.style.display = "none";
+    }, 3000);
   });
 });
