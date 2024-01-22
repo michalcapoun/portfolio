@@ -32,3 +32,18 @@ window.addEventListener("scroll", function () {
     .querySelectorAll(".nav-link")
     .forEach((link) => link.classList.remove("active-link"));
 });
+
+// ABOUT BUTTONS
+
+document.addEventListener("DOMContentLoaded", () => {
+  const downloadCvBtn = document.getElementById("download-cv");
+  const contactMeBtn = document.getElementById("contact-me");
+
+  downloadCvBtn.addEventListener("click", () => {
+    window.open("./assets/CV EN Michal Čapoun.pdf");
+  });
+
+  contactMeBtn.addEventListener("click", () => {
+    location.href = "#contact";
+  });
+});
