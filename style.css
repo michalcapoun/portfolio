@@ -19,7 +19,7 @@ body {
   background-repeat: no-repeat, no-repeat;
 }
 
-.metal-look {
+/* .metal-look {
   background: linear-gradient(
     135deg,
     white 0%,
@@ -42,7 +42,7 @@ body {
   100% {
     background-position: 0% 50%;
   }
-}
+} */
 
 html {
   scroll-behavior: smooth;
@@ -57,18 +57,13 @@ a,
 
 /* desktop nav */
 
-nav,
-.nav-links {
+header {
   display: flex;
-}
-
-nav {
-  display: flex;
-  position: fixed;
+  position: sticky;
+  z-index: 100;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 1000;
+  /* width: 100%; */
   justify-content: space-between;
   align-items: center;
   padding: 0 2rem;
@@ -83,17 +78,24 @@ nav {
   font-size: 1.5rem;
 }
 
+/* .nav-link {
+  color: black;
+  text-decoration: none;
+}
+
+.active-link {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+} */
+
 a {
   color: black;
   text-decoration: none;
-  text-decoration-color: white;
 }
 
 a:hover {
-  /* color: black; */
   text-decoration: underline;
-  text-underline-offset: 0.5rem;
-  text-decoration-color: rgb(181, 181, 181);
+  text-underline-offset: 0.3rem;
 }
 
 .logo {
@@ -106,8 +108,15 @@ a:hover {
 
 /* hamburger menu */
 
-#hamburger-nav {
+#hamburger-header {
   display: none;
+}
+
+.hamburger-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .hamburger-menu {
@@ -142,7 +151,7 @@ a:hover {
   transition: all 0.3 ease-in-out;
 }
 
-.menu-links a {
+.menu-links li {
   display: block;
   padding: 10px;
   text-align: center;
@@ -274,6 +283,10 @@ section {
   gap: 1rem;
 }
 
+#socials-container a:hover {
+  transform: scale(1.2);
+}
+
 .about-container {
   gap: 2rem;
   margin-bottom: 2rem;
@@ -382,13 +395,11 @@ section {
   margin: 1rem;
 }
 
-.contact-info-container p {
-  font-size: larger;
+.contact-info-container p,
+.contact-info-container a {
+  font-size: 20px;
 }
 
-.contact-icon {
-  height: 20rem;
-}
 .contact-info-container i {
   font-size: 25px;
 }
@@ -404,7 +415,7 @@ footer p {
   text-align: center;
 }
 
-.glass-effect {
+.glass {
   background: rgba(255, 255, 255, 0.2);
   /* border-radius: 16px; */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);

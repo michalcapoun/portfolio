@@ -1,4 +1,4 @@
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 800px) {
   #profile {
     height: 83vh;
     margin-bottom: 6rem;
@@ -12,11 +12,11 @@
   }
 }
 
-@media screen and (max-width: 1200px) {
-  #desktop-nav {
+@media screen and (max-width: 800px) {
+  #desktop-header {
     display: none;
   }
-  #hamburger-nav {
+  #hamburger-header {
     display: flex;
   }
   #tech,
@@ -66,7 +66,7 @@
     margin: 0;
   }
   .contact-info-container p,
-  .nav-links li a {
+  .nav-links a {
     font-size: 1rem;
   }
   .tech-sub-title {
