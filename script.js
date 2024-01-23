@@ -48,13 +48,20 @@ window.addEventListener("scroll", updateActiveNavbarLink);
 
 // CONTACT COPY PHONE NUMBER
 
-document.getElementById("phoneNumber").addEventListener("click", function () {
-  navigator.clipboard.writeText(this.innerText).then(() => {
-    const message = document.getElementById("copyMessage");
-    message.style.display = "block";
+document.addEventListener("DOMContentLoaded", () => {
+  const phoneNumberElement = document.getElementById("phoneNumber");
+  const phoneIconElement = document.getElementById("phoneIcon");
+  const copyMessageElement = document.getElementById("copyMessage");
 
-    setTimeout(() => {
-      message.style.display = "none";
-    }, 3000);
-  });
+  const copyPhoneNumber = () => {
+    navigator.clipboard.writeText(phoneNumberElement.innerText).then(() => {
+      copyMessageElement.style.display = "block";
+      setTimeout(() => {
+        copyMessageElement.style.display = "none";
+      }, 3000);
+    });
+  };
+
+  phoneNumberElement.addEventListener("click", copyPhoneNumber);
+  phoneIconElement.addEventListener("click", copyPhoneNumber);
 });
