@@ -46,21 +46,6 @@ const updateActiveNavbarLink = () => {
 window.addEventListener("load", updateActiveNavbarLink);
 window.addEventListener("scroll", updateActiveNavbarLink);
 
-// ABOUT BUTTONS
-
-document.addEventListener("DOMContentLoaded", () => {
-  const downloadCvBtn = document.getElementById("download-cv");
-  const contactMeBtn = document.getElementById("contact-me");
-
-  downloadCvBtn.addEventListener("click", () => {
-    window.open("./assets/CV EN Michal Čapoun.pdf");
-  });
-
-  contactMeBtn.addEventListener("click", () => {
-    location.href = "#contact";
-  });
-});
-
 // CONTACT COPY PHONE NUMBER
 
 document.getElementById("phoneNumber").addEventListener("click", function () {

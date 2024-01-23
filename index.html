@@ -67,10 +67,17 @@
           <i class="bx bxl-bootstrap"></i>
           <i class="bx bxl-java"></i>
           <i class="bx bxl-spring-boot"></i>
+          <i class="bx bxl-git"></i>
         </div>
-        <div class="btn-container">
-          <button id="download-cv" class="btn glass">Download CV</button>
-          <button id="contact-me" class="btn glass">Contact Me</button>
+        <div class="about-links">
+          <a
+            href="./assets/CV EN Michal Čapoun.pdf"
+            id="download-cv"
+            class="text-link"
+            download
+            >Download CV</a
+          >
+          <a href="#contact" id="contact-me" class="text-link">Contact Me</a>
         </div>
         <div class="social-icons">
           <a
@@ -87,68 +94,78 @@
           >
             <i class="bx bxl-github"></i>
           </a>
+          <a href="mailto:contact@michalcapoun.cz"
+            ><i class="bx bx-envelope"></i
+          ></a>
         </div>
       </div>
     </section>
 
-    <section id="work">
-      <p class="pretitle">Browse My</p>
-      <h1 class="title">Work</h1>
-      <div class="tech-details-container">
-        <div class="about-container">
-          <!-- Project 1 -->
-          <div class="details-container color-container glass">
-            <div class="article-container">
-              <img
-                src="assets/foxhub.png"
-                alt="FoxHub project info"
-                class="work-img"
-              />
+    <section id="work" class="light">
+      <div class="container py-2">
+        <p class="pretitle">Browse My</p>
+        <h1 id="pageHeaderTitle" class="title h1 text-center text-dark">
+          Work
+        </h1>
+
+        <article class="project light blue">
+          <a class="project-img-link" href="#">
+            <img
+              class="project-img"
+              src="assets/foxhub.png"
+              alt="FoxHub project info"
+            />
+          </a>
+          <div class="project-text t-dark">
+            <h1 class="project-title blue"><a href="#">FoxHub</a></h1>
+            <div class="project-preview-txt">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+              fugiat asperiores inventore beatae accusamus odit minima enim,
+              commodi quia, doloribus eius! Ducimus nemo accusantium maiores
+              velit corrupti tempora reiciendis molestiae repellat vero. Eveniet
+              ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum
+              dolores nobis enim quidem excepturi, illum quos!
             </div>
-            <h2 class="tech-sub-title work-title">FoxHub</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
-              nisi repellendus perspiciatis dolores libero sed optio, corrupti
-              porro enim aliquid architecto quas consectetur deserunt ullam non
-              neque. Quas, iusto explicabo.
-            </p>
-            <div class="tech-container">
-              <i class="bx bxl-java"></i>
-              <i class="bx bxl-spring-boot"></i>
-              <i class="bx bxl-typescript"></i>
-              <i class="bx bxl-angular"></i>
-              <i class="bx bxl-bootstrap"></i>
-            </div>
-            <div class="btn-container">
+            <ul class="project-tagbox">
+              <li class="tag-item"><i class="bx bxl-java"></i></li>
+              <li class="tag-item"><i class="bx bxl-spring-boot"></i></li>
+              <li class="tag-item"><i class="bx bxl-typescript"></i></li>
+              <li class="tag-item"><i class="bx bxl-angular"></i></li>
+              <li class="tag-item"><i class="bx bxl-bootstrap"></i></li>
+            </ul>
+            <div class="project-links">
               <a href="https://github.com/michalcapoun/foxhub" target="_blank"
                 >Source Code</a
               >
               <a href="https://foxhub.gfapp.eu" target="_blank">Live Version</a>
             </div>
           </div>
+        </article>
 
-          <!-- Project 2 -->
-          <div class="details-container color-container glass">
-            <div class="article-container">
-              <img
-                src="#"
-                alt="michalcapoun.cz portfolio project info"
-                class="work-img"
-              />
+        <article class="project light red">
+          <a class="project-img_link" href="#">
+            <img
+              class="project-img"
+              src="#"
+              alt="michalcapoun.cz portfolio project info"
+            />
+          </a>
+          <div class="project-text t-dark">
+            <h1 class="project-title red"><a href="#">michalcapoun.cz</a></h1>
+            <div class="project-preview-txt">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+              fugiat asperiores inventore beatae accusamus odit minima enim,
+              commodi quia, doloribus eius! Ducimus nemo accusantium maiores
+              velit corrupti tempora reiciendis molestiae repellat vero. Eveniet
+              ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum
+              dolores nobis enim quidem excepturi, illum quos!
             </div>
-            <h2 class="tech-sub-title work-title">michalcapoun.cz</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
-              nisi repellendus perspiciatis dolores libero sed optio, corrupti
-              porro enim aliquid architecto quas consectetur deserunt ullam non
-              neque. Quas, iusto explicabo.
-            </p>
-            <div class="tech-container">
-              <i class="bx bxl-html5"></i>
-              <i class="bx bxl-css3"></i>
-              <i class="bx bxl-javascript"></i>
-            </div>
-            <div class="btn-container">
+            <ul class="project-tagbox">
+              <li class="tag-item"><i class="bx bxl-html5"></i></li>
+              <li class="tag-item"><i class="bx bxl-css3"></i></li>
+              <li class="tag-item"><i class="bx bxl-javascript"></i></li>
+            </ul>
+            <div class="project-links">
               <a
                 href="https://github.com/michalcapoun/portfolio"
                 target="_blank"
@@ -159,30 +176,30 @@
               >
             </div>
           </div>
-
-          <!-- Project 3 (Coming Soon) -->
-          <div class="details-container color-container glass">
-            <div class="article-container">
-              <img
-                src="assets/dragonaid.png"
-                alt="DragonAid project info"
-                class="work-img coming-soon"
-              />
-              <p>Coming Soon</p>
+        </article>
+        <article class="project light green">
+          <a class="project-img_link" href="#">
+            <img
+              class="project-img"
+              src="assets/dragonaid.png"
+              alt="DragonAid project info"
+            />
+          </a>
+          <div class="project-text t-dark">
+            <h1 class="project-title green"><a href="#">DragonAid</a></h1>
+            <div class="project-bar"></div>
+            <div class="project-preview-txt">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
+              fugiat asperiores inventore beatae accusamus odit minima enim,
+              commodi quia, doloribus eius! Ducimus nemo accusantium maiores
+              velit corrupti tempora reiciendis molestiae repellat vero. Eveniet
+              ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum
+              dolores nobis enim quidem excepturi, illum quos!
             </div>
-            <h2 class="tech-sub-title work-title">DragonAid</h2>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi
-              nisi repellendus perspiciatis dolores libero sed optio, corrupti
-              porro enim aliquid architecto quas consectetur deserunt ullam non
-              neque. Quas, iusto explicabo.
-            </p>
-            <div class="tech-container"></div>
-            <div class="btn-container">
-              <p>Coming Soon</p>
-            </div>
+            <ul class="project-tagbox"></ul>
+            <div class="project-links"></div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
