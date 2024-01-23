@@ -10,14 +10,19 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   background-color: white;
   background-image: url(assets/wave-top.svg), url(assets/wave-bottom.svg);
   background-position: top center, bottom center;
   background-size: 100% auto, 100% auto;
   background-repeat: no-repeat, no-repeat;
+}
+
+.bx {
+  font-size: 40px;
+}
+
+ul {
+  list-style: none;
 }
 
 html {
@@ -175,12 +180,6 @@ section {
   display: flex;
 }
 
-/* icons */
-
-.icon i {
-  font-size: 50px;
-}
-
 /* buttons */
 
 .btn-container {
@@ -264,10 +263,14 @@ section {
   display: flex;
 }
 
-/* work */
+/* projects */
 
-#work {
+#projects {
   position: relative;
+}
+
+project-icons {
+  display: flex;
 }
 
 .color-container {
