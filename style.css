@@ -162,9 +162,9 @@ a {
 section {
   padding-top: 6vh;
   margin: 0 1%;
-  flex: 0 0 100vh;
+  /* flex: 0 0 100vh; */
   box-sizing: border-box;
-  min-height: fit-content;
+  min-height: 100vh;
 }
 
 .section-container {
@@ -241,13 +241,13 @@ section {
   display: flex;
 }
 
-/* projects */
+/* portfolio */
 
-#projects {
+#portfolio {
   position: relative;
 }
 
-project-icons {
+portfolio-icons {
   display: flex;
 }
 
@@ -256,7 +256,7 @@ project-icons {
   background: white;
 }
 
-.project-img {
+.portfolio-img {
   border-radius: 2rem;
   max-width: 100%;
   max-height: 40vh;
