@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Personal Portfolio</title>
+    <title>michalcapoun.cz</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
     <link
@@ -12,13 +12,15 @@
     />
   </head>
   <body>
+    <div class="background-container"></div>
+
     <header id="desktop-header" class="glass">
       <div class="logo">MICHAL ČAPOUN</div>
       <nav>
-        <ul class="nav-links">
-          <li><a href="#about" class="nav-link">ABOUT</a></li>
-          <li><a href="#projects" class="nav-link">PROJECTS</a></li>
-          <li><a href="#contact" class="nav-link">CONTACT</a></li>
+        <ul class="desktop-links">
+          <li><a href="#about" class="desktop-link">ABOUT</a></li>
+          <li><a href="#projects" class="desktop-link">PROJECTS</a></li>
+          <li><a href="#contact" class="desktop-link">CONTACT</a></li>
         </ul>
       </nav>
     </header>
@@ -31,16 +33,16 @@
           <span></span>
           <span></span>
         </div>
-        <ul class="menu-links">
-          <li><a href="#about" class="nav-link">ABOUT</a></li>
-          <li><a href="#projects" class="nav-link">PROJECTS</a></li>
-          <li><a href="#contact" class="nav-link">CONTACT</a></li>
+        <ul class="hamburger-links">
+          <li><a href="#about" class="hamburger-link">ABOUT</a></li>
+          <li><a href="#projects" class="hamburger-link">PROJECTS</a></li>
+          <li><a href="#contact" class="hamburger-link">CONTACT</a></li>
         </ul>
       </nav>
     </header>
 
     <section id="about">
-      <div class="section-pic-container">
+      <div class="section-img">
         <img src="assets/hero.png" alt="Michal Čapoun profile picture" />
       </div>
       <div class="section-text">
@@ -206,14 +208,14 @@
     <section id="contact">
       <p class="pretitle">Get In Touch</p>
       <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container glass">
-        <div class="contact-info-container">
+      <div class="contact-links glass">
+        <div class="contact-link">
           <a href="mailto:contact@michalcapoun.cz">
             <i class="bx bx-envelope"></i>
             contact@michalcapoun.cz
           </a>
         </div>
-        <div class="contact-info-container">
+        <div class="contact-link">
           <i class="bx bx-phone" id="phoneIcon"></i>
           <p id="phoneNumber">+420 720 246 303</p>
           <div id="copyMessage" style="display: none">Copied to clipboard!</div>
