@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuLinks = document.querySelector(".hamburger-links");
 
   hamburger.addEventListener("click", () => {
-    hamburger.classList.add("open");
-    menuLinks.classList.add("open");
+    hamburger.classList.toggle("open");
+    menuLinks.classList.toggle("open");
   });
 
   document.querySelectorAll(".hamburger-link").forEach((link) => {
