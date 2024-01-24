@@ -1,15 +1,17 @@
 // HAMBURGER MENU
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.querySelector(".hamburger-icon");
-  const menuLinks = document.querySelector(".menu-links");
+  const menuLinks = document.querySelector(".hamburger-links");
 
-  hamburger.addEventListener("click", function () {
-    menuLinks.classList.toggle("open");
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.add("open");
+    menuLinks.classList.add("open");
   });
 
-  document.querySelectorAll(".nav-link").forEach(function (link) {
-    link.addEventListener("click", function () {
+  document.querySelectorAll(".hamburger-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      hamburger.classList.remove("open");
       menuLinks.classList.remove("open");
     });
   });
@@ -17,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // NAVBAR SCROLL EFFECT
 
-const navbarLinks = document.querySelectorAll("#desktop-header .nav-link");
+const navbarLinks = document.querySelectorAll("#desktop-header .desktop-link");
 let currentActiveIndex = -1;
 
 const updateActiveNavbarLink = () => {
