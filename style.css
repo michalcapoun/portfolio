@@ -161,14 +161,57 @@ a {
 
 section {
   padding-top: 6vh;
-  margin: 0 1%;
-  /* flex: 0 0 100vh; */
   box-sizing: border-box;
   min-height: 100vh;
 }
 
 .section-container {
   display: flex;
+}
+
+/* bx icons */
+
+.bxl-html5:after,
+.bxl-css3:after,
+.bxl-javascript:after,
+.bxl-typescript:after,
+.bxl-angular:after,
+.bxl-bootstrap:after,
+.bxl-java:after,
+.bxl-spring-boot:after,
+.bxl-git:after {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.bxl-html5:after {
+  content: "HTML5";
+}
+.bxl-css3:after {
+  content: "CSS";
+}
+.bxl-javascript:after {
+  content: "JavaScript";
+}
+.bxl-typescript:after {
+  content: "TypeScript";
+}
+.bxl-angular:after {
+  content: "Angular";
+}
+.bxl-bootstrap:after {
+  content: "Bootstrap";
+}
+.bxl-java:after {
+  content: "Java";
+}
+.bxl-spring-boot:after {
+  content: "Spring";
+}
+.bxl-git:after {
+  content: "Git";
 }
 
 /* about section */
@@ -220,6 +263,37 @@ section {
   margin-bottom: 1rem;
 }
 
+.about-tech-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.about-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.about-links a:hover {
+  transform: scale(1.2);
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.social-icons i:hover {
+  transform: scale(1.2);
+}
+
 #socials-container {
   display: flex;
   justify-content: center;
@@ -228,7 +302,6 @@ section {
 }
 
 #socials-container a:hover {
-  transform: scale(1.2);
 }
 
 .about-container {
@@ -245,9 +318,10 @@ section {
 
 #portfolio {
   position: relative;
+  margin: 0 1%;
 }
 
-portfolio-icons {
+.portfolio-icons {
   display: flex;
 }
 
