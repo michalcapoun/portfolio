@@ -175,20 +175,32 @@ section {
 
 #about {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  text-align: center;
+  padding: 5rem;
   gap: 5rem;
 }
 
 .section-img {
+  flex: 1;
   display: flex;
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
+  justify-content: center;
+  align-items: center;
+  max-width: 30vw;
+  max-height: 30vh;
+}
+
+.section-img img {
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .section-text {
-  align-self: center;
-  text-align: center;
+  flex: 1;
+  max-width: 70vw;
 }
 
 .section-text p {
@@ -244,7 +256,7 @@ project-icons {
   background: white;
 }
 
-.work-img {
+.project-img {
   border-radius: 2rem;
   max-width: 100%;
   max-height: 40vh;
