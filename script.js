@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // NAVBAR SCROLL EFFECT
 
-const navbarLinks = document.querySelectorAll("#desktop-header .desktop-link");
+const navbarLinks = document.querySelectorAll(".desktop-link");
 let currentActiveIndex = -1;
 
 const updateActiveNavbarLink = () => {
@@ -48,7 +48,7 @@ const updateActiveNavbarLink = () => {
 window.addEventListener("load", updateActiveNavbarLink);
 window.addEventListener("scroll", updateActiveNavbarLink);
 
-// CONTACT COPY PHONE NUMBER
+// COPY PHONE NUMBER TO CLIPBOARD
 
 document.addEventListener("DOMContentLoaded", () => {
   const phoneNumberElement = document.getElementById("phoneNumber");
