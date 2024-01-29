@@ -3,6 +3,7 @@
 :root {
   --header-height: 2rem;
   --background-color: white;
+  --color-button: #f7770f;
   --box-shadow: 0px 1px 10px hsla(0, 0%, 0%, 0.7);
   --glass-effect: rgba(255, 255, 255, 0.2);
   --background-blur: blur(5px);
@@ -16,7 +17,7 @@
   --margin-bottom: 3.5rem;
   /* FONT */
   --text-color: black;
-  --text-stroke: 1px grey;
+  --text-stroke: 1px #f7770f;
   --font-family: "Poppins", sans-serif;
   --font-bold: 700;
   --font-regular: 400;
@@ -79,6 +80,7 @@ ul {
 
 a {
   text-decoration: none;
+  color: black;
 }
 
 img {
@@ -87,10 +89,10 @@ img {
   display: block;
 }
 
-.container {
-  /* max-width: 1120px; */
-  /* margin-inline: 1.5rem; */
-}
+/* .container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+} */
 
 .grid {
   display: grid;
@@ -227,22 +229,29 @@ section {
   align-items: center;
   color: var(--text-color);
   font-size: var(--font-size-nav);
-  cursor: default;
+  cursor: pointer;
 }
 
-.nav-logo-circle,
 .nav-toggle,
 .nav-close {
-  width: 44px;
-  height: 44px;
-  background-color: var(--text-color);
+  width: 43px;
+  height: 43px;
+  background-color: var(--color-button);
   color: var(--background-color);
   display: grid;
   place-items: center;
+  text-shadow: 2px 2px 0 #666;
+}
+
+.nav-logo-square {
+  display: flex;
+  background-color: var(--color-button);
+  color: var(--background-color);
+  text-shadow: 2px 2px 0 #666;
 }
 
 .nav-toggle {
-  font-size: var(--font-size-h2);
+  font-size: var(--font-size-nav);
   cursor: pointer;
 }
 
@@ -258,17 +267,20 @@ section {
     backdrop-filter: blur(8px);
     transition: top 0.4;
   }
+
+  .nav-logo-name {
+    display: none;
+  }
 }
 
 .nav-title,
-.nav-name,
 .nav-close {
   color: var(--background-color);
 }
 
 .nav-title {
   display: block;
-  font-size: var(--font-size-normal);
+  font-size: var(--font-size-nav);
   margin-bottom: var(--margin-bottom);
 }
 
@@ -289,12 +301,12 @@ section {
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--text-color);
+  color: var(--color-button);
 }
 
 .nav-close {
   position: absolute;
-  font-size: var(--font-size-h2);
+  font-size: var(--font-size-nav);
   top: 0;
   right: 0;
   cursor: pointer;
@@ -314,8 +326,7 @@ section {
   }
   .nav-close,
   .nav-toggle,
-  .nav-title,
-  .nav-name {
+  .nav-title {
     display: none;
   }
 
