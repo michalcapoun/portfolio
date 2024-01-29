@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 :root {
-  --header-height: 6rem;
+  --header-height: 2rem;
   --background-color: white;
-  --box-shadow: 0px 1px 10px rgba(0, 0%, 0%, 0.4);
+  --box-shadow: 0px 1px 10px hsla(0, 0%, 0%, 0.7);
   --glass-effect: rgba(255, 255, 255, 0.2);
   --background-blur: blur(5px);
   --icon-size-large: 3em;
@@ -26,6 +26,7 @@
   --font-size-large: 2.5rem;
   --font-size-normal: 0.9rem;
   --font-size-small: 0.5rem;
+  --font-size-nav: 1.8rem;
   --letter-spacing: 0.2em;
   --line-height: 1.6;
 
@@ -78,7 +79,6 @@ ul {
 
 a {
   text-decoration: none;
-  transition: var(--transition);
 }
 
 img {
@@ -86,6 +86,21 @@ img {
   max-width: 100%;
   display: block;
 }
+
+.container {
+  /* max-width: 1120px; */
+  /* margin-inline: 1.5rem; */
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.section {
+  padding-block: 4rem 2rem;
+}
+
 /* 
 h1 {
   font-size: var(--font-size-large);
@@ -201,7 +216,6 @@ section {
 
 .nav {
   position: relative;
-  height: var(--header-height);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -212,12 +226,15 @@ section {
   column-gap: 0.5rem;
   align-items: center;
   color: var(--text-color);
+  font-size: var(--font-size-nav);
+  cursor: default;
 }
 
 .nav-logo-circle,
-.nav-toggle {
-  width: 32px;
-  height: 32px;
+.nav-toggle,
+.nav-close {
+  width: 44px;
+  height: 44px;
   background-color: var(--text-color);
   color: var(--background-color);
   display: grid;
@@ -246,12 +263,12 @@ section {
 .nav-title,
 .nav-name,
 .nav-close {
-  color: var(--text-color);
+  color: var(--background-color);
 }
 
 .nav-title {
   display: block;
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-normal);
   margin-bottom: var(--margin-bottom);
 }
 
@@ -265,7 +282,7 @@ section {
   position: relative;
   color: transparent;
   -webkit-text-stroke: var(--text-stroke);
-  font-size: var(--font-size-h1);
+  font-size: var(--font-size-nav);
   font-weight: var(--font-bold);
   transition: color 0.3s;
 }
@@ -278,8 +295,8 @@ section {
 .nav-close {
   position: absolute;
   font-size: var(--font-size-h2);
-  top: 1rem;
-  right: 1.5rem;
+  top: 0;
+  right: 0;
   cursor: pointer;
 }
 
@@ -293,7 +310,6 @@ section {
 
 @media screen and (min-width: 1150px) {
   .nav {
-    height: calc(var(--header-height) + 2rem);
     column-gap: 4rem;
   }
   .nav-close,
@@ -305,7 +321,10 @@ section {
 
   .nav-list {
     flex-direction: row;
-    column-gap: 4rem;
+  }
+
+  .nav-list > * {
+    margin-right: 2rem;
   }
 
   .nav-menu {
