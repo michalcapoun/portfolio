@@ -1,4 +1,15 @@
-@media screen and (max-width: 800px) {
+@media screen and(min-width: 1150px) {
+  :root {
+    --font-size-h1: 3rem;
+    --font-size-h2: 1.5rem;
+    --font-size-h3: 1.25rem;
+    --font-size-large: 4.5rem;
+    --font-size-normal: 1rem;
+    --font-size-small: 0.8rem;
+  }
+}
+
+/* @media screen and (max-width: 800px) {
   #profile {
     height: 83vh;
     margin-bottom: 6rem;
@@ -94,4 +105,4 @@
   .text-container {
     text-align: justify;
   }
-}
+} */

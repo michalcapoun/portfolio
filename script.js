@@ -52,7 +52,6 @@ window.addEventListener("scroll", updateActiveNavbarLink);
 
 document.addEventListener("DOMContentLoaded", () => {
   const phoneNumberElement = document.getElementById("phoneNumber");
-  const phoneIconElement = document.getElementById("phoneIcon");
   const copyMessageElement = document.getElementById("copyMessage");
 
   const copyPhoneNumber = () => {
@@ -65,5 +64,4 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   phoneNumberElement.addEventListener("click", copyPhoneNumber);
-  phoneIconElement.addEventListener("click", copyPhoneNumber);
 });
