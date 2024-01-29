@@ -12,22 +12,37 @@
     />
   </head>
   <body>
-    <header id="header" class="header glass">
+    <header id="header" class="header">
       <nav class="nav container">
-        <a href="#" class="logo">MICHAL ČAPOUN</a>
+        <a href="#" class="nav-logo">
+          <span class="nav-logo-circle">MČ</span>
+          <span class="nav-logo-name">Michal Čapoun</span>
+        </a>
 
         <div class="nav-menu" id="nav-menu">
           <span class="nav-title">Menu</span>
+
+          <ul class="nav-list">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-close" id="nav-close">
+            <i class="bx bx-x"></i>
+          </div>
         </div>
-        <ul class="desktop-links">
-          <li><a href="#about" class="desktop-link">ABOUT</a></li>
-          <li><a href="#portfolio" class="desktop-link">PORTFOLIO</a></li>
-          <li><a href="#contact" class="desktop-link">CONTACT</a></li>
-        </ul>
+
+        <div class="nav-buttons">
+          <div class="nav-toggle" id="nav-toggle">
+            <i class="bx bx-menu"></i>
+          </div>
+        </div>
       </nav>
     </header>
 
-    <section id="about">
+    <!-- <section id="about">
       <div class="about-img">
         <img src="" alt="Michal Čapoun profile picture" />
       </div>
@@ -171,7 +186,7 @@
 
     <footer>
       <p>&#169; 2024 Michal Čapoun</p>
-    </footer>
+    </footer> -->
 
     <script src="script.js"></script>
   </body>
