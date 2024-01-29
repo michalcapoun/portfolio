@@ -40,34 +40,34 @@ window.addEventListener("scroll", shadowHeader);
 
 // NAVBAR ACTIVE SECTION
 
-// const navbarLinks = document.querySelectorAll(".desktop-link");
-// let currentActiveIndex = -1;
+const navbarLinks = document.querySelectorAll(".nav-link");
+let currentActiveIndex = -1;
 
-// const updateActiveNavbarLink = () => {
-//   const scrollOffset = 200;
-//   const currentPosition = window.scrollY + scrollOffset;
+const updateActiveNavbarLink = () => {
+  const scrollOffset = 200;
+  const currentPosition = window.scrollY + scrollOffset;
 
-//   navbarLinks.forEach((link, index) => {
-//     const targetSection = document.querySelector(link.hash);
-//     if (!link.hash || !targetSection) return;
+  navbarLinks.forEach((link, index) => {
+    const targetSection = document.querySelector(link.hash);
+    if (!link.hash || !targetSection) return;
 
-//     const isInSectionView =
-//       currentPosition >= targetSection.offsetTop &&
-//       currentPosition <= targetSection.offsetTop + targetSection.offsetHeight;
+    const isInSectionView =
+      currentPosition >= targetSection.offsetTop &&
+      currentPosition <= targetSection.offsetTop + targetSection.offsetHeight;
 
-//     if (isInSectionView && index !== currentActiveIndex) {
-//       navbarLinks.forEach((el) => el.classList.remove("active"));
-//       link.classList.add("active");
-//       currentActiveIndex = index;
-//     } else if (!isInSectionView && index === currentActiveIndex) {
-//       link.classList.remove("active");
-//       currentActiveIndex = -1;
-//     }
-//   });
-// };
+    if (isInSectionView && index !== currentActiveIndex) {
+      navbarLinks.forEach((el) => el.classList.remove("active"));
+      link.classList.add("active");
+      currentActiveIndex = index;
+    } else if (!isInSectionView && index === currentActiveIndex) {
+      link.classList.remove("active");
+      currentActiveIndex = -1;
+    }
+  });
+};
 
-// window.addEventListener("load", updateActiveNavbarLink);
-// window.addEventListener("scroll", updateActiveNavbarLink);
+window.addEventListener("load", updateActiveNavbarLink);
+window.addEventListener("scroll", updateActiveNavbarLink);
 
 // COPY PHONE NUMBER TO CLIPBOARD
 

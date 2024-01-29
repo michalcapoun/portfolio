@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
     <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.5.0/css/all.css"
+    />
+    <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
@@ -15,7 +19,7 @@
     <header id="header" class="header">
       <nav class="nav container">
         <a href="#" class="nav-logo">
-          <span class="nav-logo-circle">MČ</span>
+          <span class="nav-logo-square">MČ</span>
           <span class="nav-logo-name">Michal Čapoun</span>
         </a>
 
@@ -30,20 +34,32 @@
           </ul>
 
           <div class="nav-close" id="nav-close">
-            <i class="bx bx-x"></i>
+            <i class="fa-solid fa-xmark"></i>
           </div>
         </div>
 
         <div class="nav-toggle" id="nav-toggle">
-          <i class="bx bx-menu"></i>
+          <i class="fa-solid fa-bars"></i>
         </div>
       </nav>
     </header>
 
     <main class="main">
+      <section class="home" id="home">
+        <div class="home-container container grid">
+          <h1>
+            Hello and welcome on my portfolio! Click on links below or scroll
+            down...
+          </h1>
+          <h2><a href="#about">Who</a> am i?</h2>
+          <h2><a href="#portfolio">What</a> i do?</h2>
+          <h2><a href="#contact">How</a> to find me?</h2>
+        </div>
+      </section>
+
       <section id="about">
         <div class="about-img">
-          <img src="" alt="Michal Čapoun profile picture" />
+          <img src="assets/hero.png" alt="Michal Čapoun profile picture" />
         </div>
         <div class="about-text">
           <h3>Hi! My name is</h3>
