@@ -32,12 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const shadowHeader = () => {
   const header = document.querySelector("#header");
-  this.scrollY >= 50
+  window.scrollY >= 50
     ? header.classList.add("shadow-header")
     : header.classList.remove("shadow-header");
-
-  window.addEventListener("scroll", shadowHeader);
 };
+window.addEventListener("scroll", shadowHeader);
 
 // NAVBAR ACTIVE SECTION
 
