@@ -12,9 +12,13 @@
     />
   </head>
   <body>
-    <header id="desktop-header" class="glass">
-      <div class="logo">MICHAL ČAPOUN</div>
-      <nav>
+    <header id="header" class="header glass">
+      <nav class="nav container">
+        <a href="#" class="logo">MICHAL ČAPOUN</a>
+
+        <div class="nav-menu" id="nav-menu">
+          <span class="nav-title">Menu</span>
+        </div>
         <ul class="desktop-links">
           <li><a href="#about" class="desktop-link">ABOUT</a></li>
           <li><a href="#portfolio" class="desktop-link">PORTFOLIO</a></li>
@@ -23,29 +27,14 @@
       </nav>
     </header>
 
-    <header id="hamburger-header" class="glass">
-      <div class="logo">MICHAL ČAPOUN</div>
-      <nav class="hamburger-nav">
-        <div class="hamburger-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <ul class="hamburger-links">
-          <li><a href="#about" class="hamburger-link">ABOUT</a></li>
-          <li><a href="#portfolio" class="hamburger-link">PORTFOLIO</a></li>
-          <li><a href="#contact" class="hamburger-link">CONTACT</a></li>
-        </ul>
-      </nav>
-    </header>
-
     <section id="about">
       <div class="about-img">
-        <img src="assets/hero.png" alt="Michal Čapoun profile picture" />
+        <img src="" alt="Michal Čapoun profile picture" />
       </div>
       <div class="about-text">
-        <h3>Hello, my name is</h3>
+        <h3>Hi! My name is</h3>
         <h1>Michal Čapoun</h1>
+        <h3>and I am Software Developer.</h3>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus
           incidunt at repellat consequatur unde, error aliquid modi quasi
@@ -111,106 +100,51 @@
       </div>
     </section>
 
-    <section id="portfolio" class="light">
-      <div class="container py-2">
-        <h3>Browse My</h3>
-        <h1 id="pageHeaderTitle" class="title h1 text-center text-dark">
-          Portfolio
-        </h1>
-
-        <article class="portfolio light blue">
-          <a class="portfolio-img-link" href="#">
-            <img
-              class="portfolio-img"
-              src="assets/foxhub.png"
-              alt="FoxHub portfolio info"
-            />
-          </a>
-          <div class="portfolio-text t-dark">
-            <h2 class="portfolio-title blue"><a href="#">FoxHub</a></h2>
-            <div class="portfolio-preview-txt">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              fugiat asperiores inventore beatae accusamus odit minima enim,
-              commodi quia, doloribus eius! Ducimus nemo accusantium maiores
-              velit corrupti tempora reiciendis molestiae repellat vero. Eveniet
-              ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum
-              dolores nobis enim quidem excepturi, illum quos!
-            </div>
-            <ul class="portfolio-icons">
-              <li class="tag-item">Java</li>
-              <li class="tag-item">Spring Boot</li>
-              <li class="tag-item">TypeScript</li>
-              <li class="tag-item">Angular</li>
-              <li class="tag-item">Bootstrap</li>
-            </ul>
-            <div class="portfolio-links">
-              <a href="https://github.com/michalcapoun/foxhub" target="_blank"
-                >Source Code
-              </a>
-              <a href="https://foxhub.gfapp.eu" target="_blank">Live Version</a>
+    <section id="portfolio">
+      <ul class="cards">
+        <li class="cards__item">
+          <div class="card">
+            <div class="card__image card__image--fence"></div>
+            <div class="card__content">
+              <div class="card__title">Flex</div>
+              <p class="card__text">
+                This is the shorthand for flex-grow, flex-shrink and flex-basis
+                combined. The second and third parameters (flex-shrink and
+                flex-basis) are optional. Default is 0 1 auto.
+              </p>
+              <button class="btn btn--block card__btn">Button</button>
             </div>
           </div>
-        </article>
-
-        <article class="portfolio light red">
-          <a class="portfolio-img_link" href="#">
-            <img
-              class="portfolio-img"
-              src="#"
-              alt="michalcapoun.cz portfolio portfolio info"
-            />
-          </a>
-          <div class="portfolio-text t-dark">
-            <h2 class="portfolio-title red"><a href="#">michalcapoun.cz</a></h2>
-            <div class="portfolio-preview-txt">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              fugiat asperiores inventore beatae accusamus odit minima enim,
-              commodi quia, doloribus eius! Ducimus nemo accusantium maiores
-              velit corrupti tempora reiciendis molestiae repellat vero. Eveniet
-              ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum
-              dolores nobis enim quidem excepturi, illum quos!
-            </div>
-            <ul class="portfolio-icons">
-              <li class="tag-item">Html5"</li>
-              <li class="tag-item">Css3</li>
-              <li class="tag-item">JavaScript</li>
-            </ul>
-            <div class="portfolio-links">
-              <a
-                href="https://github.com/michalcapoun/portfolio"
-                target="_blank"
-                >Source Code
-              </a>
-              <a href="https://www.michalcapoun.cz" target="_blank"
-                >Live Version
-              </a>
+        </li>
+        <li class="cards__item">
+          <div class="card">
+            <div class="card__image card__image--river"></div>
+            <div class="card__content">
+              <div class="card__title">Flex Grow</div>
+              <p class="card__text">
+                This defines the ability for a flex item to grow if necessary.
+                It accepts a unitless value that serves as a proportion. It
+                dictates what amount of the available space inside the flex
+                container the item should take up.
+              </p>
+              <button class="btn btn--block card__btn">Button</button>
             </div>
           </div>
-        </article>
-        <article class="portfolio light green">
-          <a class="portfolio-img_link" href="#">
-            <img
-              class="portfolio-img"
-              src="assets/dragonaid.png"
-              alt="DragonAid portfolio info"
-            />
-          </a>
-          <div class="portfolio-text t-dark">
-            <h2 class="portfolio-title green"><a href="#">DragonAid</a></h2>
-            <div class="portfolio-bar"></div>
-            <div class="portfolio-preview-txt">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-              fugiat asperiores inventore beatae accusamus odit minima enim,
-              commodi quia, doloribus eius! Ducimus nemo accusantium maiores
-              velit corrupti tempora reiciendis molestiae repellat vero. Eveniet
-              ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum
-              dolores nobis enim quidem excepturi, illum quos!
+        </li>
+        <li class="cards__item">
+          <div class="card">
+            <div class="card__image card__image--record"></div>
+            <div class="card__content">
+              <div class="card__title">Flex Shrink</div>
+              <p class="card__text">
+                This defines the ability for a flex item to shrink if necessary.
+                Negative numbers are invalid.
+              </p>
+              <button class="btn btn--block card__btn">Button</button>
             </div>
-            <ul class="portfolio-icons"></ul>
-            <div class="portfolio-links"></div>
           </div>
-        </article>
-      </div>
+        </li>
+      </ul>
     </section>
 
     <section id="contact">
