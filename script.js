@@ -28,7 +28,18 @@ document.addEventListener("DOMContentLoaded", () => {
   navLink.forEach((n) => n.addEventListener("click", linkAction));
 });
 
-// NAVBAR SCROLL EFFECT
+// NAVBAR SCROLL EFFECT SHADOW
+
+const shadowHeader = () => {
+  const header = document.querySelector("#header");
+  this.scrollY >= 50
+    ? header.classList.add("shadow-header")
+    : header.classList.remove("shadow-header");
+
+  window.addEventListener("scroll", shadowHeader);
+};
+
+// NAVBAR ACTIVE SECTION
 
 // const navbarLinks = document.querySelectorAll(".desktop-link");
 // let currentActiveIndex = -1;
