@@ -28,16 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
   navLink.forEach((n) => n.addEventListener("click", linkAction));
 });
 
-// NAVBAR SCROLL EFFECT SHADOW
-
-const shadowHeader = () => {
-  const header = document.querySelector("#header");
-  window.scrollY >= 50
-    ? header.classList.add("shadow-header")
-    : header.classList.remove("shadow-header");
-};
-window.addEventListener("scroll", shadowHeader);
-
 // NAVBAR ACTIVE SECTION
 
 const navbarLinks = document.querySelectorAll(".nav-link");
@@ -68,21 +58,3 @@ const updateActiveNavbarLink = () => {
 
 window.addEventListener("load", updateActiveNavbarLink);
 window.addEventListener("scroll", updateActiveNavbarLink);
-
-// COPY PHONE NUMBER TO CLIPBOARD
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const phoneNumberElement = document.getElementById("phoneNumber");
-//   const copyMessageElement = document.getElementById("copyMessage");
-
-//   const copyPhoneNumber = () => {
-//     navigator.clipboard.writeText(phoneNumberElement.innerText).then(() => {
-//       copyMessageElement.style.display = "block";
-//       setTimeout(() => {
-//         copyMessageElement.style.display = "none";
-//       }, 3000);
-//     });
-//   };
-
-//   phoneNumberElement.addEventListener("click", copyPhoneNumber);
-// });
