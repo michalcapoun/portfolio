@@ -1,32 +1,32 @@
 // NAVBAR MENU TOGGLE
 
-document.addEventListener("DOMContentLoaded", () => {
-  const navMenu = document.querySelector("#nav-menu");
-  const navToggle = document.querySelector("#nav-toggle");
-  const navClose = document.querySelector("#nav-close");
+// document.addEventListener("DOMContentLoaded", () => {
+//   const navMenu = document.querySelector("#nav-menu");
+//   const navToggle = document.querySelector("#nav-toggle");
+//   const navClose = document.querySelector("#nav-close");
 
-  if (navToggle) {
-    navToggle.addEventListener("click", () => {
-      navMenu.classList.add("show-menu");
-    });
-  }
+//   if (navToggle) {
+//     navToggle.addEventListener("click", () => {
+//       navMenu.classList.add("show-menu");
+//     });
+//   }
 
-  if (navClose) {
-    navClose.addEventListener("click", () => {
-      navMenu.classList.remove("show-menu");
-    });
-  }
-});
+//   if (navClose) {
+//     navClose.addEventListener("click", () => {
+//       navMenu.classList.remove("show-menu");
+//     });
+//   }
+// });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const navLink = document.querySelectorAll(".nav-link");
+// document.addEventListener("DOMContentLoaded", () => {
+//   const navLink = document.querySelectorAll(".nav-link");
 
-  const linkAction = () => {
-    const navMenu = document.querySelector("#nav-menu");
-    navMenu.classList.remove("show-menu");
-  };
-  navLink.forEach((n) => n.addEventListener("click", linkAction));
-});
+//   const linkAction = () => {
+//     const navMenu = document.querySelector("#nav-menu");
+//     navMenu.classList.remove("show-menu");
+//   };
+//   navLink.forEach((n) => n.addEventListener("click", linkAction));
+// });
 
 // NAVBAR ACTIVE SECTION
 
