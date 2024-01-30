@@ -4,7 +4,7 @@
   --header-height: 2rem;
   --background-color: white;
   --color-button: #eda790;
-  --box-shadow: 0px 1px 10px hsla(0, 0%, 0%, 0.7);
+  --box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.7);
   --glass-effect: rgba(255, 255, 255, 0.2);
   --background-blur: blur(5px);
   --icon-size-large: 3em;
@@ -90,6 +90,12 @@ img {
   display: block;
 }
 
+section {
+  min-height: 100vh;
+  display: flex;
+  top: 0;
+}
+
 /* .container {
   max-width: 1120px;
   margin-inline: 1.5rem;
@@ -99,15 +105,6 @@ img {
   display: grid;
   gap: 1.5rem;
 } */
-
-section {
-  min-height: 100vh;
-  display: block;
-  position: fixed;
-  right: 200px;
-  top: 0;
-  /* padding-block: 4rem 2rem; */
-}
 
 /* 
 h1 {
@@ -132,63 +129,59 @@ h3 {
 
 .header {
   position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
   right: 0;
-  top: 0;
   height: 100%;
+  width: 6.6%;
   background-color: var(--background-color);
   z-index: var(--z-fixed);
-  border-left: 1px solid var(--text-color);
+  box-shadow: var(--box-shadow);
 }
 
-.nav-logo {
-  position: absolute;
-  top: 50px;
-  text-transform: uppercase;
-}
-
-.nav-logo span {
-  position: relative;
-  letter-spacing: 5px;
-  font-size: var(--font-size-nav);
-  -webkit-text-stroke: var(--text-stroke);
+.main {
+  width: 93.4%;
 }
 
 .nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.nav-logo-short {
+  display: none;
+  background-color: red;
+}
+
+.nav-logo span {
+  letter-spacing: 5px;
+  cursor: default;
+}
+
+.nav-logo-name {
+  display: block;
+}
+
+.nav-list {
   width: 100%;
 }
 
 .nav-list li {
-  position: relative;
-  margin-bottom: 100px;
-  display: block;
-}
-
-.nav-list li::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  border-bottom: 1px solid var(--text-color);
+  margin-bottom: 2rem;
 }
 
 .nav-link {
   color: transparent;
-  -webkit-text-stroke: var(--text-stroke);
-  font-size: var(--font-size-nav);
-  text-transform: uppercase;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
 }
 
 .nav-link,
 .nav-logo span {
-  margin-left: 5px;
+  text-align: right;
+  text-transform: uppercase;
+  font-size: var(--font-size-nav);
+  -webkit-text-stroke: var(--text-stroke);
 }
 
 .nav-link:hover,
