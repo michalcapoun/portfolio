@@ -93,7 +93,8 @@ section {
   display: flex;
   /* flex-direction: row; */
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  font-size: var(--font-size-nav);
 }
 
 .nav-logo {
@@ -105,6 +106,8 @@ section {
 
 .nav-logo span {
   letter-spacing: 5px;
+  background-color: var(--text-color);
+  color: var(--background-color);
 }
 
 .nav-list {
@@ -144,7 +147,6 @@ section {
 .nav-link,
 .nav-logo span {
   text-transform: uppercase;
-  font-size: var(--font-size-nav);
 }
 
 .nav-link:hover,
@@ -165,7 +167,7 @@ section {
   text-shadow: 2px 2px 0 #666;
 }
 
-@media screen and (max-width: 1099px) {
+@media screen and (max-width: 1100px) {
   .nav-menu {
     position: fixed;
     top: -100%;
@@ -174,7 +176,7 @@ section {
     width: 100%;
     text-align: center;
     backdrop-filter: var(--background-blur);
-    transition: top 0.4s;
+    transition: top 0.3s;
   }
 
   .nav-logo-name {
@@ -190,21 +192,27 @@ section {
   .nav-logo-short {
     display: none;
   }
+
+  .nav-close,
+  .nav-toggle {
+    display: none;
+  }
 }
 
 /* THEME */
 
 .nav-buttons {
   display: flex;
-  align-items: center;
-  column-gap: 1rem;
+  /* align-items: center; */
+  justify-content: center;
+  vertical-align: middle;
 }
 
 .change-theme {
   font-size: var(--font-size-nav);
   color: var(--text-color);
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.9s;
 }
 
 body.dark-theme {
@@ -214,6 +222,12 @@ body.dark-theme {
   /* --color-button: #eda790; */
   /* --box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.7); */
   /* --glass-effect: rgba(255, 255, 255, 0.2); */
+}
+
+/* LANGUAGE */
+
+.change-language {
+  font-size: var(--font-size-nav);
 }
 
 /* HOME */
