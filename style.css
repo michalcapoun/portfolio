@@ -1,22 +1,18 @@
 :root {
-  --header-height: 2rem;
-  --background-color: white;
-  --color-button: #eda790;
-  --box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.7);
-  --glass-effect: rgba(255, 255, 255, 0.2);
   --background-blur: blur(5px);
+  --transition: all 0.3s ease-in-out;
+  --font-family: "Source Code Pro", monospace;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  /* SIZES */
+  --header-height: 2rem;
+  --transform: scale(1.2);
+  --margin-bottom: 3.5rem;
   --icon-size-large: 3em;
   --icon-size-medium: 1.4em;
   --icon-size-small: 0.5em;
   --icon-hover-scale: 1.2;
   --section-padding: 5rem;
-  --transition: all 0.3s ease-in-out;
-  --transform: scale(1.2);
-  --margin-bottom: 3.5rem;
-  /* FONTS */
-  --text-color: black;
-  --text-stroke: 1px black;
-  --font-family: "Source Code Pro", monospace;
   --font-bold: 700;
   --font-regular: 400;
   --font-size-h1: 1.75rem;
@@ -28,9 +24,13 @@
   --font-size-nav: 1.4rem;
   --letter-spacing: 0.2em;
   --line-height: 1.6;
-
-  --z-tooltip: 10;
-  --z-fixed: 100;
+  /* COLORS */
+  --text-color: black;
+  --text-stroke: 1px black;
+  --background-color: white;
+  --color-button: #eda790;
+  --box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.7);
+  --glass-effect: rgba(255, 255, 255, 0.2);
 }
 
 *,
@@ -74,12 +74,6 @@ section {
   min-height: 94vh;
   display: flex;
 }
-/*
- .glass {
-  background: var(--glass-effect);
-  box-shadow: var(--box-shadow);
-  backdrop-filter: var(--background-blur);
-} */
 
 /* NAVBAR */
 
@@ -160,7 +154,7 @@ section {
 
 .nav-toggle,
 .nav-close {
-  font-size: var(--font-size-nav);
+  font-size: 2.5em;
   cursor: pointer;
   width: 6vh;
   height: 6vh;
@@ -198,7 +192,37 @@ section {
   }
 }
 
+/* THEME */
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+.change-theme {
+  font-size: var(--font-size-nav);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+body.dark-theme {
+  --text-color: white;
+  /* --text-stroke: 1px white; */
+  --background-color: black;
+  /* --color-button: #eda790; */
+  /* --box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.7); */
+  /* --glass-effect: rgba(255, 255, 255, 0.2); */
+}
+
 /* HOME */
+
+.home {
+  top: 50%;
+  position: relative;
+  justify-self: center;
+}
 
 .home a {
   text-decoration-line: underline;
