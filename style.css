@@ -115,15 +115,17 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 3rem;
+  /* row-gap: 3rem; */
 }
 
 .nav-link {
   position: relative;
   color: var(--text-color);
+  writing-mode: vertical-lr;
+  /* transform: rotate(180deg); */
 }
 
-.nav-link::after {
+/* .nav-link::after {
   content: "";
   width: 25%;
   height: 2px;
@@ -136,7 +138,7 @@ section {
 
 .nav-link:hover::after {
   width: 25%;
-}
+} */
 
 .nav-close {
   position: absolute;
@@ -426,39 +428,21 @@ body.dark-theme {
 
 /* CONTACT */
 
-/* #contact {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+.container {
+  height: 275px;
+  width: 275px;
 }
 
-.contact-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
-  background: var(--background-color);
-  margin: 2rem auto;
-  padding: 0.5rem;
+.container .card {
+  height: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.contact-link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  margin: 1rem;
-}
-
-.contact-link p,
-.contact-link a {
-  font-size: var(--font-size-medium);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-}
-
+/*
 #copyMessage {
   position: absolute;
   top: 60px;
