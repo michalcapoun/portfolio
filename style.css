@@ -228,12 +228,6 @@ body.dark-theme {
   /* --glass-effect: rgba(255, 255, 255, 0.2); */
 }
 
-/* LANGUAGE */
-
-.change-language {
-  font-size: var(--font-size-nav);
-}
-
 /* HOME */
 
 .home {
@@ -313,7 +307,7 @@ body.dark-theme {
 
 /* PORTFOLIO */
 
-/* .btn {
+.btn {
   background-color: white;
   border: 1px solid #cccccc;
   color: #696969;
@@ -424,7 +418,7 @@ body.dark-theme {
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
-} */
+}
 
 /* CONTACT */
 
@@ -432,18 +426,18 @@ body.dark-theme {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
 }
 
 code {
   font-size: 14px;
-  color: whitesmoke;
 }
 
 .contact-container {
   position: relative;
   width: 30rem;
   height: 15rem;
-  perspective: 150rem;
+  /* perspective: 150rem; */
   transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-style: preserve-3d;
 }
@@ -467,7 +461,7 @@ code {
 }
 
 .front-side {
-  font-size: var(--font-size-nav);
+  font-size: var(--font-size-large);
   background: linear-gradient(-45deg, #2c3e50, #2c3e50);
 }
 
@@ -521,12 +515,10 @@ code {
   padding: 0 10px;
   background-color: rgba(245, 245, 245, 0.03);
   font-size: 13px;
-  font-family: "Lucida Console", Monaco, monospace;
 }
 
-.line-numbers > div {
+.line-numbers > span {
   padding: 2.5px 0;
-  opacity: 0.15;
 }
 
 .indent {
