@@ -427,17 +427,22 @@ body.dark-theme {
 /*  */
 
 /* CONTACT */
+#contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .contact-container {
   position: relative;
   height: 225px;
   width: 375px;
-  transition: 1s;
+  transition: 0.9s;
   transform-style: preserve-3d;
 }
 
 .contact-active {
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
 }
 
 .contact {
@@ -461,9 +466,11 @@ body.dark-theme {
 
 .back-side {
   border: none;
-  transform: rotateY(180deg);
+  transform: rotateX(180deg);
   flex-direction: column;
 }
+
+/* content: "\ebe2" */
 
 /*
 #copyMessage {

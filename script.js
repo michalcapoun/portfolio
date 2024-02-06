@@ -90,10 +90,10 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-icon", getCurrentIcon());
 });
 
-// CONTACT CARD CLICK
+// CONTACT CARD FLIP
 
-document
-  .querySelector(".contact-container")
-  .addEventListener("click", function () {
-    this.classList.toggle("contact-active");
-  });
+const card = document.querySelector(".contact-container");
+
+card.addEventListener("click", () => {
+  card.classList.toggle("contact-active");
+});
