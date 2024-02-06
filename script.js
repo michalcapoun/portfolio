@@ -89,3 +89,11 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
 });
+
+// CONTACT CARD CLICK
+
+document
+  .querySelector(".contact-container")
+  .addEventListener("click", function () {
+    this.classList.toggle("contact-active");
+  });
