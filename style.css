@@ -428,18 +428,41 @@ body.dark-theme {
 
 /* CONTACT */
 
-.container {
-  height: 275px;
-  width: 275px;
+.contact-container {
+  position: relative;
+  height: 225px;
+  width: 375px;
+  transition: 1s;
+  transform-style: preserve-3d;
 }
 
-.container .card {
+.contact-active {
+  transform: rotateY(180deg);
+}
+
+.contact {
+  position: absolute;
   height: 100%;
-  height: 100%;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 45px rgba(0, 0, 0, 0.5);
+  width: 100%;
+  border-radius: 25px;
+  backdrop-filter: blur(25px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  backface-visibility: hidden;
+}
+
+.front-side {
+  font-size: var(--font-size-nav);
+}
+
+.back-side {
+  border: none;
+  transform: rotateY(180deg);
+  flex-direction: column;
 }
 
 /*
