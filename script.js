@@ -92,8 +92,9 @@ themeButton.addEventListener("click", () => {
 
 // CONTACT CARD FLIP
 
-const card = document.querySelector(".contact-container");
-
-card.addEventListener("click", () => {
-  card.classList.toggle("contact-active");
+document.addEventListener("DOMContentLoaded", () => {
+  const card = document.querySelector(".contact-container");
+  card.addEventListener("click", () => {
+    card.classList.toggle("contact-active");
+  });
 });
