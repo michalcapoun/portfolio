@@ -93,8 +93,12 @@ themeButton.addEventListener("click", () => {
 // CONTACT CARD FLIP
 
 document.addEventListener("DOMContentLoaded", () => {
+  const arrows = document.querySelectorAll(".bx-revision");
   const card = document.querySelector(".contact-container");
-  card.addEventListener("click", () => {
-    card.classList.toggle("contact-active");
+
+  arrows.forEach((arrow) => {
+    arrow.addEventListener("click", () => {
+      card.classList.toggle("contact-active");
+    });
   });
 });
