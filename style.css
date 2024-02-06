@@ -114,17 +114,16 @@ section {
 
 .nav-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* row-gap: 3rem; */
+  gap: 3rem;
 }
 
 .nav-link {
   position: relative;
   color: var(--text-color);
-  writing-mode: vertical-lr;
-  /* transform: rotate(180deg); */
+  /* writing-mode: vertical-lr; */
 }
 
 /* .nav-link::after {
@@ -437,7 +436,6 @@ code {
   position: relative;
   width: 30rem;
   height: 15rem;
-  /* perspective: 150rem; */
   transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-style: preserve-3d;
 }
@@ -473,14 +471,8 @@ code {
 }
 
 .front-side:before,
-.back-side:before,
-.front-side:after,
-.back-side:after {
-  position: absolute;
-}
-
-.front-side:before,
 .back-side:before {
+  position: absolute;
   top: -40px;
   right: -40px;
   content: "";
@@ -491,15 +483,15 @@ code {
   z-index: 1;
 }
 
-.front-side:after,
-.back-side:after {
-  content: "\ebe2";
+.bx-revision {
   font-family: boxicons;
-  top: 0;
+  position: absolute;
+  top: 5px;
   right: 5px;
   font-size: 20px;
   transform: rotate(45deg);
   z-index: 2;
+  cursor: pointer;
 }
 
 .line-numbers {
@@ -552,21 +544,6 @@ code {
 .boolean {
   color: #4dd0e1;
 }
-
-/*
-#copyMessage {
-  position: absolute;
-  top: 60px;
-  background-color: var(--background-color);
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: var(--box-shadow);
-  white-space: nowrap;
-}
-
-#phoneNumber {
-  cursor: pointer;
-} */
 
 /* FOOTER */
 
