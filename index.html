@@ -18,52 +18,26 @@
     />
   </head>
   <body>
-    <header id="header" class="header">
-      <nav class="nav">
-        <div class="nav-logo">
-          <a href="#home">
-            <span class="nav-logo-short">MČ</span>
-            <span class="nav-logo-name">&middot;Michal Čapoun&middot;</span>
+    <div class="left">
+      <i class="bx bx-moon change-theme icon" id="theme-button"></i>
+      <ul id="social-links">
+        <li>
+          <a href="https://www.linkedin.com/in/michalcapoun/" target="_blank">
+            <i class="bx bxl-linkedin-square icon"></i>
           </a>
-        </div>
-
-        <div class="nav-buttons">
-          <i class="bx bx-moon change-theme" id="theme-button"></i>
-          <a
-            class="icon"
-            href="https://www.linkedin.com/in/michalcapoun/"
-            target="_blank"
-          >
-            <i class="bx bxl-linkedin-square"></i>
+        </li>
+        <li>
+          <a href="https://github.com/michalcapoun" target="_blank">
+            <i class="bx bxl-github icon"></i>
           </a>
-          <a
-            class="icon"
-            href="https://github.com/michalcapoun"
-            target="_blank"
-          >
-            <i class="bx bxl-github"></i>
+        </li>
+        <li>
+          <a href="mailto:contact@michalcapoun.cz">
+            <i class="bx bx-envelope icon"></i>
           </a>
-          <a href="mailto:contact@michalcapoun.cz"
-            ><i class="bx bx-envelope"></i
-          ></a>
-          <!-- <span class="change-language" id="change-language">CS</span> -->
-        </div>
-
-        <div class="nav-menu" id="nav-menu">
-          <ul class="nav-list">
-            <li><a href="#about" class="nav-link">about</a></li>
-            <li><a href="#projects" class="nav-link">projects</a></li>
-            <li><a href="#contact" class="nav-link">contact</a></li>
-          </ul>
-
-          <div class="nav-close" id="nav-close">
-            <i class="bx bx-x"></i>
-          </div>
-        </div>
-
-        <div class="nav-toggle" id="nav-toggle">Menu</div>
-      </nav>
-    </header>
+        </li>
+      </ul>
+    </div>
 
     <main class="main">
       <section class="home" id="home">
@@ -113,32 +87,10 @@
             Explicabo ipsa iste adipisci doloremque eius accusamus, in animi
             debitis, est asperiores quisquam.
           </p>
-          <div class="social-links">
-            <a
-              href="./assets/CV EN Michal Čapoun.pdf"
-              class="btn"
-              target="_blank"
-              >Resume (.PDF)
-            </a>
-            <a
-              class="icon"
-              href="https://www.linkedin.com/in/michalcapoun/"
-              target="_blank"
-            >
-              <i class="bx bxl-linkedin-square"></i>
-            </a>
-            <a
-              class="icon"
-              href="https://github.com/michalcapoun"
-              target="_blank"
-            >
-              <i class="bx bxl-github"></i>
-            </a>
-            <a href="mailto:contact@michalcapoun.cz"
-              ><i class="bx bx-envelope"></i
-            ></a>
-          </div>
         </div>
+        <a href="./assets/resume.pdf" id="resume" target="_blank"
+          ><i class="bx bx-file-blank"></i>Resume</a
+        >
       </section>
 
       <section id="projects">
@@ -165,12 +117,18 @@
                   <li class="mysql"></li>
                   <li class="jira"></li>
                 </ul>
-                <a href="https://github.com/michalcapoun/foxhub"
-                  >source code<i class="bx bxl-github"></i
-                ></a>
-                <a href="http://foxhub.gfapp.eu/"
-                  >live version<i class="bx bx-link-external"></i
-                ></a>
+                <div class="card-links">
+                  <a
+                    href="http://foxhub.gfapp.eu/"
+                    class="card-link live-version"
+                    >live version<i class="bx bx-link-external"></i
+                  ></a>
+                  <a
+                    href="https://github.com/michalcapoun/foxhub"
+                    class="card-link github"
+                    >source code<i class="bx bxl-github"></i
+                  ></a>
+                </div>
               </div>
             </div>
           </li>
@@ -190,12 +148,18 @@
                   <li class="css"></li>
                   <li class="javascript"></li>
                 </ul>
-                <a href="https://github.com/michalcapoun/portfolio"
-                  >source code<i class="bx bxl-github"></i
-                ></a>
-                <a href="https://www.michalcapoun.cz/"
-                  >live version<i class="bx bx-link-external"></i
-                ></a>
+                <div class="card-links">
+                  <a
+                    href="https://www.michalcapoun.cz/"
+                    class="card-link live-version"
+                    >live version<i class="bx bx-link-external"></i
+                  ></a>
+                  <a
+                    href="https://github.com/michalcapoun/portfolio"
+                    class="card-link github"
+                    >source code<i class="bx bxl-github"></i
+                  ></a>
+                </div>
               </div>
             </div>
           </li>
@@ -209,8 +173,14 @@
                   necessary. Negative numbers are invalid.
                 </p>
                 <ul class="tech-used"></ul>
-                <a href="">source code<i class="bx bxl-github"></i></a>
-                <a href="">live version<i class="bx bx-link-external"></i></a>
+                <div class="card-links">
+                  <a href="" class="card-link live-version"
+                    >live version<i class="bx bx-link-external"></i
+                  ></a>
+                  <a href="" class="card-link github"
+                    >source code<i class="bx bxl-github"></i
+                  ></a>
+                </div>
               </div>
             </div>
           </li>
@@ -272,7 +242,14 @@
                 <div class="indent">
                   <span class="property">website</span>
                   <span class="operator">:</span>
-                  <span class="string">'michalcapoun.cz'</span>
+                  <span class="string">'michalcapoun.cz'</span>,
+                </div>
+                <div class="indent">
+                  <span class="property">resume</span>
+                  <span class="operator">:</span>
+                  <span class="string">
+                    <a href="./assets/resume.pdf">'resume.pdf'</a>
+                  </span>
                 </div>
                 <span>}</span>
               </div>
