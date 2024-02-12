@@ -39,3 +39,30 @@ arrows.forEach((arrow) => {
     card.classList.toggle("contact-active");
   });
 });
+
+// PARALLAX HORIZONTAL
+
+const elementInitialPositions = new Map();
+
+function parallaxScroll() {
+  const elements = document.querySelectorAll(".parallax");
+  elements.forEach((el) => {
+    const elementTop = el.getBoundingClientRect().top;
+    const viewportHeight = window.innerHeight;
+
+    if (elementTop <= viewportHeight && !elementInitialPositions.has(el)) {
+      elementInitialPositions.set(el, window.scrollY);
+    }
+
+    if (elementInitialPositions.has(el)) {
+      const initialScrollY = elementInitialPositions.get(el);
+      const scrollDistance = window.scrollY - initialScrollY;
+
+      const translateValue = scrollDistance * 1.5;
+
+      el.style.transform = `translateX(${translateValue}px)`;
+    }
+  });
+}
+
+window.addEventListener("scroll", parallaxScroll);
