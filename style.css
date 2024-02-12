@@ -69,11 +69,6 @@ a {
   color: black;
 }
 
-img {
-  height: auto;
-  max-width: 100%;
-}
-
 section {
   min-height: 100vh;
   padding-left: 40px;
@@ -102,9 +97,12 @@ section {
 .tech-used {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
-  padding: 10px;
-  margin: 25px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.tech-used li {
+  margin: 5px;
 }
 
 .java,
@@ -249,13 +247,56 @@ body.dark-theme {
 #hero {
   display: flex;
   align-items: center;
-  justify-content: center;
   text-align: center;
+  padding: 20px;
 }
 
-.hero-img,
+.hero-img {
+  margin-bottom: 20px;
+}
+
+.hero-img img {
+  max-width: 100%;
+  height: auto;
+}
+
 .hero-text {
   position: relative;
+}
+
+.hero-text p {
+  margin-bottom: 1em;
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.hero-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  background-color: #cc4331;
+  box-shadow: 0 4px 0 #a63d2e, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
+  transition: all 0.15s ease-in-out;
+  margin-top: -22px;
+  margin-left: -62px;
+  text-transform: capitalize;
+}
+
+.hero-link:active {
+  margin-top: -18px;
+  box-shadow: none;
 }
 
 .about-start::after {
@@ -396,10 +437,6 @@ body.dark-theme {
   box-shadow: none;
 }
 
-.card-link i {
-  font-size: 20px;
-}
-
 .projects-start::after {
   content: "<projects>";
 }
@@ -411,6 +448,7 @@ body.dark-theme {
 /* CONTACT */
 
 #contact {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
