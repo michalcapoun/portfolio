@@ -58,7 +58,7 @@ function parallaxScroll() {
       const initialScrollY = elementInitialPositions.get(el);
       const scrollDistance = window.scrollY - initialScrollY;
 
-      const translateValue = scrollDistance * 1;
+      const translateValue = scrollDistance * 0.5;
 
       el.style.transform = `translateX(${translateValue}px)`;
     }
