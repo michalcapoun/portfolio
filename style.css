@@ -28,10 +28,7 @@
   --line-height: 1.6;
   /* COLORS */
   --text-color: black;
-  --text-stroke: 1px black;
   --background-color: rgb(255, 255, 255);
-  --color-button: #eda790;
-  --box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.7);
   --glassmorphism: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
 }
@@ -188,6 +185,8 @@ body.dark-theme {
   align-items: center;
   justify-content: space-between;
   height: 100vh;
+  opacity: 0;
+  animation: fadeIn 3s ease-in-out forwards 5.5s;
 }
 
 #social-links {
@@ -220,6 +219,119 @@ body.dark-theme {
   align-items: center;
 }
 
+#name {
+  width: 50vw;
+}
+
+#name g {
+  animation: fill 0.5s ease forwards 5.5s;
+}
+/* m */
+#name path:nth-child(6) {
+  stroke-dasharray: 7951.7;
+  stroke-dashoffset: 7951.7;
+  animation: draw-text 2s ease forwards;
+}
+/* i */
+#name path:nth-child(13) {
+  stroke-dasharray: 3130.1;
+  stroke-dashoffset: 3130.1;
+  animation: draw-text 2s ease forwards 0.3s;
+}
+/* tecka */
+#name path:nth-child(2) {
+  stroke-dasharray: 1109.9;
+  stroke-dashoffset: 1109.9;
+  animation: draw-text 2s ease forwards 0.6s;
+}
+/* 1. c */
+#name path:nth-child(7) {
+  stroke-dasharray: 4112;
+  stroke-dashoffset: 4112;
+  animation: draw-text 2s ease forwards 0.9s;
+}
+/* 1. a */
+#name path:nth-child(8) {
+  stroke-dasharray: 5316.3;
+  stroke-dashoffset: 5316.3;
+  animation: draw-text 2s ease forwards 1.2s;
+}
+/* h */
+#name path:nth-child(3) {
+  stroke-dasharray: 5734.1;
+  stroke-dashoffset: 5734.1;
+  animation: draw-text 2s ease forwards 1.5s;
+}
+/* l */
+#name path:nth-child(4) {
+  stroke-dasharray: 4227;
+  stroke-dashoffset: 4227;
+  animation: draw-text 2s ease forwards 1.8s;
+}
+/* 2. c */
+#name path:nth-child(5) {
+  stroke-dasharray: 4820.5;
+  stroke-dashoffset: 4820.5;
+  animation: draw-text 2s ease forwards 2.1s;
+}
+/* hacek */
+#name path:nth-child(1) {
+  stroke-dasharray: 1573.1;
+  stroke-dashoffset: 1573.1;
+  animation: draw-text 2s ease forwards 2.4s;
+}
+/* 2. a */
+#name path:nth-child(9) {
+  stroke-dasharray: 5316.3;
+  stroke-dashoffset: 5316.3;
+  animation: draw-text 2s ease forwards 2.7s;
+}
+/* p */
+#name path:nth-child(10) {
+  stroke-dasharray: 5674.2;
+  stroke-dashoffset: 5674.2;
+  animation: draw-text 2s ease forwards 3s;
+}
+/* o */
+#name path:nth-child(11) {
+  stroke-dasharray: 4495.2;
+  stroke-dashoffset: 4495.2;
+  animation: draw-text 2s ease forwards 3.3s;
+}
+/* u */
+#name path:nth-child(14) {
+  stroke-dasharray: 4933.8;
+  stroke-dashoffset: 4933.8;
+  animation: draw-text 2s ease forwards 3.6s;
+}
+/* n */
+#name path:nth-child(12) {
+  stroke-dasharray: 4928.8;
+  stroke-dashoffset: 4928.8;
+  animation: draw-text 2s ease forwards 3.9s;
+}
+
+#title {
+  font-size: 40px;
+  opacity: 0;
+  animation: fadeIn 3s ease-in-out forwards 5.5s;
+}
+
+@keyframes draw-text {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill {
+  from {
+    fill: transparent;
+  }
+  to {
+    fill: var(--text-color);
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -227,19 +339,6 @@ body.dark-theme {
   to {
     opacity: 1;
   }
-}
-
-.signature h1 {
-  font-size: 150px;
-  font-family: "Dancing Script", cursive;
-  opacity: 0;
-  animation: fadeIn 2s ease-in-out forwards;
-}
-.signature h2 {
-  font-size: 40px;
-  opacity: 0;
-  animation: fadeIn 3s ease-in-out forwards;
-  animation-delay: 1s;
 }
 
 /* HERO */
