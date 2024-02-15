@@ -224,7 +224,7 @@ body.dark-theme {
 }
 
 #name g {
-  animation: fill 0.5s ease forwards 5.5s;
+  animation: fill 0.5s ease forwards 3.5s;
 }
 /* m */
 #name path:nth-child(6) {
@@ -242,79 +242,79 @@ body.dark-theme {
 #name path:nth-child(2) {
   stroke-dasharray: 1109.9;
   stroke-dashoffset: 1109.9;
-  animation: draw-text 2s ease forwards 0.6s;
+  animation: draw-text 2s ease forwards 0.4s;
 }
 /* 1. c */
 #name path:nth-child(7) {
   stroke-dasharray: 4112;
   stroke-dashoffset: 4112;
-  animation: draw-text 2s ease forwards 0.9s;
+  animation: draw-text 2s ease forwards 0.5s;
 }
 /* 1. a */
 #name path:nth-child(8) {
   stroke-dasharray: 5316.3;
   stroke-dashoffset: 5316.3;
-  animation: draw-text 2s ease forwards 1.2s;
+  animation: draw-text 2s ease forwards 0.6s;
 }
 /* h */
 #name path:nth-child(3) {
   stroke-dasharray: 5734.1;
   stroke-dashoffset: 5734.1;
-  animation: draw-text 2s ease forwards 1.5s;
+  animation: draw-text 2s ease forwards 0.7s;
 }
 /* l */
 #name path:nth-child(4) {
   stroke-dasharray: 4227;
   stroke-dashoffset: 4227;
-  animation: draw-text 2s ease forwards 1.8s;
+  animation: draw-text 2s ease forwards 0.8s;
 }
 /* 2. c */
 #name path:nth-child(5) {
   stroke-dasharray: 4820.5;
   stroke-dashoffset: 4820.5;
-  animation: draw-text 2s ease forwards 2.1s;
+  animation: draw-text 2s ease forwards 0.9s;
 }
 /* hacek */
 #name path:nth-child(1) {
   stroke-dasharray: 1573.1;
   stroke-dashoffset: 1573.1;
-  animation: draw-text 2s ease forwards 2.4s;
+  animation: draw-text 2s ease forwards 1s;
 }
 /* 2. a */
 #name path:nth-child(9) {
   stroke-dasharray: 5316.3;
   stroke-dashoffset: 5316.3;
-  animation: draw-text 2s ease forwards 2.7s;
+  animation: draw-text 2s ease forwards 1.1s;
 }
 /* p */
 #name path:nth-child(10) {
   stroke-dasharray: 5674.2;
   stroke-dashoffset: 5674.2;
-  animation: draw-text 2s ease forwards 3s;
+  animation: draw-text 2s ease forwards 1.2s;
 }
 /* o */
 #name path:nth-child(11) {
   stroke-dasharray: 4495.2;
   stroke-dashoffset: 4495.2;
-  animation: draw-text 2s ease forwards 3.3s;
+  animation: draw-text 2s ease forwards 1.3s;
 }
 /* u */
 #name path:nth-child(14) {
   stroke-dasharray: 4933.8;
   stroke-dashoffset: 4933.8;
-  animation: draw-text 2s ease forwards 3.6s;
+  animation: draw-text 2s ease forwards 1.4s;
 }
 /* n */
 #name path:nth-child(12) {
   stroke-dasharray: 4928.8;
   stroke-dashoffset: 4928.8;
-  animation: draw-text 2s ease forwards 3.9s;
+  animation: draw-text 2s ease forwards 1.5s;
 }
 
 #title {
   font-size: 40px;
   opacity: 0;
-  animation: fadeIn 3s ease-in-out forwards 5.5s;
+  animation: fadeIn 3s ease-in-out forwards 1.6s;
 }
 
 @keyframes draw-text {
@@ -355,12 +355,8 @@ body.dark-theme {
 }
 
 .hero-img img {
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
-}
-
-.hero-text {
-  position: relative;
 }
 
 .hero-text p {
