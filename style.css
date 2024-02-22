@@ -210,7 +210,8 @@ body.dark-theme {
 }
 
 #name {
-  width: 100%;
+  width: clamp(10rem, 50vw, 800px);
+  height: 15%;
 }
 
 #name g {
@@ -302,7 +303,7 @@ body.dark-theme {
 }
 
 #title {
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1rem, 2vw, 300px);
   opacity: 0;
   animation: fadeIn 3s ease-in-out forwards 1.6s;
 }
@@ -387,14 +388,6 @@ body.dark-theme {
 .hero-link:active {
   margin-top: -18px;
   box-shadow: none;
-}
-
-.about-start::after {
-  content: "<about>";
-}
-
-.about-end::after {
-  content: "</about>";
 }
 
 /* PROJECTS */
@@ -527,14 +520,6 @@ body.dark-theme {
   box-shadow: none;
 }
 
-.projects-start::after {
-  content: "<projects>";
-}
-
-.projects-end::after {
-  content: "</projects>";
-}
-
 /* CONTACT */
 
 #contact {
@@ -655,14 +640,6 @@ code {
 
 .function {
   color: #fdd835;
-}
-
-.contact-start::after {
-  content: "<contact>";
-}
-
-.contact-end::after {
-  content: "</contact>";
 }
 
 /* FOOTER */
