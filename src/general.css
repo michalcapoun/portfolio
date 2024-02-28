@@ -33,6 +33,11 @@ a {
   color: black;
 }
 
+p {
+  line-height: 2em;
+  margin-bottom: 1em;
+}
+
 section {
   min-height: 100vh;
 }
