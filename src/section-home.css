@@ -32,7 +32,7 @@
   stroke-dashoffset: 3130.1;
   animation: draw-text 2s ease forwards 0.3s;
 }
-/* tecka */
+/* dot */
 #name path:nth-child(2) {
   stroke-dasharray: 1109.9;
   stroke-dashoffset: 1109.9;
@@ -68,7 +68,7 @@
   stroke-dashoffset: 4820.5;
   animation: draw-text 2s ease forwards 0.9s;
 }
-/* hacek */
+/* hook */
 #name path:nth-child(1) {
   stroke-dasharray: 1573.1;
   stroke-dashoffset: 1573.1;
