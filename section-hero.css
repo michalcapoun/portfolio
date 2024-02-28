@@ -1,0 +1,50 @@
+@import url("variables.css");
+
+#hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.hero-img img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.hero-link {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+  background-color: #cc4331;
+  box-shadow: 0 4px 0 #a63d2e, 0 5px 5px 1px rgba(0, 0, 0, 0.4);
+  transition: all 0.15s ease-in-out;
+  margin-top: -22px;
+  margin-left: -62px;
+  text-transform: capitalize;
+}
+
+.hero-link:active {
+  margin-top: -18px;
+  box-shadow: none;
+}
