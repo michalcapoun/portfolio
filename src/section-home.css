@@ -105,12 +105,6 @@
   animation: draw-text 2s ease forwards 1.5s;
 }
 
-#title {
-  font-size: clamp(1rem, 2vw, 300px);
-  opacity: 0;
-  animation: fadeIn 3s ease-in-out forwards 1.6s;
-}
-
 @keyframes draw-text {
   to {
     stroke-dashoffset: 0;
@@ -123,14 +117,5 @@
   }
   to {
     fill: var(--text-color);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
