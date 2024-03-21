@@ -49,13 +49,6 @@ section {
   -webkit-backdrop-filter: blur(5px);
 }
 
-.tech-used {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-  gap: 10px;
-  list-style: none;
-}
-
 .tech-used li {
   margin: 5px;
   text-align: center;
