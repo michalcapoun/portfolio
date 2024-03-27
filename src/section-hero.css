@@ -6,21 +6,22 @@
   justify-content: center;
 }
 
-.hero-container,
-.hero-img {
-  flex: 1 1 300px;
-  margin: 5px;
+.hero-img,
+.hero-container {
+  flex: 1 1 40vw;
+  margin: 50px;
+  justify-content: center;
+  align-items: center;
 }
-
-.hero-img img {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
+.hero-img {
+  display: flex;
+  align-items: baseline;
 }
 
 .hero-links {
   display: flex;
-  justify-content: space-evenly;
+  gap: 20px;
+  padding-top: 20px;
 }
 
 .hero-link {
@@ -30,4 +31,8 @@
   color: white;
   background-color: #cc4331;
   text-transform: capitalize;
+}
+
+.hero-img img {
+  max-height: 600px;
 }

@@ -8,8 +8,7 @@
 }
 
 code {
-  font-size: 16px;
-  /* font-weight: bold; */
+  font-size: 15px;
 }
 
 .contact-container {
@@ -39,7 +38,7 @@ code {
 }
 
 .front-side {
-  font-size: 40px;
+  font-size: 35px;
   text-transform: capitalize;
 }
 
