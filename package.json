@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Welcome to my personal web portfolio! This is where I showcase my projects and provide a way for you to get in touch with me. I have built this portfolio using vanilla HTML, CSS, and JavaScript, opting for simplicity and elegance by avoiding additional libraries and tools. The site is thoughtfully organized into key sections to provide a seamless browsing experience.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.4"
+  }
+}
