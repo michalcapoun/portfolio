@@ -15,7 +15,7 @@ Thumbs.db
 *.7z
 
 # pdf, png files
-/assets
+# /assets
 node_modules/
 /test-results/
 /playwright-report/
