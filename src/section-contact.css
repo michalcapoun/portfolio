@@ -1,6 +1,8 @@
 @import url("variables.css");
 
 #contact {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -18,6 +20,7 @@ code {
   height: 15rem;
   transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
 }
 
 .contact-active {
@@ -32,19 +35,22 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  backface-visibility: hidden;
-  overflow: hidden;
   margin: auto;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .front-side {
   font-size: 35px;
   text-transform: capitalize;
+  background-color: var(--background-color);
 }
 
 .back-side {
   transform: rotateX(180deg);
   flex-direction: column;
+  background-color: var(--background-color);
 }
 
 .front-side:before,
