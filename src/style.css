@@ -675,8 +675,8 @@ footer {
 .contact-container {
   color: var(--text-color);
   position: relative;
-  width: min(90vw, 44rem);
-  height: clamp(11rem, 45vw, 22rem);
+  width: min(90vw, 36rem);
+  height: clamp(13rem, 22vw, 16rem);
   transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
