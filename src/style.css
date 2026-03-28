@@ -484,11 +484,15 @@ footer {
   align-items: center;
   gap: 2rem;
   padding: 80px clamp(1.5rem, 5vw, 4rem) 4rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }
 
 .hero__container {
-  flex: 1 1 280px;
-  max-width: 420px;
+  flex: 1 1 300px;
+  max-width: 600px;
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -499,9 +503,9 @@ footer {
 }
 
 .hero img {
-  flex: 1 1 30vw;
-  max-width: 400px;
-  max-height: 440px;
+  flex: 1 1 30%;
+  max-width: 500px;
+  max-height: 520px;
   object-fit: contain;
 }
 
