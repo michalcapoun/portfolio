@@ -1,5 +1,7 @@
 # Editor directories and files
 .vscode/
+.claude/
+CLAUDE.md
 
 # Operating System Files
 .DS_Store
