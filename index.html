@@ -1,24 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
   <head>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7GPX0KYLXE"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7GPX0KYLXE');
-</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7GPX0KYLXE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7GPX0KYLXE');
+    </script>
     <title>michalcapoun.cz</title>
-    <link rel="stylesheet" href="src/variables.css" />
-    <link rel="stylesheet" href="src/general.css" />
-    <link rel="stylesheet" href="src/section-hero.css" />
-    <link rel="stylesheet" href="src/section-home.css" />
-    <link rel="stylesheet" href="src/section-projects.css" />
-    <link rel="stylesheet" href="src/section-contact.css" />
+    <link rel="stylesheet" href="src/style.css" />
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -32,50 +26,74 @@
     <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <div class="left">
-      <i
-        class="bx bx-moon change-theme icon glassmorphism"
-        id="theme-button"
-      ></i>
-      <ul id="social-links">
-        <li>
-          <a href="https://www.linkedin.com/in/michalcapoun/" target="_blank">
-            <i class="bx bxl-linkedin-square icon glassmorphism"></i>
+    <nav class="navbar">
+      <div class="navbar__links">
+        <a href="#hero" class="navbar__link" data-text="o mně" data-i18n="nav.about">o mně</a>
+        <a href="#projects" class="navbar__link" data-text="projekty" data-i18n="nav.projects">projekty</a>
+        <a href="#contact" class="navbar__link" data-text="kontakt" data-i18n="nav.contact">kontakt</a>
+        <div class="navbar__progress">
+          <div class="navbar__progress-fill"></div>
+        </div>
+      </div>
+      <div class="navbar__actions">
+        <ul class="social-links">
+          <li>
+            <a href="https://github.com/michalcapoun" target="_blank" aria-label="GitHub">
+              <i class="bx bxl-github icon"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/michalcapoun/" target="_blank" aria-label="LinkedIn">
+              <i class="bx bxl-linkedin-square icon"></i>
+            </a>
+          </li>
+          <li>
+            <a href="mailto:michalcapoun@gmail.com" aria-label="E-mail">
+              <i class="bx bxl-gmail icon"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="navbar__separator"></div>
+        <button class="lang-button" aria-label="Přepnout jazyk">EN</button>
+        <button class="theme-button" aria-label="Přepnout téma">
+          <i class="bx bx-moon change-theme icon"></i>
+        </button>
+        <button class="navbar__hamburger" aria-label="Otevřít menu" aria-expanded="false">
+          <i class="bx bx-menu icon"></i>
+        </button>
+      </div>
+      <div class="navbar__mobile-menu" aria-hidden="true">
+        <a href="#hero" class="navbar__mobile-link" data-i18n="nav.about">o mně</a>
+        <a href="#projects" class="navbar__mobile-link" data-i18n="nav.projects">projekty</a>
+        <a href="#contact" class="navbar__mobile-link" data-i18n="nav.contact">kontakt</a>
+        <div class="navbar__mobile-socials">
+          <a href="https://github.com/michalcapoun" target="_blank" aria-label="GitHub">
+            <i class="bx bxl-github icon"></i>
           </a>
-        </li>
-        <li>
-          <a href="https://github.com/michalcapoun" target="_blank">
-            <i class="bx bxl-github icon glassmorphism"></i>
+          <a href="https://www.linkedin.com/in/michalcapoun/" target="_blank" aria-label="LinkedIn">
+            <i class="bx bxl-linkedin-square icon"></i>
           </a>
-        </li>
-        <li>
-          <a href="mailto:michalcapoun@gmail.com">
-            <i class="bx bxl-gmail icon glassmorphism"></i>
+          <a href="mailto:michalcapoun@gmail.com" aria-label="E-mail">
+            <i class="bx bxl-gmail icon"></i>
           </a>
-        </li>
-        <li>
-          <a
-            href="https://docs.google.com/document/d/1giyLyxhK6-pdVJFdDdy-bsfh1nTe6ty5yhtrHAV8Hn4/edit?usp=sharing"
-            target="_blank"
-          >
-            <i class="bx bxs-file icon glassmorphism"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
+        </div>
+      </div>
+    </nav>
 
-    <main class="main">
-      <section id="home">
-        <div class="signature">
-          <svg
-            id="name"
+    <main>
+      <section id="home" class="home">
+        <svg
+            id="signature-svg"
             viewBox="0 0 1487.000000 208.000000"
             preserveAspectRatio="xMidYMid meet"
+            role="img"
+            aria-labelledby="sig-title"
           >
+            <title id="sig-title">Podpis Michala Čapouna</title>
             <g
               transform="translate(0.000000,208.000000) scale(0.100000,-0.100000)"
               fill="none"
-              stroke="#000000"
+              stroke="currentColor"
               stroke-width="10"
             >
               <path
@@ -178,137 +196,88 @@ c-1 115 2 208 7 208 4 0 13 -7 21 -16 7 -8 36 -28 63 -42 44 -23 63 -27 141
 19 -10 168 -10 331 l0 298 -133 0 c-74 0 -137 -3 -140 -7z"
               />
             </g>
-          </svg>
-        </div>
+        </svg>
       </section>
 
-      <section id="hero">
-        <div class="hero-img">
-          <img src="assets/hero.png" alt="Michal Čapoun profile picture" />
-        </div>
-        <div class="hero-container">
-          <div class="hero-text">
-            <p> O počítače jsem se začal zajímat už na základní škole, když jsem si sestavil svůj první počítač ze starších, nefunkčních dílů. Do světa IT jsem vstoupil IT support, kde jsem uplatnil zájem o technologie i schopnost efektivně řešit problémy. Tato role mi umožnila rychle se učit, pochopit fungování firemních procesů a získat zkušenosti s technologiemi, které jsem chtěl ovládnout. </p> <p> Motivuje mě možnost hledat řešení a vidět konkrétní výsledky své práce, které mají praktický přínos. V práci i mimo ni mě motivuje se zlepšovat – ať už jde o opravu chyby nebo tvorbu něčeho nového, co dává smysl. </p> <p> V roce 2023 jsem absolvoval programátorský kurz, díky kterému jsem své dovednosti posunul dál. Testování a programování se pro mě staly činnostmi, které mi dávají prostor pro další rozvoj. </p>
+      <section id="hero" class="hero">
+        <img src="assets/hero.png" alt="Michal Čapoun profile picture" />
+        <div class="hero__container">
+          <div class="hero__text">
+            <p data-i18n="hero.p1">O počítače se zajímám od základní školy – první jsem si sestavil ze starých dílů. Přes IT support jsem se dostal k testování softwaru, kde jsem našel to, co mě baví: systematicky hledat problémy dřív, než se dostanou k uživatelům.</p>
+            <p data-i18n="hero.p2">Aktuálně se věnuji testování mobilních aplikací – jak manuálnímu, tak automatizovanému. Zajímá mě celý proces: od pochopení toho, jak má věc fungovat, až po ověření že změna skutečně funguje.</p>
+            <p data-i18n="hero.p3">Automatizuji v TypeScript – primárně s Appium, zkušenosti mám i s Playwright. Pro mobilní platformy UIAutomator2 a XCUITest, pro API Postman a Swagger, síť analyzuji v Proxyman. Při diagnostice backendových chyb používám Azure Application Insights.</p>
           </div>
-          <div class="hero-links">
+          <div class="hero__links">
             <a
-              href="https://docs.google.com/document/d/1giyLyxhK6-pdVJFdDdy-bsfh1nTe6ty5yhtrHAV8Hn4/edit?usp=sharing"
-              class="hero-link"
+              href="https://docs.google.com/document/d/1giyLyxhK6-pdVJFdDdy-bsfh1nTe6ty5yhtrHAV8Hn4/view"
+              class="hero__link"
               target="_blank"
-              >Životopis</a
+              data-i18n="hero.resume">Životopis</
             >
             <a
-              href="https://www.linkedin.com/in/michalcapoun/"
-              class="hero-link"
-              target="_blank"
-              >LinkedIn
-            </a>
-            <a
               href="https://github.com/michalcapoun"
-              class="hero-link"
+              class="hero__link"
               target="_blank"
               >GitHub
             </a>
-            <a href="mailto:michalcapoun@gmail.com" class="hero-link">Email </a>
+            <a
+              href="https://www.linkedin.com/in/michalcapoun/"
+              class="hero__link"
+              target="_blank"
+              >LinkedIn
+            </a>
+            <a href="mailto:michalcapoun@gmail.com" class="hero__link">Email </a>
           </div>
         </div>
       </section>
 
-      <section id="projects">
-        <ul class="cards">
-          <li class="cards__item">
-            <div class="card">
-              <div class="card__image card__image--fence"></div>
-              <div class="card__content">
-                <div class="card__title">FoxHub</div>
-                <p class="card__text">
-                  Tento projekt je na míru vytvořená sociální platforma pro
-                  studenty Green Fox Academy, navržená k propojení s
-                  potenciálními technologickými recruitery. Projekt byl vyvíjen
-                  pětičlenným týmem po dobu čtyř týdnů pod dohledem tech lead.
-                  Pro správu verzí jsme využívali GitHub a pracovali ve workflow
-                  s týdenními sprinty, dohledem SCRUM master a využitím Jira pro
-                  správu úkolů, přičemž jsme se přizpůsobovali měnícím se
-                  požadavkům od product owner.
-                </p>
-                <ul class="tech-used">
-                  <li class="java"></li>
-                  <li class="spring-boot"></li>
-                  <li class="typescript"></li>
-                  <li class="angular"></li>
-                  <li class="bootstrap"></li>
-                  <li class="mysql"></li>
-                  <li class="jira"></li>
-                </ul>
-                <div class="card-links">
-                  <!-- <a
-                    href="http://foxhub.gfapp.eu/"
-                    target="_blank"
-                    class="card-link"
-                    >live version</a
-                  > -->
-                  <a
-                    href="https://github.com/michalcapoun/foxhub"
-                    target="_blank"
-                    class="card-link"
-                    >GitHub</a
-                  >
+      <section id="projects" class="projects">
+        <button class="projects__nav projects__nav--prev" aria-label="Předchozí projekt">
+          <i class="bx bx-chevron-left"></i>
+        </button>
+        <div class="projects__track-wrapper">
+          <ul class="cards">
+            <li class="cards__item">
+              <div class="card">
+                <div class="card__image card__image--portfolio"></div>
+                <div class="card__content">
+                  <h2 class="card__title">michalcapoun.cz</h2>
+                  <p class="card__text" data-i18n="projects.portfolio-text">Moje portfolio – místo, kde sdílím projekty a kde mě můžeš kontaktovat. Postaveno na čistém HTML, CSS a JavaScriptu bez frameworků a závislostí.</p>
+                  <div class="card__links">
+                    <a
+                      href="https://github.com/michalcapoun/portfolio"
+                      target="_blank"
+                      class="card__link"
+                      >GitHub</a
+                    >
+                  </div>
                 </div>
               </div>
-            </div>
-          </li>
-          <li class="cards__item">
-            <div class="card">
-              <div class="card__image card__image--river"></div>
-              <div class="card__content">
-                <div class="card__title">michalcapoun.cz</div>
-                <p class="card__text">
-                  Můj osobní web portfolio, prostor, kde sdílím své projekty a
-                  způsob, jak se se mnou spojit. Vytvořeno s použitím čistého
-                  HTML, CSS a JavaScriptu, rozhodl jsem se zůstat u základů,
-                  vyhýbat se knihovnám a nástrojům, aby vše zůstalo elegantní a
-                  přehledné. Web je intuitivně uspořádán do klíčových sekcí.
-                </p>
-                <ul class="tech-used">
-                  <li class="html"></li>
-                  <li class="css"></li>
-                  <li class="javascript"></li>
-                </ul>
-                <div class="card-links">
-                  <a
-                    href="https://github.com/michalcapoun/portfolio"
-                    target="_blank"
-                    class="card-link"
-                    >GitHub</a
-                  >
+            </li>
+            <li class="cards__item">
+              <div class="card">
+                <div class="card__image card__image--map-archive"></div>
+                <div class="card__content">
+                  <h2 class="card__title">Map Archive</h2>
+                  <p class="card__text" data-i18n="projects.map-archive-text">Projekt, na kterém momentálně pracuji. Chci propojit mapy.com API pro ukládání tras a zobrazení základních dat a celkové trasy na mapě.</p>
                 </div>
               </div>
-            </div>
-          </li>
-          <li class="cards__item">
-            <div class="card">
-              <div class="card__image card__image--record"></div>
-              <div class="card__content">
-                <div class="card__title">Map Archive</div>
-                <p class="card__text">
-                  Projekt, na kterém momentálně pracuji. Chci propojit mapy.com
-                  API pro ukládání tras a zobrazení základních dat a celkové
-                  trasy na mapě.
-                </p>
-              </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
+        <button class="projects__nav projects__nav--next" aria-label="Další projekt">
+          <i class="bx bx-chevron-right"></i>
+        </button>
       </section>
 
-      <section id="contact">
+      <section id="contact" class="contact-section">
         <div class="contact-container">
-          <div class="contact front-side glassmorphism">
+          <div class="contact contact__front glassmorphism">
             <span>&middot; Michal Čapoun &middot;</span>
-            <i class="bx bx-revision"></i>
+            <i class="bx bx-revision contact__flip-icon" data-action="flip"></i>
           </div>
-          <div class="contact back-side glassmorphism">
-            <i class="bx bx-revision"></i>
+          <div class="contact contact__back glassmorphism">
+            <i class="bx bx-revision contact__flip-icon" data-action="flip"></i>
             <div class="line-numbers">
               <span>1</span>
               <span>2</span>
@@ -320,42 +289,43 @@ c-1 115 2 208 7 208 4 0 13 -7 21 -16 7 -8 36 -28 63 -42 44 -23 63 -27 141
               <span>8</span>
               <span>9</span>
             </div>
-            <code>
+            <div class="code-block">
               <span class="variable">const</span>
               <span class="function">aboutMe</span>
               <span class="operator">=</span>
               <span>{</span>
-              <div class="indent">
+              <span class="indent">
                 <span class="property">name</span>
                 <span class="operator">:</span>
                 <span class="string">'Michal Čapoun'</span>,
-              </div>
-              <div class="indent">
+              </span>
+              <span class="indent">
                 <span class="property">contact</span>
                 <span class="operator">:</span>
                 <span>{</span>
-                <div class="indent">
+                <span class="indent">
                   <span class="property">phone</span>
                   <span class="operator">:</span>
                   <span class="string">'+420 720 246 303'</span>,
-                </div>
-                <div class="indent">
+                </span>
+                <span class="indent">
                   <span class="property">email</span>
                   <span class="operator">:</span>
                   <span class="string"> 'michalcapoun@gmail.com'</span>
-                </div>
+                </span>
                 <span>}</span>
-              </div>
+              </span>
               <span>}</span>
-            </code>
+            </div>
           </div>
         </div>
       </section>
 
-      <footer>
-        <p>&#169; 2026 Michal Čapoun</p>
-      </footer>
     </main>
+
+    <footer>
+      <p>&#169; 2026 Michal Čapoun</p>
+    </footer>
 
     <script src="src/script.js"></script>
   </body>
