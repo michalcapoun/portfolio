@@ -317,19 +317,22 @@ body.dark-theme .navbar__mobile-menu {
     display: none;
   }
 
-  .navbar__separator {
-    display: none;
-  }
-
-  .navbar__actions .lang-button,
-  .navbar__actions .theme-button {
-    display: none;
+  .navbar__separator,
+  .navbar__actions > .lang-button,
+  .navbar__actions > .theme-button {
+    display: none !important;
   }
 
   .navbar__hamburger {
     display: flex;
     align-items: center;
   }
+}
+
+.navbar__mobile-controls {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
 /* FOOTER */
