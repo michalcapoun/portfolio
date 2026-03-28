@@ -461,11 +461,12 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 80px 2rem 4rem;
+  padding: 80px 4rem 4rem;
 }
 
 .hero__container {
   flex: 1 1 40vw;
+  max-width: 600px;
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -477,6 +478,7 @@ footer {
 
 .hero img {
   flex: 1 1 40vw;
+  max-width: 480px;
   max-height: 500px;
   object-fit: contain;
 }
@@ -511,7 +513,7 @@ footer {
 .projects__track-wrapper {
   overflow: hidden;
   flex: 1;
-  max-width: 50vw;
+  max-width: min(50vw, 800px);
 }
 
 @media (max-width: 768px) {
@@ -645,8 +647,8 @@ footer {
 .contact-container {
   color: var(--text-color);
   position: relative;
-  width: 30rem;
-  height: 15rem;
+  width: clamp(20rem, 40vw, 35rem);
+  height: clamp(10rem, 20vw, 18rem);
   transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;

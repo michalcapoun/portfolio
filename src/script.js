@@ -29,8 +29,13 @@ const translations = {
   },
 };
 
+const storage = {
+  get: (key) => { try { return localStorage.getItem(key); } catch(e) { return null; } },
+  set: (key, val) => { try { localStorage.setItem(key, val); } catch(e) {} },
+};
+
 const langButton = document.querySelector(".lang-button");
-let currentLang = localStorage.getItem("selected-lang") || "cs";
+let currentLang = storage.get("selected-lang") || "cs";
 
 const applyLanguage = (lang) => {
   document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -48,7 +53,7 @@ applyLanguage(currentLang);
 
 langButton.addEventListener("click", () => {
   currentLang = currentLang === "cs" ? "en" : "cs";
-  localStorage.setItem("selected-lang", currentLang);
+  storage.set("selected-lang", currentLang);
   applyLanguage(currentLang);
 });
 
@@ -59,8 +64,8 @@ const themeIcon = themeButton.querySelector("i");
 const darkTheme = "dark-theme";
 const sunIcon = "bx-sun";
 
-const selectedTheme = localStorage.getItem("selected-theme");
-const selectedIcon = localStorage.getItem("selected-icon");
+const selectedTheme = storage.get("selected-theme");
+const selectedIcon = storage.get("selected-icon");
 
 const getCurrentTheme = () =>
   document.body.classList.contains(darkTheme) ? "dark" : "light";
