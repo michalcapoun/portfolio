@@ -1,6 +1,6 @@
 # michalcapoun.cz
 
-Personal portfolio of Michal Čapoun — QA tester.
+Personal portfolio.
 
 **Live:** [michalcapoun.cz](https://michalcapoun.cz)
 
