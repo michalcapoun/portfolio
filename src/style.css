@@ -545,7 +545,7 @@ footer {
 @media (max-width: 768px) {
   .hero img {
     min-width: 0;
-    max-width: min(55vw, 260px);
+    max-width: min(75vw, 320px);
   }
 
   .hero__container {
@@ -555,8 +555,35 @@ footer {
     overflow-wrap: break-word;
   }
 
+  .hero__links {
+    flex-wrap: wrap;
+  }
+
+  .projects {
+    position: relative;
+    padding: 2rem 0;
+  }
+
   .projects__nav {
-    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    font-size: 2rem;
+    padding: 0.4rem;
+    opacity: 0.7;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50%;
+  }
+
+  .projects__nav--prev {
+    left: 0.25rem;
+  }
+
+  .projects__nav--next {
+    right: 0.25rem;
   }
 
   .projects__track-wrapper {
