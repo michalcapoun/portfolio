@@ -465,8 +465,8 @@ footer {
 }
 
 .hero__container {
-  flex: 1 1 40vw;
-  max-width: 600px;
+  flex: 1 1 280px;
+  max-width: 420px;
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -477,9 +477,9 @@ footer {
 }
 
 .hero img {
-  flex: 1 1 40vw;
-  max-width: 480px;
-  max-height: 500px;
+  flex: 1 1 30vw;
+  max-width: 400px;
+  max-height: 440px;
   object-fit: contain;
 }
 
@@ -513,7 +513,7 @@ footer {
 .projects__track-wrapper {
   overflow: hidden;
   flex: 1;
-  max-width: min(50vw, 800px);
+  max-width: min(42vw, 660px);
 }
 
 @media (max-width: 768px) {
@@ -647,8 +647,8 @@ footer {
 .contact-container {
   color: var(--text-color);
   position: relative;
-  width: clamp(20rem, 40vw, 35rem);
-  height: clamp(10rem, 20vw, 18rem);
+  width: clamp(24rem, 50vw, 44rem);
+  height: clamp(13rem, 25vw, 22rem);
   transition: 0.9s cubic-bezier(0.25, 0.8, 0.25, 1);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
