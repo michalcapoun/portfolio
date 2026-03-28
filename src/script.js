@@ -34,7 +34,7 @@ const storage = {
   set: (key, val) => { try { localStorage.setItem(key, val); } catch(e) {} },
 };
 
-const langButton = document.querySelector(".lang-button");
+const langButtons = document.querySelectorAll(".lang-button");
 let currentLang = storage.get("selected-lang") || "cs";
 
 const applyLanguage = (lang) => {
@@ -45,22 +45,23 @@ const applyLanguage = (lang) => {
     el.textContent = text;
     if (el.dataset.text !== undefined) el.dataset.text = text;
   });
-  langButton.textContent = lang === "cs" ? "EN" : "CS";
+  langButtons.forEach((btn) => (btn.textContent = lang === "cs" ? "EN" : "CS"));
   document.documentElement.lang = lang;
 };
 
 applyLanguage(currentLang);
 
-langButton.addEventListener("click", () => {
-  currentLang = currentLang === "cs" ? "en" : "cs";
-  storage.set("selected-lang", currentLang);
-  applyLanguage(currentLang);
+langButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentLang = currentLang === "cs" ? "en" : "cs";
+    storage.set("selected-lang", currentLang);
+    applyLanguage(currentLang);
+  });
 });
 
 // THEME SWITCHER
 
-const themeButton = document.querySelector(".theme-button");
-const themeIcon = themeButton.querySelector("i");
+const themeButtons = document.querySelectorAll(".theme-button");
 const darkTheme = "dark-theme";
 const sunIcon = "bx-sun";
 
@@ -69,19 +70,19 @@ const selectedIcon = storage.get("selected-icon");
 
 const getCurrentTheme = () =>
   document.body.classList.contains(darkTheme) ? "dark" : "light";
-const getCurrentIcon = () =>
-  themeIcon.classList.contains(sunIcon) ? "bx bx-moon" : "bx bx-sun";
 
 const isDark = selectedTheme ? selectedTheme === "dark" : true;
 const useSun = selectedTheme ? selectedIcon === "bx bx-moon" : true;
 document.body.classList[isDark ? "add" : "remove"](darkTheme);
-themeIcon.classList[useSun ? "add" : "remove"](sunIcon);
+themeButtons.forEach((btn) => btn.querySelector("i").classList[useSun ? "add" : "remove"](sunIcon));
 
-themeButton.addEventListener("click", () => {
-  document.body.classList.toggle(darkTheme);
-  themeIcon.classList.toggle(sunIcon);
-  localStorage.setItem("selected-theme", getCurrentTheme());
-  localStorage.setItem("selected-icon", getCurrentIcon());
+themeButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle(darkTheme);
+    themeButtons.forEach((b) => b.querySelector("i").classList.toggle(sunIcon));
+    storage.set("selected-theme", getCurrentTheme());
+    storage.set("selected-icon", themeButtons[0].querySelector("i").classList.contains(sunIcon) ? "bx bx-moon" : "bx bx-sun");
+  });
 });
 
 // CONTACT CARD FLIP
