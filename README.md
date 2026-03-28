@@ -6,32 +6,40 @@ Personal portfolio of Michal Čapoun — QA tester.
 
 ## Stack
 
-Built with plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies — except [Boxicons](https://boxicons.com) and [Google Fonts](https://fonts.google.com) loaded via CDN.
+Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies — except [Boxicons](https://boxicons.com) and [Google Fonts (Source Code Pro)](https://fonts.google.com) loaded via CDN.
 
 ## Features
 
-- Animated SVG signature on load
-- Dark / light theme with localStorage persistence
-- Language switcher (CS / EN)
-- Glassmorphism design with mesh gradient background
-- Infinite project carousel with swipe support (touch + trackpad)
-- Flip contact card
-- Scroll progress bar
-- Responsive layout (mobile, desktop, 27" monitor)
+- Animated SVG signature on page load
+- Dark / light theme toggle with localStorage persistence (dark by default)
+- Language switcher (CS / EN) with localStorage persistence
+- Mesh gradient background with glassmorphism cards
+- Project carousel with infinite loop and swipe support (touch + trackpad)
+- Flippable contact card showing name on front, code-styled contact info on back
+- Scroll progress bar in the navbar
+- Active section highlight via IntersectionObserver
+- Hamburger menu on mobile
+- Responsive layout (mobile + desktop)
+- Google Analytics (G-7GPX0KYLXE)
+
+## Projects shown
+
+- **michalcapoun.cz** — this portfolio site
+- **Map Archive** — work in progress
 
 ## Structure
 
 ```
-index.html          # single HTML file
+index.html
 src/
-  style.css         # all styles
-  script.js         # all JS
-assets/             # images, favicon
+  style.css       # all styles (variables, layout, components)
+  script.js       # all JS
+assets/           # images, favicon
 .github/
   workflows/
-    deploy.yml      # GitHub Actions deployment
+    deploy.yml    # GitHub Actions deployment
 ```
 
 ## Deployment
 
-Deployed automatically to [GitHub Pages](https://pages.github.com) on every push to `main` via GitHub Actions.
+Deployed automatically to [GitHub Pages](https://pages.github.com) on every push to `main` via GitHub Actions. No build step — the repo root is uploaded as the artifact.
