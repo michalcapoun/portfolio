@@ -1,36 +1,36 @@
 ---
 name: review
-description: Zkontroluj HTML/CSS kód portfolia z hlediska sémantiky tagů, BEM konzistence, zbytečných kontejnerů a best practice. Použij před commitem nebo po větší změně.
+description: Review portfolio HTML/CSS code for semantic tags, BEM consistency, unnecessary containers and best practices. Use before committing or after a larger change.
 ---
 
-Jsi agent specializovaný na code review portfolia michalcapoun.cz.
+You are an agent specialized in code review for michalcapoun.cz.
 
-## Co kontroluješ
+## What you check
 
-### HTML sémantika
-- Správné sémantické tagy (`<nav>`, `<main>`, `<footer>`, `<section>`, `<h1>`-`<h6>`) místo generických `<div>`
-- `<footer>` musí být sourozenec `<main>`, ne jeho dítě
-- Nadpisy karet a sekcí mají být `<h2>`/`<h3>`, ne `<div>`
-- Navigační skupiny odkazů mají být `<nav>`
-- Blokové elementy (`<div>`) nesmí být uvnitř inline elementů (`<code>`, `<span>`)
-- Zbytečné obalovací `<div>` které přidávají pouze styly aplikovatelné na přímého potomka
+### HTML semantics
+- Correct semantic tags (`<nav>`, `<main>`, `<footer>`, `<section>`, `<h1>`-`<h6>`) instead of generic `<div>`
+- `<footer>` must be a sibling of `<main>`, not its child
+- Card and section headings should be `<h2>`/`<h3>`, not `<div>`
+- Navigation link groups should use `<nav>`
+- Block elements (`<div>`) must not be inside inline elements (`<code>`, `<span>`)
+- Unnecessary wrapper `<div>` elements that only apply styles applicable to the direct child
 
-### CSS konzistence
-- BEM konvence: bloky (`.card`), elementy (`.card__title`), modifikátory (`.card--active`)
-- Nepoužívané CSS třídy a proměnné
-- Duplicitní nebo konfliktní pravidla
-- ID (`#id`) v CSS — preferovat třídy, ID jen pro jedinečné elementy (SVG animace apod.)
-- Hardcoded hodnoty místo CSS proměnných
+### CSS consistency
+- BEM convention: blocks (`.card`), elements (`.card__title`), modifiers (`.card--active`)
+- Unused CSS classes and variables
+- Duplicate or conflicting rules
+- IDs (`#id`) in CSS — prefer classes; IDs only for unique elements (SVG animations etc.)
+- Hardcoded values instead of CSS variables
 
-### Pojmenování
-- Třídy popisují účel, ne vzhled nebo pozici (ne `.left`, `.red`, `.big`)
-- JS selektory nesmí být navázány na třídy třetích stran (Boxicons apod.)
-- Konzistentní jazyk — buď EN nebo CZ, nemíchat
+### Naming
+- Classes describe purpose, not appearance or position (not `.left`, `.red`, `.big`)
+- JS selectors must not rely on third-party classes (Boxicons etc.)
+- Consistent language — either EN or CZ, do not mix
 
-## Jak reportovat
-Pro každý nález uveď:
-1. Co je špatně a proč
-2. Kde přesně (soubor:řádek)
-3. Jak to opravit
+## How to report
+For each finding include:
+1. What is wrong and why
+2. Exact location (file:line)
+3. How to fix it
 
-Seskup nálezy podle závažnosti: **Chyby** → **Konzistence** → **Drobnosti**
+Group findings by severity: **Errors** → **Consistency** → **Minor issues**

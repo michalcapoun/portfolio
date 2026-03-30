@@ -1,24 +1,24 @@
 # Portfolio – michalcapoun.cz
 
-Osobní portfolio web Michala Čapouna.
+Personal portfolio website of Michal Capoun.
 
 ## Stack
 
-Čisté HTML/CSS/JS – žádné frameworky, žádný build step, žádné závislosti.
-- Jediný HTML soubor: `index.html`
-- JS: `src/script.js`
-- CSS: `src/variables.css`, `src/general.css`, `src/section-*.css`
-- Assety: `assets/`
+Plain HTML/CSS/JS – no frameworks, no build step, no dependencies.
+- Single HTML file: `index.html`
+- JS: `src/script.js` (language switcher CS/EN, dark/light theme, flip card, carousel)
+- CSS: `src/style.css` (single file)
+- Assets: `assets/`
 
-## Pravidla
+## Rules
 
-- Nepoužívat frameworky ani knihovny (výjimka: Boxicons + Google Fonts přes CDN)
-- Obsah webu je česky
-- Preferovat jednoduché, přehledné řešení před komplexním
+- No frameworks or libraries (exception: Boxicons + Google Fonts via CDN)
+- Website content is in Czech
+- Prefer simple, readable solutions over complex ones
 
-## Kontext
+## Context
 
-- Vlastník: Michal Čapoun – QA tester
-- Živá verze: michalcapoun.cz
+- Owner: Michal Capoun – QA tester
+- Live version: michalcapoun.cz
 - Google Analytics: G-7GPX0KYLXE
-- Projekty na webu: FoxHub, michalcapoun.cz (portfolio), Map Archive (WIP)
+- Projects on the site: michalcapoun.cz (portfolio), Map Archive (WIP)
