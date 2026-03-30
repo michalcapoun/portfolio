@@ -42,4 +42,4 @@ assets/           # images, favicon
 
 ## Deployment
 
-Deployed automatically to [GitHub Pages](https://pages.github.com) on every push to `main` via GitHub Actions. No build step — the repo root is uploaded as the artifact.
+Deployed automatically to [GitHub Pages](https://pages.github.com) on every push to `main` via GitHub Actions. No build step — the repo root is uploaded as the artifact. After a successful deploy, a `portfolio-deployed` event is dispatched to the `portfolio-watchdog` repository.
