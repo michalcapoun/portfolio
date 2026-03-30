@@ -1,7 +1,6 @@
 # Editor directories and files
 .vscode/
-.claude/
-CLAUDE.md
+.claude/settings.local.json
 
 # Operating System Files
 .DS_Store
