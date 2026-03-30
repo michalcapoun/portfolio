@@ -713,6 +713,9 @@ footer {
 
 .code-block {
   font-size: 15px;
+  width: 100%;
+  padding-left: 2.5rem;
+  box-sizing: border-box;
 }
 
 .contact-container {
