@@ -1,0 +1,106 @@
+#!/bin/sh
+# Watchdog sync – runs before git push
+# If index.html changed, checks whether watchdog test selectors are still valid.
+
+# ── 1. Check if index.html is among the commits being pushed ─────────────────
+CHANGED=$(git diff @{u}..HEAD --name-only 2>/dev/null || git diff HEAD~1..HEAD --name-only 2>/dev/null)
+if ! echo "$CHANGED" | grep -q "index.html"; then
+  exit 0
+fi
+
+echo ""
+echo "index.html changed – checking watchdog tests..."
+
+# ── 2. Extract section IDs from current index.html ───────────────────────────
+SECTIONS=$(grep -oE 'id="[^"]+"' index.html \
+  | sed 's/id="//;s/"//' \
+  | grep -vE "^(sig-title|signature-svg)$")
+
+# ── 3. Fetch watchdog test files ──────────────────────────────────────────────
+BASE="https://raw.githubusercontent.com/michalcapoun/portfolio-watchdog/main/tests"
+NAV_TEST=$(curl -sf "$BASE/navigation.spec.ts" 2>/dev/null)
+SMOKE_TEST=$(curl -sf "$BASE/smoke.spec.ts" 2>/dev/null)
+
+if [ -z "$NAV_TEST" ] && [ -z "$SMOKE_TEST" ]; then
+  echo "Warning: could not fetch watchdog tests – skipping sync check."
+  exit 0
+fi
+
+ALL_TESTS="$NAV_TEST $SMOKE_TEST"
+
+# ── 4. Find sections missing from watchdog tests ─────────────────────────────
+MISSING=""
+for id in $SECTIONS; do
+  if ! echo "$ALL_TESTS" | grep -qE "#$id|\"$id\"|'$id'"; then
+    MISSING="$MISSING $id"
+  fi
+done
+
+# ── 5. Find watchdog selectors that no longer exist in index.html ─────────────
+WATCHDOG_IDS=$(echo "$ALL_TESTS" | grep -oE '#[a-z][a-z0-9-]+' | sed 's/#//' | sort -u)
+REMOVED=""
+for id in $WATCHDOG_IDS; do
+  if ! grep -q "id=\"$id\"" index.html; then
+    REMOVED="$REMOVED $id"
+  fi
+done
+
+# ── 6. If no differences, continue push ──────────────────────────────────────
+if [ -z "$MISSING" ] && [ -z "$REMOVED" ]; then
+  echo "Watchdog tests are up to date."
+  echo ""
+  exit 0
+fi
+
+# ── 7. Show diff to user ──────────────────────────────────────────────────────
+echo ""
+echo "Watchdog test selectors are out of sync with the current portfolio:"
+if [ -n "$MISSING" ]; then
+  echo ""
+  echo "  New sections (not yet in watchdog tests):"
+  for id in $MISSING; do echo "    + #$id"; done
+fi
+if [ -n "$REMOVED" ]; then
+  echo ""
+  echo "  Removed sections (still referenced in watchdog tests):"
+  for id in $REMOVED; do echo "    - #$id"; done
+fi
+echo ""
+
+# ── 8. Ask for confirmation ───────────────────────────────────────────────────
+printf "Update watchdog tests and push them before this push? (y/n): "
+read -r CONFIRM </dev/tty
+
+if [ "$CONFIRM" != "y" ] && [ "$CONFIRM" != "Y" ]; then
+  echo ""
+  echo "Push cancelled. Update watchdog tests manually before pushing."
+  exit 1
+fi
+
+# ── 9. Run watchdog-sync agent ────────────────────────────────────────────────
+echo ""
+echo "Updating watchdog tests..."
+echo ""
+
+PORTFOLIO_DIR=$(pwd)
+CONTEXT="Portfolio directory: $PORTFOLIO_DIR
+New sections (add to tests): ${MISSING:-none}
+Removed sections (remove from tests): ${REMOVED:-none}
+All current section IDs: $(echo $SECTIONS | tr ' ' ', ')"
+
+claude -p "Run the watchdog-sync agent with the following context:
+
+$CONTEXT"
+
+EXIT_CODE=$?
+
+echo ""
+if [ $EXIT_CODE -eq 0 ]; then
+  echo "Watchdog tests updated. Continuing with portfolio push..."
+  echo ""
+else
+  echo "Watchdog update failed. Push cancelled."
+  exit 1
+fi
+
+exit 0
