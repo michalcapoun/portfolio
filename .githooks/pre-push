@@ -14,7 +14,7 @@ echo "index.html changed – checking watchdog tests..."
 # ── 2. Extract section IDs from current index.html ───────────────────────────
 SECTIONS=$(grep -oE 'id="[^"]+"' index.html \
   | sed 's/id="//;s/"//' \
-  | grep -vE "^(sig-title|signature-svg|home)$")
+  | grep -vE "^(sig-title|signature-svg)$")
 
 # ── 3. Fetch watchdog test files ──────────────────────────────────────────────
 BASE="https://raw.githubusercontent.com/michalcapoun/portfolio-watchdog/main/tests"
