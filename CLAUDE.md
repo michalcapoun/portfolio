@@ -16,6 +16,14 @@ Plain HTML/CSS/JS – no frameworks, no build step, no dependencies.
 - Website content is in Czech
 - Prefer simple, readable solutions over complex ones
 
+## Setup
+
+After cloning, run once to activate git hooks:
+```
+make setup
+```
+This sets `core.hooksPath` to `.githooks/` so the pre-push watchdog sync hook works.
+
 ## Context
 
 - Owner: Michal Capoun – QA tester
