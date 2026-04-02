@@ -14,7 +14,7 @@ const translations = {
     "hero.p3": "Automatizuji v TypeScript – primárně s Appium, zkušenosti mám i s Playwright. Pro mobilní platformy UIAutomator2 a XCUITest, pro API Postman a Swagger, síť analyzuji v Proxyman. Při diagnostice backendových chyb používám Azure Application Insights.",
     "hero.resume": "Životopis",
     "projects.portfolio-text": "Moje portfolio – místo, kde sdílím projekty a kde mě můžeš kontaktovat. Postaveno na čistém HTML, CSS a JavaScriptu bez frameworků a závislostí.",
-    "projects.map-archive-text": "Projekt, na kterém momentálně pracuji. Chci propojit mapy.com API pro ukládání tras a zobrazení základních dat a celkové trasy na mapě.",
+    "projects.tracer-text": "Osobní archiv výletů. Ukládám, organizuji a archivuji trasy naplánované v Mapy.com. Vue 3, TypeScript, Supabase.",
     "projects.watchdog-text": "Automatizované E2E testy pro toto portfolio. Playwright + TypeScript, axe-core pro přístupnost. Spouští se po každém deployi a denně hlídá funkčnost webu.",
   },
   en: {
@@ -26,7 +26,7 @@ const translations = {
     "hero.p3": "I automate in TypeScript — primarily with Appium, with some experience in Playwright. For mobile platforms UIAutomator2 and XCUITest, for API Postman and Swagger, network analysis in Proxyman. For diagnosing backend errors I use Azure Application Insights.",
     "hero.resume": "Resume",
     "projects.portfolio-text": "My portfolio — a place to share my projects and get in touch. Built with plain HTML, CSS and JavaScript, no frameworks, no dependencies.",
-    "projects.map-archive-text": "A project I'm currently working on. I want to integrate the mapy.com API to store routes and display route data on a map.",
+    "projects.tracer-text": "Personal trip archive. Save, organize and archive routes planned in Mapy.com. Vue 3, TypeScript, Supabase.",
     "projects.watchdog-text": "Automated E2E tests for this portfolio. Playwright + TypeScript, axe-core for accessibility. Runs after every deploy and checks the site daily.",
   },
 };
