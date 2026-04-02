@@ -664,9 +664,8 @@ footer {
   background-size: contain;
 }
 
-.card__image--map-archive {
-  background-image: url(https://unsplash.it/800/600?image=82);
-  filter: blur(20px);
+.card__image--tracer {
+  background-image: url(../assets/tracer.png);
 }
 
 .card__image--watchdog {
