@@ -15,7 +15,6 @@ const translations = {
     "hero.resume": "Životopis",
     "projects.portfolio-text": "Moje portfolio – místo, kde sdílím projekty a kde mě můžeš kontaktovat. Postaveno na čistém HTML, CSS a JavaScriptu bez frameworků a závislostí.",
     "projects.tracer-text": "Osobní archiv výletů. Ukládám, organizuji a archivuji trasy naplánované v Mapy.com. Vue 3, TypeScript, Supabase.",
-    "projects.watchdog-text": "Automatizované E2E testy pro toto portfolio. Playwright + TypeScript, axe-core pro přístupnost. Spouští se po každém deployi a denně hlídá funkčnost webu.",
   },
   en: {
     "nav.about": "about",
@@ -27,7 +26,6 @@ const translations = {
     "hero.resume": "Resume",
     "projects.portfolio-text": "My portfolio — a place to share my projects and get in touch. Built with plain HTML, CSS and JavaScript, no frameworks, no dependencies.",
     "projects.tracer-text": "Personal trip archive. Save, organize and archive routes planned in Mapy.com. Vue 3, TypeScript, Supabase.",
-    "projects.watchdog-text": "Automated E2E tests for this portfolio. Playwright + TypeScript, axe-core for accessibility. Runs after every deploy and checks the site daily.",
   },
 };
 
