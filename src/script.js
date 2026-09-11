@@ -4,18 +4,8 @@ window.scrollTo(0, 0);
 
 // LANGUAGE SWITCHER
 
+// Czech text lives in index.html; only English is kept here.
 const translations = {
-  cs: {
-    "nav.about": "o mně",
-    "nav.projects": "projekty",
-    "nav.contact": "kontakt",
-    "hero.p1": "O počítače se zajímám od základní školy – první jsem si sestavil ze starých dílů. Přes IT support jsem se dostal k testování softwaru, kde jsem našel to, co mě baví: systematicky hledat problémy dřív, než se dostanou k uživatelům.",
-    "hero.p2": "Aktuálně se věnuji testování mobilních aplikací – jak manuálnímu, tak automatizovanému. Zajímá mě celý proces: od pochopení toho, jak má věc fungovat, až po ověření že změna skutečně funguje.",
-    "hero.p3": "Automatizuji v TypeScript – primárně s Appium, zkušenosti mám i s Playwright. Pro mobilní platformy UIAutomator2 a XCUITest, pro API Postman a Swagger, síť analyzuji v Proxyman. Při diagnostice backendových chyb používám Azure Application Insights.",
-    "hero.resume": "Životopis",
-    "projects.portfolio-text": "Moje portfolio – místo, kde sdílím projekty a kde mě můžeš kontaktovat. Postaveno na čistém HTML, CSS a JavaScriptu bez frameworků a závislostí.",
-    "projects.tracer-text": "Osobní archiv výletů. Ukládám, organizuji a archivuji trasy naplánované v Mapy.com. Vue 3, TypeScript, Supabase.",
-  },
   en: {
     "nav.about": "about",
     "nav.projects": "projects",
@@ -39,8 +29,8 @@ let currentLang = storage.get("selected-lang") || "cs";
 
 const applyLanguage = (lang) => {
   document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.dataset.i18n;
-    const text = translations[lang][key];
+    el.dataset.cs ??= el.textContent;
+    const text = lang === "cs" ? el.dataset.cs : translations.en[el.dataset.i18n];
     if (!text) return;
     el.textContent = text;
     if (el.dataset.text !== undefined) el.dataset.text = text;
