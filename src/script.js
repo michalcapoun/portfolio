@@ -40,6 +40,17 @@ const applyLanguage = (lang) => {
 
 applyLanguage(currentLang);
 
+// CONSOLE GREETING
+
+console.log(
+  "%c  \\( )/\n  -( )-\n  /( )\\\n\n%c" +
+    (currentLang === "cs" ? "Hledáš bugy? To je moje práce. Napiš mi:" : "Looking for bugs? That's my job. Say hi:") +
+    "\n%cmichalcapoun@gmail.com",
+  "color: #cc4331; font-weight: bold",
+  "font-size: 14px; font-weight: bold",
+  "font-size: 12px"
+);
+
 langButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     currentLang = currentLang === "cs" ? "en" : "cs";
