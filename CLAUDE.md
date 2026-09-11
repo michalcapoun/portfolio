@@ -21,4 +21,4 @@ Plain HTML/CSS/JS – no frameworks, no build step, no dependencies.
 - Owner: Michal Capoun – QA tester
 - Live version: michalcapoun.cz
 - Google Analytics: G-7GPX0KYLXE
-- Projects on the site: michalcapoun.cz (portfolio), Map Archive (WIP)
+- Projects on the site: michalcapoun.cz (portfolio), Tracer
