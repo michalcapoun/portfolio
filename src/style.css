@@ -82,11 +82,6 @@ section {
 
 /* THEME */
 
-.change-theme {
-  color: var(--text-color);
-  cursor: pointer;
-}
-
 body.dark-theme {
   --text-color: white;
   --background-color: #0f1117;
@@ -801,14 +796,13 @@ body.dark-theme .contact {
 }
 
 .operator { color: #0891b2; }
-.string, .string a { color: #15803d; }
+.string { color: #15803d; }
 .variable { color: #7e22ce; }
 .property { color: #b91c1c; }
 .function { color: #b45309; }
 
 body.dark-theme .operator { color: #4dd0e1; }
-body.dark-theme .string,
-body.dark-theme .string a { color: #9ccc65; }
+body.dark-theme .string { color: #9ccc65; }
 body.dark-theme .variable { color: #ba68c8; }
 body.dark-theme .property { color: #ef5350; }
 body.dark-theme .function { color: #fdd835; }
