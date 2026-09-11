@@ -13,7 +13,6 @@ const translations = {
     "hero.p1": "I've been into computers since elementary school — I built my first one from spare parts. Through IT support, I found my way to software testing, where I discovered what I enjoy: systematically finding problems before they reach users.",
     "hero.p2": "I currently focus on mobile application testing — both manual and automated. I'm interested in the whole process: understanding how something should work, all the way to verifying that a fix actually works.",
     "hero.p3": "I automate in TypeScript — primarily with Appium, with some experience in Playwright. For mobile platforms UIAutomator2 and XCUITest, for API Postman and Swagger, network analysis in Proxyman. For diagnosing backend errors I use Azure Application Insights.",
-    "hero.resume": "Resume",
     "projects.portfolio-text": "My portfolio — a place to share my projects and get in touch. Built with plain HTML, CSS and JavaScript, no frameworks, no dependencies.",
     "projects.tracer-text": "Personal trip archive. Save, organize and archive routes planned in Mapy.com. Vue 3, TypeScript, Supabase.",
   },
