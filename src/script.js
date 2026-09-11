@@ -63,25 +63,20 @@ langButtons.forEach((btn) => {
 
 const themeButtons = document.querySelectorAll(".theme-button");
 const darkTheme = "dark-theme";
-const sunIcon = "bx-sun";
 
-const selectedTheme = storage.get("selected-theme");
-const selectedIcon = storage.get("selected-icon");
+// Sun icon in dark mode, moon in light mode.
+const applyTheme = (isDark) => {
+  document.body.classList.toggle(darkTheme, isDark);
+  themeButtons.forEach((btn) => btn.querySelector("i").classList.toggle("bx-sun", isDark));
+};
 
-const getCurrentTheme = () =>
-  document.body.classList.contains(darkTheme) ? "dark" : "light";
-
-const isDark = selectedTheme ? selectedTheme === "dark" : true;
-const useSun = selectedTheme ? selectedIcon === "bx bx-moon" : true;
-document.body.classList[isDark ? "add" : "remove"](darkTheme);
-themeButtons.forEach((btn) => btn.querySelector("i").classList[useSun ? "add" : "remove"](sunIcon));
+applyTheme(storage.get("selected-theme") !== "light");
 
 themeButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.body.classList.toggle(darkTheme);
-    themeButtons.forEach((b) => b.querySelector("i").classList.toggle(sunIcon));
-    storage.set("selected-theme", getCurrentTheme());
-    storage.set("selected-icon", themeButtons[0].querySelector("i").classList.contains(sunIcon) ? "bx bx-moon" : "bx bx-sun");
+    const isDark = !document.body.classList.contains(darkTheme);
+    applyTheme(isDark);
+    storage.set("selected-theme", isDark ? "dark" : "light");
   });
 });
 
