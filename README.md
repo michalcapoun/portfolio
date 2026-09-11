@@ -35,11 +35,8 @@ src/
   style.css       # all styles (variables, layout, components)
   script.js       # all JS
 assets/           # images, favicon
-.github/
-  workflows/
-    deploy.yml    # GitHub Actions deployment
 ```
 
 ## Deployment
 
-Deployed automatically to [GitHub Pages](https://pages.github.com) on every push to `main` via GitHub Actions. No build step — the repo root is uploaded as the artifact.
+Deployed automatically by [GitHub Pages](https://pages.github.com) from the `main` branch on every push. No build step.
