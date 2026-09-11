@@ -98,22 +98,18 @@ const navbar = document.querySelector(".navbar");
 const mobileMenu = document.querySelector(".navbar__mobile-menu");
 const hamburgerIcon = hamburger.querySelector("i");
 
-hamburger.addEventListener("click", () => {
-  const isOpen = navbar.classList.toggle("navbar--open");
+const setMenu = (isOpen) => {
+  navbar.classList.toggle("navbar--open", isOpen);
   hamburger.setAttribute("aria-expanded", isOpen);
   mobileMenu.setAttribute("aria-hidden", !isOpen);
-  hamburgerIcon.classList.toggle("bx-menu");
-  hamburgerIcon.classList.toggle("bx-x");
-});
+  hamburgerIcon.classList.toggle("bx-menu", !isOpen);
+  hamburgerIcon.classList.toggle("bx-x", isOpen);
+};
+
+hamburger.addEventListener("click", () => setMenu(!navbar.classList.contains("navbar--open")));
 
 document.querySelectorAll(".navbar__mobile-link").forEach((link) => {
-  link.addEventListener("click", () => {
-    navbar.classList.remove("navbar--open");
-    hamburger.setAttribute("aria-expanded", "false");
-    mobileMenu.setAttribute("aria-hidden", "true");
-    hamburgerIcon.classList.add("bx-menu");
-    hamburgerIcon.classList.remove("bx-x");
-  });
+  link.addEventListener("click", () => setMenu(false));
 });
 
 // PROGRESS BAR & ACTIVE SECTION
