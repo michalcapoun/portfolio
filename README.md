@@ -26,7 +26,6 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies �
 
 - **michalcapoun.cz** — this portfolio site ([GitHub](https://github.com/michalcapoun/portfolio))
 - **Tracer** — personal trip archive built with Vue 3, TypeScript, and Supabase ([GitHub](https://github.com/michalcapoun/tracer), [Live](https://tracer-six.vercel.app))
-- **portfolio-watchdog** — automated E2E tests for this portfolio using Playwright, TypeScript, and axe-core ([GitHub](https://github.com/michalcapoun/portfolio-watchdog))
 
 ## Structure
 

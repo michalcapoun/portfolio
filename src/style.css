@@ -668,12 +668,6 @@ footer {
   background-image: url(../assets/tracer.png);
 }
 
-.card__image--watchdog {
-  background-color: #0d1117;
-  background-image: url(../assets/portfolio-watchdog.png);
-  background-size: contain;
-}
-
 .card__title {
   color: var(--text-color);
   font-size: 1.25rem;
