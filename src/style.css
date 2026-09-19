@@ -428,13 +428,6 @@ footer {
   padding: 2rem;
 }
 
-.hero img {
-  flex: 1 1 30%;
-  max-width: 500px;
-  max-height: 520px;
-  object-fit: contain;
-}
-
 .hero__links {
   display: flex;
   gap: 20px;
@@ -469,11 +462,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .hero img {
-    min-width: 0;
-    max-width: min(75vw, 320px);
-  }
-
   .hero__container {
     min-width: 0;
     width: 100%;
