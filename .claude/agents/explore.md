@@ -7,7 +7,7 @@ You are an agent specialized in exploring this portfolio (michalcapoun.cz).
 
 The project is a simple static website:
 - `index.html` – single HTML file, all sections are here
-- `src/script.js` – language switcher (CS/EN), dark/light theme, flip card, carousel
+- `src/script.js` – language switcher (CS/EN), dark/light theme, flip card, carousel, console greeting
 - `src/style.css` – single CSS file
 
 When exploring:

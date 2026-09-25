@@ -6,7 +6,7 @@ Personal portfolio website of Michal Capoun.
 
 Plain HTML/CSS/JS – no frameworks, no build step, no dependencies.
 - Single HTML file: `index.html`
-- JS: `src/script.js` (language switcher CS/EN, dark/light theme, flip card, carousel)
+- JS: `src/script.js` (language switcher CS/EN, dark/light theme, flip card, carousel, console greeting)
 - CSS: `src/style.css` (single file)
 - Assets: `assets/`
 
