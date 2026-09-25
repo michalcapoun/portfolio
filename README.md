@@ -1,42 +1,43 @@
 # michalcapoun.cz
 
-Personal portfolio.
+Osobní portfolio.
 
-**Live:** [michalcapoun.cz](https://michalcapoun.cz)
+**Živě:** [michalcapoun.cz](https://michalcapoun.cz)
 
-## Stack
+## Technologie
 
-Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies — except [Boxicons](https://boxicons.com) and [Google Fonts (Source Code Pro)](https://fonts.google.com) loaded via CDN.
+Čisté HTML, CSS a JavaScript. Žádné frameworky, žádný build, žádné závislosti — kromě [Boxicons](https://boxicons.com) a [Google Fonts (Source Code Pro)](https://fonts.google.com) načítaných přes CDN.
 
-## Features
+## Funkce
 
-- Animated SVG signature on page load
-- Dark / light theme toggle with localStorage persistence (dark by default)
-- Language switcher (CS / EN) with localStorage persistence
-- Mesh gradient background with glassmorphism cards
-- Project carousel with infinite loop and swipe support (touch + trackpad)
-- Flippable contact card showing name on front, code-styled contact info on back
-- Scroll progress bar in the navbar
-- Active section highlight via IntersectionObserver
-- Hamburger menu on mobile
-- Responsive layout (mobile + desktop)
+- Animovaný SVG podpis při načtení stránky
+- Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
+- Přepínání jazyka (CS / EN), volba se pamatuje v localStorage
+- Mesh gradient na pozadí a karty ve stylu glassmorphism
+- Karusel projektů s nekonečnou smyčkou a swipem (dotyk i touchpad)
+- Otočná kontaktní karta — vepředu jméno, vzadu kontakty stylizované jako kód
+- Pozdrav v konzoli prohlížeče pro návštěvníky, kteří otevřou DevTools
+- Ukazatel průběhu scrollování v navigaci
+- Zvýraznění aktivní sekce přes IntersectionObserver
+- Hamburger menu na mobilu
+- Responzivní rozložení (mobil i desktop)
 - Google Analytics (G-7GPX0KYLXE)
 
-## Projects shown
+## Projekty na webu
 
-- **michalcapoun.cz** — this portfolio site ([GitHub](https://github.com/michalcapoun/portfolio))
-- **Tracer** — personal trip archive built with Vue 3, TypeScript, and Supabase ([GitHub](https://github.com/michalcapoun/tracer), [Live](https://tracer-six.vercel.app))
+- **michalcapoun.cz** — tohle portfolio ([GitHub](https://github.com/michalcapoun/portfolio))
+- **Tracer** — osobní archiv výletů ve Vue 3, TypeScriptu a Supabase ([GitHub](https://github.com/michalcapoun/tracer), [živě](https://tracer-six.vercel.app))
 
-## Structure
+## Struktura
 
 ```
-index.html
+index.html        # celá stránka, favicon je inline SVG
 src/
-  style.css       # all styles (variables, layout, components)
-  script.js       # all JS
-assets/           # images, favicon
+  style.css       # všechny styly (proměnné, layout, komponenty)
+  script.js       # všechen JS
+assets/           # screenshoty projektů
 ```
 
-## Deployment
+## Nasazení
 
-Deployed automatically by [GitHub Pages](https://pages.github.com) from the `main` branch on every push. No build step.
+Nasazuje se automaticky přes [GitHub Pages](https://pages.github.com) z větve `main` při každém pushi. Bez buildu.
