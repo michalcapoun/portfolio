@@ -12,9 +12,8 @@ Always read the current state of:
 - `index.html` (sections, features)
 - `src/style.css` (design features)
 - `src/script.js` (JS features)
-- `.github/workflows/deploy.yml` (deployment)
 
-Based on that, update the README to reflect the actual current state of the project. Write in English, concisely and factually.
+Based on that, update the README to reflect the actual current state of the project. Write in Czech, concisely and factually.
 
 ## What belongs in the README
 
@@ -22,7 +21,7 @@ Based on that, update the README to reflect the actual current state of the proj
 - Stack (only what is actually used)
 - Features (only functional, existing things — not plans)
 - File structure
-- Deployment (how CI/CD works)
+- Deployment (GitHub Pages from `main`, no build step)
 
 ## What does not belong in the README
 
