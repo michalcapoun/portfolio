@@ -14,11 +14,3 @@ Thumbs.db
 
 # Archive files
 *.7z
-
-# pdf, png files
-# /assets
-node_modules/
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
