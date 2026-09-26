@@ -11,6 +11,7 @@
   --accent: #82a8ff;
   --accent-2: #c7a0ff;
   --link: #f2b764;
+  --line: #2c333d;
 }
 
 :root[data-theme="light"] {
@@ -22,6 +23,7 @@
   --accent: #2456c9;
   --accent-2: #8440c4;
   --link: #8f4d00;
+  --line: #d3d9e0;
 }
 
 /* ================================
@@ -40,6 +42,10 @@ body {
   color: var(--fg);
   font: 16px/1.7 "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   -webkit-text-size-adjust: 100%;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 h1, h2, p, dl, dd {
@@ -102,10 +108,32 @@ button:focus-visible {
   padding: 24px max(16px, 5vw) 64px;
 }
 
-.prompt { color: var(--dim); }
-.prompt__user { color: var(--accent); }
-.prompt__dir { color: var(--accent-2); }
-.prompt__cmd { color: var(--fg); }
+/* Chat-style input box; the first holds the typed question, the last waits with a cursor */
+.prompt {
+  display: flex;
+  gap: 1ch;
+  margin: 0;
+  padding: 0.5em 1.5ch;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.prompt__sign { color: var(--accent); }
+
+.thinking { margin-top: 1.7em; }
+.thinking__spinner { color: var(--accent-2); }
+
+/* The answer is indented under a marker, like a model's reply */
+.output {
+  position: relative;
+  padding-left: 2ch;
+}
+
+.output__mark {
+  position: absolute;
+  left: 0;
+  color: var(--accent-2);
+}
 
 .output {
   display: flex;
@@ -134,6 +162,7 @@ h2 { color: var(--accent); }
 }
 
 .row dt { color: var(--dim); }
+.row dd { overflow-wrap: anywhere; }
 
 .project {
   display: grid;

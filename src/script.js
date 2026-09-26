@@ -12,6 +12,8 @@ const storage = {
 // Czech text lives in index.html; only English is kept here.
 const translations = {
   en: {
+    "prompt": "Introduce yourself to a recruiter. Brief, in the first person.",
+    "thinking": "Thinking…",
     "role": "QA tester · mobile app testing, manual and automated",
     "about.title": "About",
     "about.p1": "I've been into computers since elementary school — I built my first one from spare parts. Through IT support, I found my way to software testing, where I discovered what I enjoy: systematically finding problems before they reach users.",
@@ -62,11 +64,14 @@ themeButton.addEventListener("click", () => {
 });
 
 // TERMINAL PRINTING
-// The command is typed, then the output streams, then the cursor blinks on a new prompt.
+// The question is typed into the prompt, a spinner "thinks", the answer streams, then the cursor
+// blinks in an empty prompt.
 // Without JS all text is simply visible. Any click, key, wheel or touch finishes printing at once.
 
 const CPS = 450; // output speed in characters per second
-const command = document.querySelector(".prompt__cmd");
+const command = document.querySelector(".prompt__text");
+const thinking = document.querySelector(".thinking");
+const spinner = document.querySelector(".thinking__spinner");
 const output = document.querySelector(".output");
 const lastPrompt = document.querySelector(".prompt--last");
 const footer = document.querySelector("footer");
@@ -101,22 +106,33 @@ async function print() {
   const lines = textNodes(output);
   printed = [[cmd, cmdText], ...lines];
   printed.forEach(([node]) => (node.data = ""));
-  lastPrompt.hidden = footer.hidden = true;
+  lastPrompt.hidden = footer.hidden = thinking.hidden = true;
 
-  // fresh prompt, idle cursor for a moment, then the command is typed by hand
+  // empty prompt, idle cursor for a moment, then the question is typed by hand
   cmd.after(cursor);
   cursor.classList.remove("cursor--busy");
-  if (!fast) await wait(700);
+  if (!fast) await wait(500);
   cursor.classList.add("cursor--busy");
   for (const ch of cmdText) {
     if (!live()) return;
     if (fast) break;
     cmd.data += ch;
-    await wait(35 + Math.random() * 60);
+    await wait(25 + Math.random() * 35);
   }
   if (!live()) return;
   cmd.data = cmdText;
-  if (!fast) await wait(350);
+
+  // the model "thinks" for a moment
+  cursor.remove();
+  thinking.hidden = fast;
+  for (const frame of "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏") {
+    if (!live()) return;
+    if (fast) break;
+    spinner.textContent = frame;
+    await wait(80);
+  }
+  if (!live()) return;
+  thinking.hidden = true;
 
   // output streams at CPS
   let t = performance.now();
