@@ -10,7 +10,7 @@ Osobní portfolio.
 
 ## Funkce
 
-- Stránka vypadá jako výpis z terminálu: po otevření se napíše příkaz, obsah se vypíše po znacích a na konci bliká kurzor
+- Stránka vypadá jako rozhovor s AI v terminálu: po otevření se do promptu napíše otázka, chvíli se „přemýšlí“, odpověď se vypíše po znacích a na konci bliká kurzor v prázdném promptu
 - Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
 - Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
 - Přepínání jazyka (CS / EN), volba se pamatuje v localStorage; po přepnutí se text vypíše znovu
