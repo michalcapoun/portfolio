@@ -114,6 +114,7 @@ async function print() {
     cmd.data += ch;
     await wait(35 + Math.random() * 60);
   }
+  if (!live()) return;
   cmd.data = cmdText;
   if (!fast) await wait(350);
 
@@ -125,6 +126,7 @@ async function print() {
       if (!live()) return;
       if (fast) { node.data = text; break; }
       await nextFrame();
+      if (!live()) return;
       const now = performance.now();
       node.data = text.slice(0, node.data.length + Math.max(1, Math.round(((now - t) * CPS) / 1000)));
       t = now;
