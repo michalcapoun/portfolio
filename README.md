@@ -26,7 +26,7 @@ Osobní portfolio.
 ## Struktura
 
 ```
-index.html        # celá stránka, favicon je inline SVG
+index.html        # celá stránka, bez faviconu
 src/
   style.css       # všechny styly (motivy, layout, kurzor)
   script.js       # všechen JS
