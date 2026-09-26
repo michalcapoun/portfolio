@@ -6,20 +6,15 @@ Osobní portfolio.
 
 ## Technologie
 
-Čisté HTML, CSS a JavaScript. Žádné frameworky, žádný build, žádné závislosti — kromě [Boxicons](https://boxicons.com) a [Google Fonts (Source Code Pro)](https://fonts.google.com) načítaných přes CDN.
+Čisté HTML, CSS a JavaScript. Žádné frameworky, žádný build, žádné závislosti — kromě [Google Fonts (JetBrains Mono)](https://fonts.google.com/specimen/JetBrains+Mono) načítaného přes CDN.
 
 ## Funkce
 
-- Animovaný SVG podpis při načtení stránky
+- Stránka vypadá jako výpis z terminálu: po otevření se napíše příkaz, obsah se vypíše po znacích a na konci bliká kurzor
+- Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
 - Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
-- Přepínání jazyka (CS / EN), volba se pamatuje v localStorage
-- Mesh gradient na pozadí a karty ve stylu glassmorphism
-- Karusel projektů s nekonečnou smyčkou a swipem (dotyk i touchpad)
-- Otočná kontaktní karta — vepředu jméno, vzadu kontakty stylizované jako kód
+- Přepínání jazyka (CS / EN), volba se pamatuje v localStorage; po přepnutí se text vypíše znovu
 - Pozdrav v konzoli prohlížeče pro návštěvníky, kteří otevřou DevTools
-- Ukazatel průběhu scrollování v navigaci
-- Zvýraznění aktivní sekce přes IntersectionObserver
-- Hamburger menu na mobilu
 - Responzivní rozložení (mobil i desktop)
 - Google Analytics (G-7GPX0KYLXE)
 
@@ -33,9 +28,8 @@ Osobní portfolio.
 ```
 index.html        # celá stránka, favicon je inline SVG
 src/
-  style.css       # všechny styly (proměnné, layout, komponenty)
+  style.css       # všechny styly (motivy, layout, kurzor)
   script.js       # všechen JS
-assets/           # screenshoty projektů
 ```
 
 ## Nasazení
