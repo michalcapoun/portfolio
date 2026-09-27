@@ -115,7 +115,9 @@ const moveCursor = (node) => {
 };
 
 function renderLine() {
-  if (closed || cursor.classList.contains("cursor--busy")) return; // the cursor is busy elsewhere
+  if (closed || lastPrompt.hidden || cursor.classList.contains("cursor--busy")) return; // the cursor is elsewhere
+  lastPromptPath.textContent = pathLabel(cwd);
+  lastPromptPath.hidden = !cwd.length;
   const value = input.value;
   const pos = input.selectionStart ?? value.length;
   typed.data = value.slice(0, pos);
@@ -230,7 +232,7 @@ async function print() {
   typedTimes = [];
   typedHistory = [];
   histPos = 0;
-  cwd = [];
+  cwd = prevCwd = [];
   usedSuggestions.clear();
   suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
 
@@ -356,6 +358,12 @@ function answerFor(question) {
 // Anything that isn't a known command goes to the prewritten answers.
 
 let cwd = []; // path below the home directory, e.g. ["projects"]
+let prevCwd = []; // for `cd -`
+const pathLabel = (parts) => (parts.length ? `~/${parts.join("/")}` : "");
+const lastPromptPath = lastPrompt.querySelector(".prompt__path");
+
+// Prompt of a finished line; shows the directory it was typed in, like a shell prompt.
+const promptMarkup = (parts) => `<p class="prompt">${parts.length ? `<span class="prompt__path">${esc(pathLabel(parts))}</span>` : ""}<span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>`;
 const HOME = "/Users/michal";
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const link = (href, text) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
@@ -451,11 +459,14 @@ function runCommand(input) {
       return out(names.join(flags.includes("1") ? "\n" : "    "));
     }
     case "cd": {
-      if (!paths[0] || paths[0] === "~") { cwd = []; return out(""); }
-      const [parts, node] = resolve(paths[0]);
+      if (args[0] === "-") {
+        [cwd, prevCwd] = [prevCwd, cwd];
+        return out(esc(pathLabel(cwd) || "~"));
+      }
+      const [parts, node] = resolve(paths[0] ?? "~");
       if (node === undefined) return out(`cd: no such file or directory: ${esc(paths[0])}`);
       if (!isDir(node)) return out(`cd: not a directory: ${esc(paths[0])}`);
-      cwd = parts;
+      [prevCwd, cwd] = [cwd, parts];
       return out("");
     }
     case "cat": {
@@ -485,7 +496,7 @@ function runCommand(input) {
 }
 
 // Shell output appears at once, like in a real terminal: no thinking, no streaming.
-function shellReply(question, shell, last) {
+function shellReply(question, shell, last, where = cwd) {
   typed.data = afterCaret.data = "";
   if (shell.clear) {
     document.querySelectorAll(".exchange").forEach((el) => el.remove());
@@ -494,7 +505,7 @@ function shellReply(question, shell, last) {
   const exchange = document.createElement("div");
   exchange.className = "exchange";
   exchange.innerHTML = `
-    <p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>
+    ${promptMarkup(where)}
     ${shell.html ? `<pre class="shell">${shell.html}</pre>` : ""}
     ${last ? `<div class="answer">${closingNote[currentLang]}</div>` : ""}`;
   exchange.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
@@ -518,13 +529,14 @@ async function ask(question, typeIt, last = false) {
     if (!done) return;
   }
 
+  const where = cwd;
   const shell = runCommand(question);
-  if (shell) return shellReply(question, shell, last);
+  if (shell) return shellReply(question, shell, last, where);
 
   const exchange = document.createElement("div");
   exchange.className = "exchange";
   exchange.innerHTML = `
-    <p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>
+    ${promptMarkup(where)}
     <div class="answer"><span class="output__mark" aria-hidden="true">●</span>${answerFor(question)}${last ? closingNote[currentLang] : ""}</div>`;
   exchange.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
   typed.data = afterCaret.data = "";
@@ -614,7 +626,7 @@ function complete() {
 function echoLine(text) {
   const exchange = document.createElement("div");
   exchange.className = "exchange";
-  exchange.innerHTML = '<p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>';
+  exchange.innerHTML = promptMarkup(cwd);
   exchange.querySelector(".prompt__text").textContent = text;
   lastPrompt.before(exchange);
 }
@@ -728,7 +740,7 @@ async function gameOver(kind, question) {
   const screen = document.createElement("main");
   screen.className = "term";
   screen.innerHTML = `
-    ${question ? '<p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>' : ""}
+    ${question ? promptMarkup(cwd) : ""}
     <div class="answer">
       <span class="output__mark" aria-hidden="true">●</span>
       <p>${t[0]}</p>

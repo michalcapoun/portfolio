@@ -120,6 +120,7 @@ button:focus-visible {
 }
 
 .prompt__sign { color: var(--accent); }
+.prompt__path { color: var(--accent-2); }
 
 /* Bottom prompt: an invisible input covers the box, its text is mirrored in .prompt__typed */
 .prompt--last {
