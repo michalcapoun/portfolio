@@ -12,7 +12,6 @@ const storage = {
 // Czech text lives in index.html; only English is kept here.
 const translations = {
   en: {
-    "prompt": "Introduce yourself to a recruiter. Brief, in the first person.",
     "thinking": "Thinking…",
     "role": "QA tester · mobile app testing, manual and automated",
     "about.title": "About",
@@ -32,6 +31,25 @@ const translations = {
     "q.contact": "How can I reach you?",
   },
 };
+
+// FIRST QUESTION
+// A few wordings of the same request, so a returning visitor doesn't see the same question typed every time; the
+// answer below fits them all. Never the one shown last. The HTML keeps the first one for visitors without JS.
+const PROMPTS = [
+  { cs: "Představ se personalistovi. Stručně a v první osobě.", en: "Introduce yourself to a recruiter. Brief, in the first person." },
+  { cs: "Kdo jsi a co děláš? Krátce, pro personalistu.", en: "Who are you and what do you do? Briefly, for a recruiter." },
+  { cs: "Napiš o sobě pár vět pro náboráře. V první osobě.", en: "Write a few sentences about yourself for a recruiter. In the first person." },
+  { cs: "Shrň pro personalistu, kdo jsi a co umíš. Bez omáčky.", en: "Sum up for a recruiter who you are and what you can do. No fluff." },
+  { cs: "Stručně se představ někomu, kdo hledá testera.", en: "Briefly introduce yourself to someone looking for a tester." },
+];
+{
+  const last = storage.get("last-prompt");
+  const choices = PROMPTS.map((_, i) => i).filter((i) => String(i) !== last);
+  const pick = choices[Math.floor(Math.random() * choices.length)];
+  storage.set("last-prompt", pick);
+  document.querySelector(".prompt__text").dataset.cs = PROMPTS[pick].cs;
+  translations.en.prompt = PROMPTS[pick].en;
+}
 
 const langButton = document.querySelector(".lang-button");
 let currentLang = storage.get("selected-lang") || "cs";
