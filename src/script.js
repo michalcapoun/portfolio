@@ -43,7 +43,6 @@ const PROMPTS = [
   { cs: "Stručně se představ někomu, kdo hledá testera.", en: "Briefly introduce yourself to someone looking for a tester." },
   { cs: "Představ se, jako bys mluvil s personalistou.", en: "Introduce yourself as if you were talking to a recruiter." },
   { cs: "Kdo jsi? Pár vět pro někoho, kdo hledá QA testera.", en: "Who are you? A few sentences for someone looking for a QA tester." },
-  { cs: "Proč bych si měl pozvat na pohovor právě tebe?", en: "Why should I invite you to an interview?" },
   { cs: "Popiš se v pár větách, ať vím, s kým mluvím.", en: "Describe yourself in a few sentences so I know who I'm talking to." },
   { cs: "Hledám testera do týmu. Kdo jsi?", en: "I'm looking for a tester for my team. Who are you?" },
 ];
