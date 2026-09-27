@@ -39,7 +39,7 @@ const PROMPTS = [
   { cs: "Představ se personalistovi. Stručně a v první osobě.", en: "Introduce yourself to a recruiter. Brief, in the first person." },
   { cs: "Kdo jsi a co děláš? Krátce, pro personalistu.", en: "Who are you and what do you do? Briefly, for a recruiter." },
   { cs: "Napiš o sobě pár vět pro náboráře. V první osobě.", en: "Write a few sentences about yourself for a recruiter. In the first person." },
-  { cs: "Shrň pro personalistu, kdo jsi a co umíš. Bez omáčky.", en: "Sum up for a recruiter who you are and what you can do. No fluff." },
+  { cs: "Shrň pro personalistu, kdo jsi a co umíš.", en: "Sum up for a recruiter who you are and what you can do." },
   { cs: "Stručně se představ někomu, kdo hledá testera.", en: "Briefly introduce yourself to someone looking for a tester." },
 ];
 {
