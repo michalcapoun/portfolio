@@ -210,7 +210,7 @@ async function printPortraits(live) {
 // Matched by keywords against the question (lowercase, without diacritics); first match wins.
 // Only facts that are on this page — anything else falls back to "write me".
 
-const EMAIL = '<a href="mailto:michalcapoun@gmail.com">michalcapoun@gmail.com</a>';
+const EMAIL = '<a href="mailto:michalcapoun%2Bweb@gmail.com">michalcapoun+web@gmail.com</a>';
 const LINKEDIN = '<a href="https://www.linkedin.com/in/michalcapoun/" target="_blank" rel="noopener noreferrer">';
 const contactRows = `
   <dl class="group">
@@ -347,7 +347,7 @@ print();
 console.log(
   "%c  \\( )/\n  -( )-\n  /( )\\\n\n%c" +
     (currentLang === "cs" ? "Hledáš bugy? To je moje práce. Napiš mi:" : "Looking for bugs? That's my job. Say hi:") +
-    "\n%cmichalcapoun@gmail.com",
+    "\n%cmichalcapoun+web@gmail.com",
   "color: #cc4331; font-weight: bold",
   "font-size: 14px; font-weight: bold",
   "font-size: 12px"
