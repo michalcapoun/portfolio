@@ -13,6 +13,7 @@ Osobní portfolio.
 - Stránka vypadá jako rozhovor s AI v terminálu: po otevření se do promptu napíše otázka, chvíli se „přemýšlí“, odpověď se vypíše po znacích a na konci bliká kurzor v prázdném promptu
 - Na širokých obrazovkách (od 1200 px) se vedle odpovědi vykreslí můj ASCII portrét, ve světlém motivu s obráceným stínováním; na mobilu je schovaný
 - Do spodního promptu se dá psát: otázky (nebo klik na navrženou otázku) dostanou předem napsanou odpověď vybranou podle klíčových slov; co stránka nezná, na to odkáže na e-mail. Všechno běží ve stránce, bez serveru
+- Když návštěvník stránku „testuje“ (vloží HTML/JS nebo šablonu, vloží přes 1000 znaků, upraví limity promptu v DevTools nebo pošle 4 otázky za 5 s), portfolio zmizí a zbyde jen „Dobrý pokus, ale bugy tu hledám já“, pojmenovaná technika a rozloučení; po obnovení stránky je vše zpět. Pozná se to podle chování a HTML parseru prohlížeče, ne podle klíčových slov
 - Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
 - Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
 - Přepínání jazyka (CS / EN), volba se pamatuje v localStorage; po přepnutí se text vypíše znovu
