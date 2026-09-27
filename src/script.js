@@ -98,6 +98,7 @@ let run = 0;
 let fast = false;
 let typedCount = 0;
 let closed = false;
+let typingQuestion = false; // a suggestion is being typed into the prompt; new questions wait
 let printed = []; // [textNode, fullText] of the current run
 
 // Put back full text, e.g. before switching language mid-print.
@@ -329,7 +330,10 @@ async function ask(question, typeIt, last = false) {
   cursor.classList.add("cursor--busy");
   if (typeIt) {
     typed.after(cursor);
-    if (!(await typeInto(typed, question, live))) return;
+    typingQuestion = true;
+    const done = await typeInto(typed, question, live);
+    typingQuestion = false;
+    if (!done) return;
   }
 
   const exchange = document.createElement("div");
@@ -356,7 +360,7 @@ input.addEventListener("input", () => {
 });
 lastPrompt.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (closed || !input.value.trim()) return;
+  if (closed || typingQuestion || !input.value.trim()) return;
   typedCount++;
   const last = typedCount >= MAX_TYPED;
   const question = input.value;
@@ -365,6 +369,7 @@ lastPrompt.addEventListener("submit", (e) => {
 });
 suggestions.querySelectorAll("button").forEach((btn) =>
   btn.addEventListener("click", () => {
+    if (typingQuestion) return;
     btn.disabled = true;
     ask(btn.textContent, true);
   })
