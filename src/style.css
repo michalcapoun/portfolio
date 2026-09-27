@@ -200,6 +200,11 @@ button:focus-visible {
   color: var(--dim);
 }
 
+.shell__match {
+  color: var(--link);
+  font-weight: 700;
+}
+
 .shell__dir {
   color: var(--accent);
   font-weight: 700;

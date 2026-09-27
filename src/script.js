@@ -433,9 +433,36 @@ function lsLong(name, node) {
   return `${dir ? "drwxr-xr-x" : "-rw-r--r--"}  ${links} michal  staff  ${String(size).padStart(5)} ${date} ${shown}`;
 }
 
+const plain = (html) => html.replace(/<[^>]+>/g, "");
+const pad2 = (n) => String(n).padStart(2, "0");
+const escRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const env = () => ({
+  HOME, USER: "michal", SHELL: "/bin/zsh", PWD: [HOME, ...cwd].join("/"),
+  LANG: currentLang === "cs" ? "cs_CZ.UTF-8" : "en_US.UTF-8", TERM: "xterm-256color",
+});
+const BUILTINS = ["cd", "echo", "pwd", "history", "exit", "logout", "which"];
+
+function wrap(text, width) {
+  const lines = [""];
+  for (const word of text.split(" ")) {
+    if ((lines.at(-1) + " " + word).trim().length > width) lines.push(word);
+    else lines[lines.length - 1] = (lines.at(-1) + " " + word).trim();
+  }
+  return lines;
+}
+
+// Reads a file for commands like head or grep: [text] or [undefined, error message].
+function readFile(name, path) {
+  const [, node] = resolve(path);
+  if (node === undefined) return [undefined, `${name}: ${esc(path)}: No such file or directory`];
+  if (isDir(node)) return [undefined, `${name}: ${esc(path)}: Is a directory`];
+  return [node];
+}
+
 // Returns { html } for a known command (html may be empty), or null.
 function runCommand(input) {
-  const [cmd, ...args] = input.split(/\s+/);
+  // split like a shell: quoted strings stay one argument, quotes are dropped
+  const [cmd, ...args] = input.match(/"[^"]*"|'[^']*'|\S+/g).map((t) => t.replace(/^(["'])(.*)\1$/, "$2"));
   const name = cmd.toLowerCase();
   const cs = currentLang === "cs";
   const flags = args.filter((a) => a.startsWith("-")).join("").replace(/-/g, "");
@@ -470,6 +497,87 @@ function runCommand(input) {
       return out("");
     }
     case "git": return out("fatal: not a git repository (or any of the parent directories): .git");
+    case "man": {
+      if (!paths[0]) return out("What manual page do you want?");
+      if (!/^michal(capoun)?$/i.test(paths[0])) return out(`No manual entry for ${esc(paths[0])}`);
+      const t = translations[currentLang];
+      return out([
+        "MICHAL(1)                  User Commands                  MICHAL(1)", "",
+        "<b>NAME</b>", `       michal – ${esc(t.role)}`, "",
+        "<b>SYNOPSIS</b>", "       cat about.txt | tools.txt | contact.txt", "",
+        "<b>DESCRIPTION</b>", ...wrap(t["about.p2"], 60).map((l) => "       " + esc(l)), "",
+        "<b>SEE ALSO</b>", "       ls(1), cat(1), tree(1)",
+      ].join("\n"));
+    }
+    case "tree": {
+      const [, node] = resolve(paths[0]);
+      if (!isDir(node)) return out(`${esc(paths[0])} [error opening dir]\n\n0 directories, 0 files`);
+      let dirs = 0, count = 0;
+      const walk = (dir, prefix) => Object.entries(dir).sort(([a], [b]) => a.localeCompare(b)).flatMap(([n, v], i, all) => {
+        const lastOne = i === all.length - 1;
+        const branch = prefix + (lastOne ? "└── " : "├── ");
+        if (!isDir(v)) return count++, [branch + esc(n)];
+        dirs++;
+        return [branch + `<span class="shell__dir">${esc(n)}</span>`, ...walk(v, prefix + (lastOne ? "    " : "│   "))];
+      });
+      const lines = walk(node, "");
+      return out([`<span class="shell__dir">${esc(paths[0] ?? ".")}</span>`, ...lines, "",
+        `${dirs} director${dirs === 1 ? "y" : "ies"}, ${count} file${count === 1 ? "" : "s"}`].join("\n"));
+    }
+    case "head": case "tail": {
+      let n = 10;
+      const targets = [];
+      for (let i = 0; i < args.length; i++) {
+        if (args[i] === "-n") n = Number(args[++i]);
+        else if (/^-n?\d+$/.test(args[i])) n = Number(args[i].replace(/^-n?/, ""));
+        else targets.push(args[i]);
+      }
+      if (!Number.isInteger(n) || n < 0) return out(`${name}: illegal line count -- ${esc(String(args[args.indexOf("-n") + 1] ?? ""))}`);
+      if (!targets.length) return out(`usage: ${name} [-n lines] [file ...]`);
+      return out(targets.map((p) => {
+        const [text, error] = readFile(name, p);
+        if (error) return error;
+        const lines = text.split("\n");
+        const part = name === "head" ? lines.slice(0, n) : n ? lines.slice(-n) : [];
+        return (targets.length > 1 ? `==> ${esc(p)} <==\n` : "") + part.join("\n");
+      }).join("\n\n"));
+    }
+    case "wc": {
+      if (!paths.length) return out("usage: wc [-clw] [file ...]");
+      const shown = flags ? [..."lwc"].filter((f) => flags.includes(f)) : ["l", "w", "c"];
+      return out(paths.map((p) => {
+        const [html, error] = readFile(name, p);
+        if (error) return error;
+        const text = plain(html) + "\n";
+        const counts = { l: text.split("\n").length - 1, w: text.split(/\s+/).filter(Boolean).length, c: new TextEncoder().encode(text).length };
+        return shown.map((k) => String(counts[k]).padStart(8)).join("") + " " + esc(p);
+      }).join("\n"));
+    }
+    case "grep": {
+      const [pattern, ...targets] = paths;
+      if (!pattern) return out("usage: grep [-i] pattern [file ...]");
+      const test = new RegExp(escRe(pattern), flags.includes("i") ? "i" : "");
+      const split = new RegExp(`(${escRe(pattern)})`, flags.includes("i") ? "i" : "");
+      return out(targets.flatMap((p) => {
+        const [html, error] = readFile(name, p);
+        if (error) return [error];
+        return plain(html).split("\n").filter((l) => test.test(l)).map((l) =>
+          (targets.length > 1 ? `<span class="shell__dir">${esc(p)}</span>:` : "") +
+          l.split(split).map((part, i) => (i % 2 ? `<span class="shell__match">${esc(part)}</span>` : esc(part))).join(""));
+      }).join("\n"));
+    }
+    case "which": return out(paths.map((c) =>
+      BUILTINS.includes(c) ? `${esc(c)}: shell built-in command` : COMMANDS.includes(c) ? `/bin/${esc(c)}` : `${esc(c)} not found`).join("\n"));
+    case "env": case "printenv": return out(Object.entries(env()).map(([k, v]) => `${k}=${esc(v)}`).join("\n"));
+    case "hostname": return out(esc(location.hostname || "michalcapoun.cz"));
+    case "id": return out("uid=501(michal) gid=20(staff) groups=20(staff)");
+    case "uname": return out(flags.includes("a") ? `Darwin ${esc(location.hostname || "michalcapoun.cz")} 25.6.0 Darwin Kernel Version 25.6.0 arm64` : "Darwin");
+    case "uptime": {
+      const now = new Date();
+      const mins = Math.floor(performance.now() / 60000); // since this page was opened
+      const up = mins < 60 ? `${mins} min${mins === 1 ? "" : "s"}` : `${Math.floor(mins / 60)}:${pad2(mins % 60)}`;
+      return out(`${pad2(now.getHours())}:${pad2(now.getMinutes())}  up ${up}, 1 user`);
+    }
     case "less": case "more":
     case "cat": {
       if (!paths.length) return out(cs ? "cat: chybí název souboru" : "cat: missing file name");
@@ -482,13 +590,13 @@ function runCommand(input) {
     }
     case "pwd": return out(esc([HOME, ...cwd].join("/")));
     case "whoami": return out("michal");
-    case "echo": return out(esc(args.join(" ")));
+    case "echo": return out(esc(args.join(" ").replace(/\$\{?([A-Za-z_]\w*)\}?/g, (_, k) => env()[k] ?? "")));
     case "date": return out(esc(new Date().toString()));
     case "history": return out(typedHistory.map((h, i) => `${String(i + 1).padStart(5)}  ${esc(h)}`).join("\n"));
     case "clear": return { clear: true };
     case "help": return out(cs
-      ? "Tohle je jen napodobenina shellu nad obsahem portfolia.\nUmí: ls, cd, cat, pwd, whoami, echo, date, history, clear, exit\n\nNa ostatní se zeptej normálně, třeba „Co testuješ?“"
-      : "This is just a mock shell over the portfolio's content.\nIt knows: ls, cd, cat, pwd, whoami, echo, date, history, clear, exit\n\nFor anything else just ask, e.g. \"What do you test?\"");
+      ? `Tohle je jen napodobenina shellu nad obsahem portfolia.\nUmí: ${COMMANDS.join(", ")}\nKlávesy: ↑/↓ historie, Tab doplňování, Ctrl+C, Ctrl+L, Ctrl+U, Ctrl+D\n\nNa ostatní se zeptej normálně, třeba „Co testuješ?“ nebo zkus „man michal“.`
+      : `This is just a mock shell over the portfolio's content.\nIt knows: ${COMMANDS.join(", ")}\nKeys: Up/Down history, Tab completion, Ctrl+C, Ctrl+L, Ctrl+U, Ctrl+D\n\nFor anything else just ask, e.g. "What do you test?", or try "man michal".`);
     case "sudo": return out("michal is not in the sudoers file. This incident will be reported.");
     case "rm": case "rmdir": case "mv": case "cp": case "touch": case "mkdir": case "chmod": case "chown":
       return out(`${name}: ${esc(paths.at(-1) ?? ".")}: Read-only file system`);
@@ -578,8 +686,15 @@ async function ask(question, typeIt, last = false) {
 document.addEventListener("selectionchange", renderLine);
 lastPrompt.addEventListener("submit", (e) => {
   e.preventDefault();
-  const question = input.value.trim();
+  let question = input.value.trim();
   if (closed || typingQuestion || !question) return;
+  if (question === "!!") {
+    if (!typedHistory.length) {
+      setLine("");
+      return shellReply("!!", { html: "zsh: no such event: 0" }, false);
+    }
+    question = typedHistory.at(-1);
+  }
   const now = Date.now();
   typedTimes = [...typedTimes.filter((t) => now - t < FLOOD_MS), now];
   const kind = injectionIn(question) ?? (typedTimes.length >= FLOOD_COUNT ? "flood" : null);
@@ -606,7 +721,8 @@ suggestions.querySelectorAll("button").forEach((btn) =>
 // Ctrl+L clears the screen, Ctrl+U clears the line, Ctrl+D on an empty line logs out.
 // Typing anywhere on the page goes to the prompt, like a terminal window.
 
-const COMMANDS = ["cat", "cd", "clear", "date", "echo", "exit", "help", "history", "logout", "ls", "pwd", "sudo", "whoami"];
+const COMMANDS = ["cat", "cd", "clear", "date", "echo", "env", "exit", "git", "grep", "head", "help", "history", "hostname", "id",
+  "less", "logout", "ls", "man", "more", "printenv", "pwd", "sudo", "tail", "tree", "uname", "uptime", "wc", "which", "whoami"];
 let histPos = 0; // position in typedHistory while browsing; typedHistory.length = the line being written
 let draft = ""; // what was on the line before browsing history
 
