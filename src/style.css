@@ -1,29 +1,30 @@
 /* ================================
-   THEME (dark by default, set on <html data-theme>)
+   THEME (high contrast in the spirit of the VS Code High Contrast themes;
+   dark by default, set on <html data-theme>)
    ================================ */
 
 :root {
   color-scheme: dark;
-  --bg: #14171c;
-  --fg: #cdd5de;
-  --strong: #f3f6f9;
-  --dim: #7d8998;
-  --accent: #82a8ff;
-  --accent-2: #c7a0ff;
-  --link: #f2b764;
-  --line: #2c333d;
+  --bg: #000000;
+  --fg: #ffffff;
+  --strong: #ffffff;
+  --dim: #b3b3b3;
+  --accent: #4fc1ff;
+  --accent-2: #e0a0ff;
+  --link: #ffd24a;
+  --line: #6fc3df;
 }
 
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #f3f5f7;
-  --fg: #1c222a;
-  --strong: #0b0f14;
-  --dim: #5f6979;
-  --accent: #2456c9;
-  --accent-2: #8440c4;
-  --link: #8f4d00;
-  --line: #d3d9e0;
+  --bg: #ffffff;
+  --fg: #000000;
+  --strong: #000000;
+  --dim: #474747;
+  --accent: #0f4a85;
+  --accent-2: #6b1d94;
+  --link: #8a3b00;
+  --line: #0f4a85;
 }
 
 /* ================================
