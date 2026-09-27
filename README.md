@@ -11,6 +11,7 @@ Osobní portfolio.
 ## Funkce
 
 - Stránka vypadá jako rozhovor s AI v terminálu: po otevření se do promptu napíše otázka, chvíli se „přemýšlí“, odpověď se vypíše po znacích a na konci bliká kurzor v prázdném promptu
+- Na širokých obrazovkách (od 1200 px) se vedle odpovědi vykreslí můj ASCII portrét, ve světlém motivu s obráceným stínováním; na mobilu je schovaný
 - Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
 - Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
 - Přepínání jazyka (CS / EN), volba se pamatuje v localStorage; po přepnutí se text vypíše znovu
