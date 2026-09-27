@@ -244,12 +244,12 @@ const projectRows = (portfolio, tracer) => `
 const answers = [
   // Attempts to break the page get their own replies.
   {
-    match: /<\s*\/?\s*[a-z!]|javascript:|\bon\w+\s*=|alert\s*\(|document\.cookie|\{\{.*\}\}|\$\{.*\}/,
+    match: /<\s*\/?\s*(script|img|svg|iframe|object|embed|body|style|link|meta|input|form|video|audio|details|math)\b|javascript:|\bon[a-z]+\s*=|\b(alert|prompt|confirm|eval)\s*\(|document\.(cookie|write|location)|\{\{.*\}\}|\$\{.*\}/,
     cs: `<p>Dobrý pokus. Tady se všechno vypíše jen jako text, nic se nespustí. Hledat bugy je ale moje práce – jestli nějaký najdeš, napiš mi na ${EMAIL}.</p>`,
     en: `<p>Nice try. Everything here is printed as plain text, nothing runs. Finding bugs is my job though – if you find one, write me at ${EMAIL}.</p>`,
   },
   {
-    match: /\b(select|union|drop|insert|delete|update)\b.*\b(from|table|into|set|select)\b|'\s*or\s*'?1'?\s*=\s*'?1|;\s*--/,
+    match: /'\s*(or|and)\s+'?\w+'?\s*=\s*'?\w+|;\s*(drop|delete|insert|update|select|truncate)\b|\bunion\s+(all\s+)?select\b|\bselect\s+\*\s+from\b|\bdrop\s+(table|database)\b|\binsert\s+into\s+\w+\s*(\(|values\b|select\b)|\bdelete\s+from\s+\w+\s*(;|where\b|$)|'\s*--|;\s*--/,
     cs: "<p>SQL injection? Tady žádná databáze není, odpovědi jsem napsal ručně. Ale ten instinkt oceňuju.</p>",
     en: "<p>SQL injection? There's no database here, I wrote the answers by hand. I like the instinct though.</p>",
   },
