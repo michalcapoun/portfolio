@@ -229,6 +229,22 @@ const projectRows = (portfolio, tracer) => `
   </div>`;
 
 const answers = [
+  // Attempts to break the page get their own replies.
+  {
+    match: /<\s*\/?\s*[a-z!]|javascript:|\bon\w+\s*=|alert\s*\(|document\.cookie|\{\{.*\}\}|\$\{.*\}/,
+    cs: `<p>Dobrý pokus. Tady se všechno vypíše jen jako text, nic se nespustí. Hledat bugy je ale moje práce – jestli nějaký najdeš, napiš mi na ${EMAIL}.</p>`,
+    en: `<p>Nice try. Everything here is printed as plain text, nothing runs. Finding bugs is my job though – if you find one, write me at ${EMAIL}.</p>`,
+  },
+  {
+    match: /\b(select|union|drop|insert|delete|update)\b.*\b(from|table|into|set|select)\b|'\s*or\s*'?1'?\s*=\s*'?1|;\s*--/,
+    cs: "<p>SQL injection? Tady žádná databáze není, odpovědi jsem napsal ručně. Ale ten instinkt oceňuju.</p>",
+    en: "<p>SQL injection? There's no database here, I wrote the answers by hand. I like the instinct though.</p>",
+  },
+  {
+    match: /\b(rm -rf|sudo|chmod|curl|wget|shutdown)\b|^\s*(ls|cd|pwd|whoami|exit)\b|\.\.\//,
+    cs: "<p>Tohle jen vypadá jako terminál, příkazy tu nefungují. Zkus se mě radši zeptat, co testuju.</p>",
+    en: "<p>This only looks like a terminal, commands don't work here. Try asking me what I test instead.</p>",
+  },
   {
     match: /jsi (ai|a\.i\.|robot|bot|clovek|skutecn)|are you (an? )?(ai|bot|robot|human|real)/,
     cs: "<p>Nejsem. Stránka jen vypadá jako AI – odpovědi jsem napsal předem já a vybírají se podle klíčových slov.</p>",
