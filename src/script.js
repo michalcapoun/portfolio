@@ -98,7 +98,6 @@ const output = document.querySelector(".output");
 const lastPrompt = document.querySelector(".prompt--last");
 const input = document.querySelector(".prompt__input");
 const suggestions = document.querySelector(".suggestions");
-const footer = document.querySelector("footer");
 const portraits = [...document.querySelectorAll(".portrait")].map((el) => [el, el.textContent]);
 const typed = document.createTextNode(""); // mirror of the input, so the block cursor can follow it
 document.querySelector(".prompt__typed").append(typed);
@@ -184,7 +183,7 @@ async function stream(nodes, live) {
 
 // Cursor waits in the bottom prompt.
 function idle() {
-  lastPrompt.hidden = suggestions.hidden = footer.hidden = false;
+  lastPrompt.hidden = suggestions.hidden = false;
   if (closed) return cursor.remove();
   typed.after(cursor);
   cursor.classList.remove("cursor--busy");
@@ -219,7 +218,7 @@ async function print() {
   printed = [[cmd, cmdText], ...lines];
   printed.forEach(([node]) => (node.data = ""));
   portraits.forEach(([el]) => (el.textContent = ""));
-  lastPrompt.hidden = suggestions.hidden = footer.hidden = thinking.hidden = true;
+  lastPrompt.hidden = suggestions.hidden = thinking.hidden = true;
 
   // empty prompt, idle cursor for a moment, then the question is typed by hand
   cmd.after(cursor);

@@ -315,12 +315,6 @@ h2 { color: var(--accent); }
   50% { opacity: 0; }
 }
 
-footer {
-  padding: 0 max(16px, 5vw) 32px;
-  font-size: 13px;
-  color: var(--dim);
-}
-
 /* ================================
    RESPONSIVE / MOTION
    ================================ */
