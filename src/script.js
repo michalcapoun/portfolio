@@ -134,6 +134,7 @@ const MAX_TYPED = 20; // questions and commands a visitor can type before the pr
 
 let run = 0;
 let fast = false;
+let userSkipped = false; // the visitor clicked, scrolled or typed during this run: stop following output
 let typedCount = 0;
 let closed = false;
 let typedTimes = []; // timestamps of recent typed questions (flood detection)
@@ -185,7 +186,8 @@ async function think(promptEl, live) {
   return true;
 }
 
-async function stream(nodes, live) {
+// follow: keep the cursor in view while printing, like a terminal scrolling with its output
+async function stream(nodes, live, follow = false) {
   let t = performance.now();
   for (const [node, text] of nodes) {
     moveCursor(node);
@@ -197,6 +199,7 @@ async function stream(nodes, live) {
       const now = performance.now();
       node.data = text.slice(0, node.data.length + Math.max(1, Math.round(((now - t) * CPS) / 1000)));
       t = now;
+      if (follow && !userSkipped) cursor.scrollIntoView({ block: "nearest" });
     }
   }
   return live();
@@ -220,6 +223,7 @@ function startRun() {
   restore();
   const id = ++run;
   fast = reducedMotion();
+  userSkipped = false;
   return () => id === run;
 }
 
@@ -638,9 +642,9 @@ function shellReply(question, shell, last, where = cwd) {
     ${last ? `<div class="answer">${closingNote[currentLang]}</div>` : ""}`;
   exchange.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
   lastPrompt.before(exchange);
-  exchange.scrollIntoView({ block: "nearest" });
   if (shell.exit) setClosed(true);
   idle();
+  (closed ? exchange : lastPrompt).scrollIntoView({ block: "nearest" });
 }
 
 async function ask(question, typeIt, last = false) {
@@ -671,14 +675,15 @@ async function ask(question, typeIt, last = false) {
   exchange.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
   typed.data = afterCaret.data = "";
   lastPrompt.before(exchange);
-  exchange.scrollIntoView({ block: "start", behavior: fast ? "auto" : "smooth" });
+  exchange.scrollIntoView({ block: "nearest" });
 
   const lines = textNodes(exchange.querySelector(".answer"));
   printed = lines;
   lines.forEach(([node]) => (node.data = ""));
   if (!(await think(exchange.querySelector(".prompt"), live))) return;
-  if (!(await stream(lines, live))) return;
+  if (!(await stream(lines, live, true))) return;
   idle();
+  if (!userSkipped) lastPrompt.scrollIntoView({ block: "nearest" });
 }
 
 // Keep the mirror in step with typing and caret moves (arrows, clicks, selection).
@@ -898,7 +903,7 @@ async function gameOver(kind, question) {
 }
 
 ["pointerdown", "keydown", "wheel", "touchstart"].forEach((e) =>
-  addEventListener(e, () => (fast = true), { passive: true })
+  addEventListener(e, () => (fast = userSkipped = true), { passive: true })
 );
 
 langButton.addEventListener("click", () => {
