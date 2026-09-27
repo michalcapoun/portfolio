@@ -75,6 +75,7 @@ const spinner = document.querySelector(".thinking__spinner");
 const output = document.querySelector(".output");
 const lastPrompt = document.querySelector(".prompt--last");
 const footer = document.querySelector("footer");
+const portraits = [...document.querySelectorAll(".portrait")].map((el) => [el, el.textContent]);
 const cursor = document.createElement("span");
 cursor.className = "cursor";
 cursor.setAttribute("aria-hidden", "true");
@@ -87,12 +88,17 @@ let fast = false;
 let printed = []; // [textNode, fullText] of the current run
 
 // Put back full text, e.g. before switching language mid-print.
-const restore = () => printed.forEach(([node, text]) => (node.data = text));
+const restore = () => {
+  printed.forEach(([node, text]) => (node.data = text));
+  portraits.forEach(([el, text]) => (el.textContent = text));
+};
 
 const textNodes = (el) => {
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
   const nodes = [];
-  for (let n; (n = walker.nextNode()); ) if (n.data.trim()) nodes.push([n, n.data]);
+  for (let n; (n = walker.nextNode()); ) {
+    if (n.data.trim() && !n.parentElement.closest(".portrait")) nodes.push([n, n.data]);
+  }
   return nodes;
 };
 
@@ -106,6 +112,7 @@ async function print() {
   const lines = textNodes(output);
   printed = [[cmd, cmdText], ...lines];
   printed.forEach(([node]) => (node.data = ""));
+  portraits.forEach(([el]) => (el.textContent = ""));
   lastPrompt.hidden = footer.hidden = thinking.hidden = true;
 
   // empty prompt, idle cursor for a moment, then the question is typed by hand
@@ -133,6 +140,7 @@ async function print() {
   }
   if (!live()) return;
   thinking.hidden = true;
+  printPortraits(live); // runs alongside the text
 
   // output streams at CPS
   let t = performance.now();
@@ -152,6 +160,18 @@ async function print() {
   lastPrompt.hidden = footer.hidden = false;
   lastPrompt.append(cursor);
   cursor.classList.remove("cursor--busy");
+}
+
+// The portrait prints line by line, both theme variants in step.
+async function printPortraits(live) {
+  const rows = portraits.map(([el, text]) => [el, text.split("\n")]);
+  for (let i = 1; i <= rows[0][1].length; i++) {
+    if (!live()) return;
+    if (fast) break;
+    rows.forEach(([el, lines]) => (el.textContent = lines.slice(0, i).join("\n")));
+    await wait(35);
+  }
+  if (live()) portraits.forEach(([el, text]) => (el.textContent = text));
 }
 
 ["pointerdown", "keydown", "wheel", "touchstart"].forEach((e) =>

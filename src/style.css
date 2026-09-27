@@ -135,6 +135,29 @@ button:focus-visible {
   color: var(--accent-2);
 }
 
+/* ASCII portrait right of the answer; only where there is room for it */
+.portrait {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .portrait {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 40px);
+    margin: 0;
+    font: inherit;
+    font-size: clamp(5px, calc((100vw - 900px) / 60), 8px);
+    line-height: 1;
+    color: var(--fg);
+  }
+
+  :root:not([data-theme="light"]) .portrait--dark,
+  :root[data-theme="light"] .portrait--light {
+    display: block;
+  }
+}
+
 .output {
   display: flex;
   flex-direction: column;
