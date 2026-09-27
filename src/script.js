@@ -26,7 +26,6 @@ const translations = {
     "projects.portfolio": "This portfolio. Plain HTML, CSS and JavaScript, no frameworks.",
     "projects.tracer": "Personal archive of trips planned in Mapy.com. Vue 3, TypeScript, Supabase.",
     "contact.title": "Contact",
-    "contact.phone": "phone",
     "q.test": "What do you test?",
     "q.tools": "Which tools do you use?",
     "q.experience": "What's your experience?",
@@ -213,10 +212,9 @@ async function printPortraits(live) {
 
 const EMAIL = '<a href="mailto:michalcapoun@gmail.com">michalcapoun@gmail.com</a>';
 const LINKEDIN = '<a href="https://www.linkedin.com/in/michalcapoun/" target="_blank" rel="noopener noreferrer">';
-const contactRows = (phone) => `
+const contactRows = `
   <dl class="group">
     <div class="row"><dt>e-mail</dt><dd>${EMAIL}</dd></div>
-    <div class="row"><dt>${phone}</dt><dd><a href="tel:+420720246303">+420 720 246 303</a></dd></div>
     <div class="row"><dt>LinkedIn</dt><dd>${LINKEDIN}linkedin.com/in/michalcapoun</a></dd></div>
     <div class="row"><dt>GitHub</dt><dd><a href="https://github.com/michalcapoun" target="_blank" rel="noopener noreferrer">github.com/michalcapoun</a></dd></div>
   </dl>`;
@@ -243,8 +241,8 @@ const answers = [
   },
   {
     match: /kontakt|mail|telefon|zavol|cisl|napsat|napis|spojit|linkedin|contact|phone|call|reach|hire|nabid/,
-    cs: "<p>Napiš mi nebo zavolej:</p>" + contactRows("telefon"),
-    en: "<p>Write or call me:</p>" + contactRows("phone"),
+    cs: "<p>Napiš mi e-mail nebo přes LinkedIn:</p>" + contactRows,
+    en: "<p>Write me an e-mail or message me on LinkedIn:</p>" + contactRows,
   },
   {
     match: /prax|zkusenost|zivotopis|\bcv\b|resume|experience|kolik let|firm|zamestn|pozic/,
