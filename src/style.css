@@ -179,6 +179,12 @@ button:focus-visible {
   cursor: default;
 }
 
+/* After the question limit the bottom prompt is closed */
+.prompt--closed {
+  opacity: 0.5;
+  cursor: default;
+}
+
 /* A visitor's question and its prewritten answer */
 .exchange {
   margin-top: 1.7em;

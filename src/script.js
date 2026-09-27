@@ -92,8 +92,12 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const nextFrame = () => new Promise(requestAnimationFrame);
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const MAX_TYPED = 10; // questions a visitor can type before the prompt closes
+
 let run = 0;
 let fast = false;
+let typedCount = 0;
+let closed = false;
 let printed = []; // [textNode, fullText] of the current run
 
 // Put back full text, e.g. before switching language mid-print.
@@ -159,8 +163,14 @@ async function stream(nodes, live) {
 // Cursor waits in the bottom prompt.
 function idle() {
   lastPrompt.hidden = suggestions.hidden = footer.hidden = false;
+  if (closed) return cursor.remove();
   typed.after(cursor);
   cursor.classList.remove("cursor--busy");
+}
+
+function setClosed(value) {
+  closed = input.disabled = value;
+  lastPrompt.classList.toggle("prompt--closed", value);
 }
 
 function startRun() {
@@ -174,6 +184,8 @@ async function print() {
   const live = startRun();
   document.querySelectorAll(".exchange").forEach((el) => el.remove());
   input.value = typed.data = "";
+  typedCount = 0;
+  setClosed(false);
   suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
 
   const [cmd, cmdText] = textNodes(command)[0];
@@ -287,6 +299,10 @@ const answers = [
     en: () => `<p>${translations.en["about.p1"]}</p>`,
   },
 ];
+const closingNote = {
+  cs: `<p class="dim">Tohle byla poslední otázka, kterou tu zvládnu. Na další ti rád odpovím osobně – ${EMAIL}.</p>`,
+  en: `<p class="dim">That was the last question I can take here. Happy to answer more in person – ${EMAIL}.</p>`,
+};
 const fallback = {
   cs: `<p>Na tohle ti líp odpovím osobně – napiš mi na ${EMAIL}.</p>`,
   en: `<p>I'd rather answer that in person – write me at ${EMAIL}.</p>`,
@@ -305,7 +321,7 @@ function answerFor(question) {
   return typeof html === "function" ? html() : html;
 }
 
-async function ask(question, typeIt) {
+async function ask(question, typeIt, last = false) {
   question = question.trim();
   if (!question) return;
   const live = startRun();
@@ -320,7 +336,7 @@ async function ask(question, typeIt) {
   exchange.className = "exchange";
   exchange.innerHTML = `
     <p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>
-    <div class="answer"><span class="output__mark" aria-hidden="true">●</span>${answerFor(question)}</div>`;
+    <div class="answer"><span class="output__mark" aria-hidden="true">●</span>${answerFor(question)}${last ? closingNote[currentLang] : ""}</div>`;
   exchange.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
   typed.data = "";
   lastPrompt.before(exchange);
@@ -340,7 +356,12 @@ input.addEventListener("input", () => {
 });
 lastPrompt.addEventListener("submit", (e) => {
   e.preventDefault();
-  ask(input.value, false);
+  if (closed || !input.value.trim()) return;
+  typedCount++;
+  const last = typedCount >= MAX_TYPED;
+  const question = input.value;
+  if (last) setClosed(true);
+  ask(question, false, last);
 });
 suggestions.querySelectorAll("button").forEach((btn) =>
   btn.addEventListener("click", () => {
