@@ -837,7 +837,7 @@ const techniques = {
 function injectionIn(text) {
   const doc = new DOMParser().parseFromString(text, "text/html");
   if ([...doc.querySelectorAll("*")].some((el) => !["HTML", "HEAD", "BODY"].includes(el.tagName))) return "xss";
-  if (/\{\{.+\}\}|\$\{.+\}/.test(text)) return "template";
+  if (/\{\{.+\}\}|\$\{(?![A-Za-z_]\w*\}).+?\}/.test(text)) return "template"; // ${HOME} is just a shell variable
   return null;
 }
 
