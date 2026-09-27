@@ -191,6 +191,10 @@ button:focus-visible {
   scroll-margin-top: 1em;
 }
 
+.game-over {
+  margin-top: 1.7em;
+}
+
 .answer {
   position: relative;
   display: flex;

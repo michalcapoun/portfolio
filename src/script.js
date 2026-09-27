@@ -98,7 +98,9 @@ let run = 0;
 let fast = false;
 let typedCount = 0;
 let closed = false;
+let typedTimes = []; // timestamps of recent typed questions (flood detection)
 let typingQuestion = false; // a suggestion is being typed into the prompt; new questions wait
+const usedSuggestions = new Set();
 let printed = []; // [textNode, fullText] of the current run
 
 // Put back full text, e.g. before switching language mid-print.
@@ -187,6 +189,8 @@ async function print() {
   input.value = typed.data = "";
   typedCount = 0;
   setClosed(false);
+  typedTimes = [];
+  usedSuggestions.clear();
   suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
 
   const [cmd, cmdText] = textNodes(command)[0];
@@ -243,17 +247,7 @@ const projectRows = (portfolio, tracer) => `
   </div>`;
 
 const answers = [
-  // Attempts to break the page get their own replies.
-  {
-    match: /<\s*\/?\s*(script|img|svg|iframe|object|embed|body|style|link|meta|input|form|video|audio|details|math)\b|javascript:|\bon[a-z]+\s*=|\b(alert|prompt|confirm|eval)\s*\(|document\.(cookie|write|location)|\{\{.*\}\}|\$\{.*\}/,
-    cs: `<p>Dobrý pokus. Tady se všechno vypíše jen jako text, nic se nespustí. Hledat bugy je ale moje práce – jestli nějaký najdeš, napiš mi na ${EMAIL}.</p>`,
-    en: `<p>Nice try. Everything here is printed as plain text, nothing runs. Finding bugs is my job though – if you find one, write me at ${EMAIL}.</p>`,
-  },
-  {
-    match: /'\s*(or|and)\s+'?\w+'?\s*=\s*'?\w+|;\s*(drop|delete|insert|update|select|truncate)\b|\bunion\s+(all\s+)?select\b|\bselect\s+\*\s+from\b|\bdrop\s+(table|database)\b|\binsert\s+into\s+\w+\s*(\(|values\b|select\b)|\bdelete\s+from\s+\w+\s*(;|where\b|$)|'\s*--|;\s*--/,
-    cs: "<p>SQL injection? Tady žádná databáze není, odpovědi jsem napsal ručně. Ale ten instinkt oceňuju.</p>",
-    en: "<p>SQL injection? There's no database here, I wrote the answers by hand. I like the instinct though.</p>",
-  },
+  // Shell commands get a friendly reply; real injection attempts are detected below (TESTER DETECTION).
   {
     match: /\b(rm -rf|sudo|chmod|curl|wget|shutdown)\b|^\s*(ls|cd|pwd|whoami|exit)\b|\.\.\//,
     cs: "<p>Tohle jen vypadá jako terminál, příkazy tu nefungují. Zkus se mě radši zeptat, co testuju.</p>",
@@ -360,20 +354,106 @@ input.addEventListener("input", () => {
 });
 lastPrompt.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (closed || typingQuestion || !input.value.trim()) return;
+  const question = input.value.trim();
+  if (closed || typingQuestion || !question) return;
+  const now = Date.now();
+  typedTimes = [...typedTimes.filter((t) => now - t < FLOOD_MS), now];
+  const kind = injectionIn(question) ?? (typedTimes.length >= FLOOD_COUNT ? "flood" : null);
+  if (kind) return gameOver(kind, question);
   typedCount++;
   const last = typedCount >= MAX_TYPED;
-  const question = input.value;
   if (last) setClosed(true);
   ask(question, false, last);
 });
 suggestions.querySelectorAll("button").forEach((btn) =>
   btn.addEventListener("click", () => {
     if (typingQuestion) return;
+    usedSuggestions.add(btn);
     btn.disabled = true;
     ask(btn.textContent, true);
   })
 );
+
+// TESTER DETECTION
+// Not keywords: what the browser would make of the input, and how the visitor behaves.
+// Any of these ends the session with a game-over screen; a reload brings the page back.
+
+const PASTE_LIMIT = 1000; // pasting more than this is a length (boundary) test; the field holds 200
+const FLOOD_COUNT = 4; // typed questions ...
+const FLOOD_MS = 5000; // ... within this window
+
+const techniques = {
+  xss: { cs: "XSS (vložený HTML/JavaScript)", en: "XSS (injected HTML/JavaScript)" },
+  template: { cs: "template injection", en: "template injection" },
+  boundary: { cs: "test hraničních hodnot (příliš dlouhý vstup)", en: "boundary test (oversized input)" },
+  tamper: { cs: "obcházení omezení přes DevTools", en: "bypassing limits via DevTools" },
+  flood: { cs: "zahlcení formuláře", en: "form flooding" },
+};
+
+// The browser's own HTML parser in an inert document (nothing runs or loads): if the input
+// would become an element, it's markup. "<3" or "a < b" stay text.
+function injectionIn(text) {
+  const doc = new DOMParser().parseFromString(text, "text/html");
+  if ([...doc.querySelectorAll("*")].some((el) => !["HTML", "HEAD", "BODY"].includes(el.tagName))) return "xss";
+  if (/\{\{.+\}\}|\$\{.+\}/.test(text)) return "template";
+  return null;
+}
+
+input.addEventListener("paste", (e) => {
+  const text = e.clipboardData?.getData("text") ?? "";
+  if (text.length <= PASTE_LIMIT) return;
+  e.preventDefault();
+  gameOver("boundary", `${text.slice(0, 60)}… (${text.length})`);
+});
+
+// Only this script changes these attributes, always together with its own state;
+// a mismatch means someone edited the page in DevTools.
+const suggestionButtons = [...suggestions.querySelectorAll("button")];
+const guard = new MutationObserver(() => {
+  const tampered =
+    input.disabled !== closed ||
+    input.maxLength !== 200 ||
+    suggestionButtons.some((btn) => btn.disabled !== usedSuggestions.has(btn));
+  if (tampered) gameOver("tamper");
+});
+guard.observe(input, { attributes: true, attributeFilter: ["disabled", "maxlength"] });
+suggestionButtons.forEach((btn) => guard.observe(btn, { attributes: true, attributeFilter: ["disabled"] }));
+
+let over = false;
+
+// The whole portfolio is replaced by the attempt, the detected technique and a goodbye.
+// Nothing is left to click or type.
+async function gameOver(kind, question) {
+  if (over) return;
+  over = true;
+  guard.disconnect();
+  const live = startRun();
+  cursor.classList.add("cursor--busy");
+  const t = {
+    cs: ["Dobrý pokus, ale bugy tu hledám já.", "Detekováno", `Tím pro dnešek končíme. Kdyby něco, jsem na ${EMAIL}.`, "Spojení s michalcapoun.cz bylo ukončeno."],
+    en: ["Nice try, but I'm the one hunting bugs here.", "Detected", `That's it for today. If you need anything, I'm at ${EMAIL}.`, "Connection to michalcapoun.cz closed."],
+  }[currentLang];
+  const screen = document.createElement("main");
+  screen.className = "term";
+  screen.innerHTML = `
+    ${question ? '<p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>' : ""}
+    <div class="answer">
+      <span class="output__mark" aria-hidden="true">●</span>
+      <p>${t[0]}</p>
+      <p class="dim">${t[1]}: ${techniques[kind][currentLang]}</p>
+      <p>${t[2]}</p>
+    </div>
+    <p class="dim game-over">${t[3]}</p>`;
+  if (question) screen.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
+  document.body.replaceChildren(screen);
+  scrollTo(0, 0);
+
+  const lines = [...textNodes(screen.querySelector(".answer")), ...textNodes(screen.querySelector(".game-over"))];
+  printed = lines;
+  lines.forEach(([node]) => (node.data = ""));
+  if (question && !(await think(screen.querySelector(".prompt"), live))) return;
+  if (await stream(lines, live)) cursor.remove();
+}
 
 ["pointerdown", "keydown", "wheel", "touchstart"].forEach((e) =>
   addEventListener(e, () => (fast = true), { passive: true })
