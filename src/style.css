@@ -121,8 +121,70 @@ button:focus-visible {
 
 .prompt__sign { color: var(--accent); }
 
-/* The waiting cursor is a flex item here, so vertical-align doesn't apply */
-.prompt--last { align-items: center; }
+/* Bottom prompt: an invisible input covers the box, its text is mirrored in .prompt__typed */
+.prompt--last {
+  position: relative;
+  align-items: center;
+  margin-top: 1.7em;
+  cursor: text;
+}
+
+.prompt--last:focus-within {
+  box-shadow: 0 0 0 1px var(--line);
+}
+
+.prompt__typed {
+  min-width: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.prompt__input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  font-size: 16px; /* below 16px iOS zooms in on focus */
+  cursor: text;
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 2ch;
+  margin-top: 0.8em;
+}
+
+.suggestions button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  color: var(--dim);
+  cursor: pointer;
+}
+
+.suggestions button::before { content: "["; }
+.suggestions button::after { content: "]"; }
+.suggestions button:hover { color: var(--fg); }
+
+/* A visitor's question and its prewritten answer */
+.exchange {
+  margin-top: 1.7em;
+  scroll-margin-top: 1em;
+}
+
+.answer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55em;
+  margin-top: 1.2em;
+  padding-left: 2ch;
+}
 
 .thinking { margin-top: 1.7em; }
 .thinking__spinner { color: var(--accent-2); }
