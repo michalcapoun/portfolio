@@ -121,6 +121,9 @@ button:focus-visible {
 
 .prompt__sign { color: var(--accent); }
 
+/* The waiting cursor is a flex item here, so vertical-align doesn't apply */
+.prompt--last { align-items: center; }
+
 .thinking { margin-top: 1.7em; }
 .thinking__spinner { color: var(--accent-2); }
 
