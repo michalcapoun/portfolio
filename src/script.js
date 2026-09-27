@@ -183,15 +183,16 @@ async function stream(nodes, live) {
 
 // Cursor waits in the bottom prompt.
 function idle() {
-  lastPrompt.hidden = suggestions.hidden = false;
   if (closed) return cursor.remove();
+  lastPrompt.hidden = suggestions.hidden = false;
   typed.after(cursor);
   cursor.classList.remove("cursor--busy");
 }
 
+// Closed (after `exit` or the question limit): the prompt and suggestions are gone.
 function setClosed(value) {
   closed = input.disabled = value;
-  lastPrompt.classList.toggle("prompt--closed", value);
+  lastPrompt.hidden = suggestions.hidden = value;
 }
 
 function startRun() {
@@ -538,7 +539,7 @@ lastPrompt.addEventListener("submit", (e) => {
 });
 suggestions.querySelectorAll("button").forEach((btn) =>
   btn.addEventListener("click", () => {
-    if (typingQuestion) return;
+    if (closed || typingQuestion) return;
     usedSuggestions.add(btn);
     btn.disabled = true;
     ask(btn.textContent, true);
