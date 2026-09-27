@@ -194,6 +194,11 @@ button:focus-visible {
   overflow-wrap: anywhere;
 }
 
+.completions {
+  margin-top: 0.4em;
+  color: var(--dim);
+}
+
 .shell__dir {
   color: var(--accent);
   font-weight: 700;

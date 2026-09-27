@@ -210,6 +210,7 @@ async function print() {
   setClosed(false);
   typedTimes = [];
   typedHistory = [];
+  histPos = 0;
   cwd = [];
   usedSuggestions.clear();
   suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
@@ -533,6 +534,8 @@ lastPrompt.addEventListener("submit", (e) => {
   if (kind) return gameOver(kind, question);
   typedCount++;
   typedHistory.push(question);
+  histPos = typedHistory.length;
+  hideCompletions();
   const last = typedCount >= MAX_TYPED;
   if (last) setClosed(true);
   ask(question, false, last);
@@ -545,6 +548,105 @@ suggestions.querySelectorAll("button").forEach((btn) =>
     ask(btn.textContent, true);
   })
 );
+
+// TERMINAL KEYS
+// ↑/↓ browse history, Tab completes commands and paths, Ctrl+C abandons the line or stops output,
+// Ctrl+L clears the screen, Ctrl+U clears the line, Ctrl+D on an empty line logs out.
+// Typing anywhere on the page goes to the prompt, like a terminal window.
+
+const COMMANDS = ["cat", "cd", "clear", "date", "echo", "exit", "help", "history", "logout", "ls", "pwd", "sudo", "whoami"];
+let histPos = 0; // position in typedHistory while browsing; typedHistory.length = the line being written
+let draft = ""; // what was on the line before browsing history
+
+function setLine(value) {
+  input.value = value;
+  input.setSelectionRange(value.length, value.length);
+  typed.data = value;
+}
+
+const completions = document.createElement("pre");
+completions.className = "shell completions";
+const hideCompletions = () => completions.remove();
+
+const commonPrefix = (words) => words.reduce((a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return a.slice(0, i); });
+
+function complete() {
+  const value = input.value;
+  const word = value.match(/\S*$/)[0];
+  const base = value.slice(0, value.length - word.length);
+  let options; // [shown in the list, text that replaces the word]
+  if (!base.trim()) {
+    options = COMMANDS.filter((c) => c.startsWith(word.toLowerCase())).map((c) => [c, c + " "]);
+  } else {
+    const dir = word.slice(0, word.lastIndexOf("/") + 1);
+    const [, node] = resolve(dir);
+    if (!isDir(node)) return;
+    options = Object.entries(node)
+      .filter(([n]) => n.toLowerCase().startsWith(word.slice(dir.length).toLowerCase()))
+      .map(([n, v]) => [isDir(v) ? n + "/" : n, dir + n + (isDir(v) ? "/" : " ")]);
+  }
+  if (!options.length) return;
+  const prefix = options.length === 1 ? options[0][1] : commonPrefix(options.map(([, full]) => full));
+  if (prefix.length > word.length) return setLine(base + prefix);
+  completions.textContent = options.map(([shown]) => shown).join("    ");
+  lastPrompt.after(completions);
+}
+
+// A finished line without output, e.g. "ls^C"
+function echoLine(text) {
+  const exchange = document.createElement("div");
+  exchange.className = "exchange";
+  exchange.innerHTML = '<p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>';
+  exchange.querySelector(".prompt__text").textContent = text;
+  lastPrompt.before(exchange);
+}
+
+function interrupt() {
+  hideCompletions();
+  if (cursor.classList.contains("cursor--busy")) {
+    // stop the answer where it is, like ^C on a running command
+    run++;
+    printed = [];
+    typingQuestion = false;
+    thinking.hidden = true;
+    if (cursor.isConnected) cursor.before("^C");
+    setLine("");
+    return idle();
+  }
+  echoLine(input.value + "^C");
+  setLine("");
+}
+
+input.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+    e.preventDefault();
+    if (e.key === "ArrowUp" && histPos > 0) {
+      if (histPos === typedHistory.length) draft = input.value;
+      setLine(typedHistory[--histPos]);
+    } else if (e.key === "ArrowDown" && histPos < typedHistory.length) {
+      histPos++;
+      setLine(histPos === typedHistory.length ? draft : typedHistory[histPos]);
+    }
+  } else if (e.key === "Tab" && !e.shiftKey && input.value.trim()) {
+    // on an empty line Tab still moves focus, so keyboard users aren't trapped
+    e.preventDefault();
+    complete();
+  } else if (e.ctrlKey && !e.metaKey && !e.altKey) {
+    const k = e.key.toLowerCase();
+    if (k === "c") interrupt();
+    else if (k === "l") document.querySelectorAll(".exchange").forEach((el) => el.remove());
+    else if (k === "u") setLine("");
+    else if (k === "d" && !input.value) shellReply("", runCommand("exit"), false);
+    else return;
+    e.preventDefault();
+  }
+});
+input.addEventListener("input", hideCompletions);
+
+addEventListener("keydown", (e) => {
+  const printable = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey;
+  if (printable && !closed && !lastPrompt.hidden && !e.target.closest?.("input, textarea, button, a")) input.focus();
+});
 
 // TESTER DETECTION
 // Not keywords: what the browser would make of the input, and how the visitor behaves.
