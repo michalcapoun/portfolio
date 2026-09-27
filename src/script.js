@@ -683,7 +683,7 @@ addEventListener("keydown", (e) => {
 // Any of these ends the session with a game-over screen; a reload brings the page back.
 
 const PASTE_LIMIT = 1000; // pasting more than this is a length (boundary) test; the field holds 200
-const FLOOD_COUNT = 6; // typed questions or commands ...
+const FLOOD_COUNT = 8; // typed questions or commands ...
 const FLOOD_MS = 5000; // ... within this window
 
 const techniques = {
