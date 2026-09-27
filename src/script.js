@@ -99,11 +99,30 @@ const lastPrompt = document.querySelector(".prompt--last");
 const input = document.querySelector(".prompt__input");
 const suggestions = document.querySelector(".suggestions");
 const portraits = [...document.querySelectorAll(".portrait")].map((el) => [el, el.textContent]);
-const typed = document.createTextNode(""); // mirror of the input, so the block cursor can follow it
-document.querySelector(".prompt__typed").append(typed);
+// The input is mirrored as text before the caret, the block cursor (covering the character
+// under the caret, like a terminal) and text after it.
+const typed = document.createTextNode("");
+const afterCaret = document.createTextNode("");
 const cursor = document.createElement("span");
 cursor.className = "cursor";
 cursor.setAttribute("aria-hidden", "true");
+document.querySelector(".prompt__typed").append(typed, afterCaret);
+
+// Puts the (empty) block cursor right after a node that is being printed.
+const moveCursor = (node) => {
+  cursor.textContent = "\u00a0";
+  node.after(cursor);
+};
+
+function renderLine() {
+  if (closed || cursor.classList.contains("cursor--busy")) return; // the cursor is busy elsewhere
+  const value = input.value;
+  const pos = input.selectionStart ?? value.length;
+  typed.data = value.slice(0, pos);
+  cursor.textContent = value[pos] ?? "\u00a0";
+  afterCaret.data = value.slice(pos + 1);
+  typed.after(cursor);
+}
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const nextFrame = () => new Promise(requestAnimationFrame);
@@ -167,7 +186,7 @@ async function think(promptEl, live) {
 async function stream(nodes, live) {
   let t = performance.now();
   for (const [node, text] of nodes) {
-    node.after(cursor);
+    moveCursor(node);
     while (node.data.length < text.length) {
       if (!live()) return false;
       if (fast) { node.data = text; break; }
@@ -185,8 +204,8 @@ async function stream(nodes, live) {
 function idle() {
   if (closed) return cursor.remove();
   lastPrompt.hidden = suggestions.hidden = false;
-  typed.after(cursor);
   cursor.classList.remove("cursor--busy");
+  renderLine();
 }
 
 // Closed (after `exit` or the question limit): the prompt and suggestions are gone.
@@ -205,7 +224,7 @@ function startRun() {
 async function print() {
   const live = startRun();
   document.querySelectorAll(".exchange").forEach((el) => el.remove());
-  input.value = typed.data = "";
+  input.value = typed.data = afterCaret.data = "";
   typedCount = 0;
   setClosed(false);
   typedTimes = [];
@@ -223,7 +242,7 @@ async function print() {
   lastPrompt.hidden = suggestions.hidden = thinking.hidden = true;
 
   // empty prompt, idle cursor for a moment, then the question is typed by hand
-  cmd.after(cursor);
+  moveCursor(cmd);
   cursor.classList.remove("cursor--busy");
   if (!fast) await wait(500);
   cursor.classList.add("cursor--busy");
@@ -467,7 +486,7 @@ function runCommand(input) {
 
 // Shell output appears at once, like in a real terminal: no thinking, no streaming.
 function shellReply(question, shell, last) {
-  typed.data = "";
+  typed.data = afterCaret.data = "";
   if (shell.clear) {
     document.querySelectorAll(".exchange").forEach((el) => el.remove());
     return idle();
@@ -489,10 +508,10 @@ async function ask(question, typeIt, last = false) {
   question = question.trim();
   if (!question) return;
   const live = startRun();
-  input.value = typed.data = "";
+  input.value = typed.data = afterCaret.data = "";
   cursor.classList.add("cursor--busy");
   if (typeIt) {
-    typed.after(cursor);
+    moveCursor(typed);
     typingQuestion = true;
     const done = await typeInto(typed, question, live);
     typingQuestion = false;
@@ -508,7 +527,7 @@ async function ask(question, typeIt, last = false) {
     <p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>
     <div class="answer"><span class="output__mark" aria-hidden="true">●</span>${answerFor(question)}${last ? closingNote[currentLang] : ""}</div>`;
   exchange.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
-  typed.data = "";
+  typed.data = afterCaret.data = "";
   lastPrompt.before(exchange);
   exchange.scrollIntoView({ block: "start", behavior: fast ? "auto" : "smooth" });
 
@@ -520,10 +539,9 @@ async function ask(question, typeIt, last = false) {
   idle();
 }
 
-input.addEventListener("input", () => {
-  typed.data = input.value;
-  if (!cursor.classList.contains("cursor--busy")) typed.after(cursor);
-});
+// Keep the mirror in step with typing and caret moves (arrows, clicks, selection).
+["input", "keyup", "click", "focus"].forEach((e) => input.addEventListener(e, renderLine));
+document.addEventListener("selectionchange", renderLine);
 lastPrompt.addEventListener("submit", (e) => {
   e.preventDefault();
   const question = input.value.trim();
@@ -561,7 +579,7 @@ let draft = ""; // what was on the line before browsing history
 function setLine(value) {
   input.value = value;
   input.setSelectionRange(value.length, value.length);
-  typed.data = value;
+  renderLine();
 }
 
 const completions = document.createElement("pre");

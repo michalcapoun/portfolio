@@ -297,21 +297,21 @@ h2 { color: var(--accent); }
   gap: 2ch;
 }
 
-/* Blinks when idle, solid while text is being printed */
+/* Block cursor: covers the character under the caret in inverse colours, like a terminal.
+   Blinks when idle, solid while text is being printed. */
 .cursor {
   display: inline-block;
-  width: 0.6em;
-  height: 1.2em;
-  margin-left: 1px;
-  vertical-align: -0.25em;
+  min-width: 0.6em;
+  line-height: 1.2;
   background: var(--fg);
+  color: var(--bg);
   animation: blink 1.06s steps(1) infinite;
 }
 
 .cursor--busy { animation: none; }
 
 @keyframes blink {
-  50% { opacity: 0; }
+  50% { background: transparent; color: var(--fg); }
 }
 
 /* ================================
