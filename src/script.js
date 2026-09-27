@@ -110,13 +110,14 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const nextFrame = () => new Promise(requestAnimationFrame);
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const MAX_TYPED = 10; // questions a visitor can type before the prompt closes
+const MAX_TYPED = 20; // questions and commands a visitor can type before the prompt closes
 
 let run = 0;
 let fast = false;
 let typedCount = 0;
 let closed = false;
 let typedTimes = []; // timestamps of recent typed questions (flood detection)
+let typedHistory = []; // everything the visitor typed, for the `history` command (not `history`: that would shadow window.history)
 let typingQuestion = false; // a suggestion is being typed into the prompt; new questions wait
 const usedSuggestions = new Set();
 let printed = []; // [textNode, fullText] of the current run
@@ -208,6 +209,8 @@ async function print() {
   typedCount = 0;
   setClosed(false);
   typedTimes = [];
+  typedHistory = [];
+  cwd = [];
   usedSuggestions.clear();
   suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
 
@@ -265,12 +268,6 @@ const projectRows = (portfolio, tracer) => `
   </div>`;
 
 const answers = [
-  // Shell commands get a friendly reply; real injection attempts are detected below (TESTER DETECTION).
-  {
-    match: /\b(rm -rf|sudo|chmod|curl|wget|shutdown)\b|^\s*(ls|cd|pwd|whoami|exit)\b|\.\.\//,
-    cs: "<p>Tohle jen vypadá jako terminál, příkazy tu nefungují. Zkus se mě radši zeptat, co testuju.</p>",
-    en: "<p>This only looks like a terminal, commands don't work here. Try asking me what I test instead.</p>",
-  },
   {
     match: /jsi (ai|a\.i\.|robot|bot|clovek|skutecn)|are you (an? )?(ai|bot|robot|human|real)/,
     cs: "<p>Nejsem. Stránka jen vypadá jako AI – odpovědi jsem napsal předem já a vybírají se podle klíčových slov.</p>",
@@ -334,6 +331,159 @@ function answerFor(question) {
   return typeof html === "function" ? html() : html;
 }
 
+// FAKE SHELL
+// A few real commands over a tiny read-only file system built from the page's own content.
+// Anything that isn't a known command goes to the prewritten answers.
+
+let cwd = []; // path below the home directory, e.g. ["projects"]
+const HOME = "/Users/michal";
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const link = (href, text) => `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+
+function files() {
+  const t = translations[currentLang];
+  const label = (key) => t[key].padEnd(14);
+  return {
+    "about.txt": `${t["about.p1"]}\n\n${t["about.p2"]}`,
+    "tools.txt": [
+      `${label("tools.automation")}TypeScript, Appium, Playwright`,
+      `${label("tools.mobile")}UIAutomator2, XCUITest`,
+      `${"API".padEnd(14)}Postman, Swagger`,
+      `${label("tools.network")}Proxyman`,
+      `${"backend".padEnd(14)}Azure Application Insights`,
+    ].join("\n"),
+    "contact.txt": [
+      `${"e-mail".padEnd(14)}${EMAIL}`,
+      `${"LinkedIn".padEnd(14)}${link("https://www.linkedin.com/in/michalcapoun/", "linkedin.com/in/michalcapoun")}`,
+      `${"GitHub".padEnd(14)}${link("https://github.com/michalcapoun", "github.com/michalcapoun")}`,
+    ].join("\n"),
+    projects: {
+      "michalcapoun.cz": {
+        "README.md": `# michalcapoun.cz\n\n${t["projects.portfolio"]}\n\nGitHub  ${link("https://github.com/michalcapoun/portfolio", "github.com/michalcapoun/portfolio")}`,
+      },
+      tracer: {
+        "README.md": `# Tracer\n\n${t["projects.tracer"]}\n\nGitHub  ${link("https://github.com/michalcapoun/tracer", "github.com/michalcapoun/tracer")}\nLive    ${link("https://tracer-six.vercel.app", "tracer-six.vercel.app")}`,
+      },
+    },
+  };
+}
+
+// Resolves a path to [segments, node]; node is undefined when it doesn't exist.
+// Nothing above the home directory is reachable (like a chroot); names match case-insensitively.
+function resolve(path = "") {
+  let parts;
+  if (path === "~" || path.startsWith("~/")) [parts, path] = [[], path.slice(1)];
+  else if (path === HOME || path.startsWith(HOME + "/")) [parts, path] = [[], path.slice(HOME.length)];
+  else if (path.startsWith("/")) return [[], undefined];
+  else parts = [...cwd];
+  for (const seg of path.split("/").filter(Boolean)) {
+    if (seg === "..") parts.pop();
+    else if (seg !== ".") parts.push(seg);
+  }
+  let node = files();
+  const found = [];
+  for (const seg of parts) {
+    const key = isDir(node) ? Object.keys(node).find((k) => k.toLowerCase() === seg.toLowerCase()) : undefined;
+    if (key === undefined) return [found, undefined];
+    found.push(key);
+    node = node[key];
+  }
+  return [found, node];
+}
+
+const isDir = (node) => typeof node === "object";
+const textLength = (html) => new TextEncoder().encode(html.replace(/<[^>]+>/g, "")).length;
+const modified = new Date(document.lastModified); // when the server last changed this page
+
+function lsLong(name, node) {
+  const d = modified;
+  const date = `${d.toLocaleString("en-US", { month: "short" })} ${String(d.getDate()).padStart(2)} ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}`;
+  const dir = isDir(node);
+  const size = dir ? (Object.keys(node).length + 2) * 32 : textLength(node);
+  const links = dir ? 2 + Object.values(node).filter(isDir).length : 1;
+  const shown = dir ? `<span class="shell__dir">${esc(name)}</span>` : esc(name);
+  return `${dir ? "drwxr-xr-x" : "-rw-r--r--"}  ${links} michal  staff  ${String(size).padStart(5)} ${date} ${shown}`;
+}
+
+// Returns { html } for a known command (html may be empty), or null.
+function runCommand(input) {
+  const [cmd, ...args] = input.split(/\s+/);
+  const name = cmd.toLowerCase();
+  const cs = currentLang === "cs";
+  const flags = args.filter((a) => a.startsWith("-")).join("").replace(/-/g, "");
+  const paths = args.filter((a) => !a.startsWith("-"));
+  const out = (html) => ({ html });
+
+  switch (name) {
+    case "ls": {
+      const bad = [...flags].find((f) => !"la1".includes(f));
+      if (bad) return out(`ls: invalid option -- ${esc(bad)}\nusage: ls [-al1] [file ...]`);
+      const [, node] = resolve(paths[0]);
+      if (node === undefined) return out(`ls: ${esc(paths[0])}: No such file or directory`);
+      if (!isDir(node)) return out(flags.includes("l") ? lsLong(paths[0], node) : esc(paths[0]));
+      let entries = Object.entries(node).sort(([a], [b]) => a.localeCompare(b));
+      if (flags.includes("a")) entries = [[".", node], ["..", node], ...entries];
+      if (flags.includes("l")) {
+        const total = entries.filter(([, n]) => !isDir(n)).length * 8;
+        return out([`total ${total}`, ...entries.map(([n, v]) => lsLong(n, v))].join("\n"));
+      }
+      const names = entries.map(([n, v]) => (isDir(v) ? `<span class="shell__dir">${esc(n)}</span>` : esc(n)));
+      return out(names.join(flags.includes("1") ? "\n" : "    "));
+    }
+    case "cd": {
+      if (!paths[0] || paths[0] === "~") { cwd = []; return out(""); }
+      const [parts, node] = resolve(paths[0]);
+      if (node === undefined) return out(`cd: no such file or directory: ${esc(paths[0])}`);
+      if (!isDir(node)) return out(`cd: not a directory: ${esc(paths[0])}`);
+      cwd = parts;
+      return out("");
+    }
+    case "cat": {
+      if (!paths.length) return out(cs ? "cat: chybí název souboru" : "cat: missing file name");
+      return out(paths.map((p) => {
+        const [, node] = resolve(p);
+        if (node === undefined) return `cat: ${esc(p)}: No such file or directory`;
+        if (isDir(node)) return `cat: ${esc(p)}: Is a directory`;
+        return node;
+      }).join("\n"));
+    }
+    case "pwd": return out(esc([HOME, ...cwd].join("/")));
+    case "whoami": return out("michal");
+    case "echo": return out(esc(args.join(" ")));
+    case "date": return out(esc(new Date().toString()));
+    case "history": return out(typedHistory.map((h, i) => `${String(i + 1).padStart(5)}  ${esc(h)}`).join("\n"));
+    case "clear": return { clear: true };
+    case "help": return out(cs
+      ? "Tohle je jen napodobenina shellu nad obsahem portfolia.\nUmí: ls, cd, cat, pwd, whoami, echo, date, history, clear, exit\n\nNa ostatní se zeptej normálně, třeba „Co testuješ?“"
+      : "This is just a mock shell over the portfolio's content.\nIt knows: ls, cd, cat, pwd, whoami, echo, date, history, clear, exit\n\nFor anything else just ask, e.g. \"What do you test?\"");
+    case "sudo": return out("michal is not in the sudoers file. This incident will be reported.");
+    case "rm": case "rmdir": case "mv": case "cp": case "touch": case "mkdir": case "chmod": case "chown":
+      return out(`${name}: ${esc(paths.at(-1) ?? ".")}: Read-only file system`);
+    case "exit": case "logout": return { html: `logout\n\n${cs ? "[Proces dokončen]" : "[Process completed]"}`, exit: true };
+    default: return null;
+  }
+}
+
+// Shell output appears at once, like in a real terminal: no thinking, no streaming.
+function shellReply(question, shell, last) {
+  typed.data = "";
+  if (shell.clear) {
+    document.querySelectorAll(".exchange").forEach((el) => el.remove());
+    return idle();
+  }
+  const exchange = document.createElement("div");
+  exchange.className = "exchange";
+  exchange.innerHTML = `
+    <p class="prompt"><span class="prompt__sign" aria-hidden="true">&gt;</span><span class="prompt__text"></span></p>
+    ${shell.html ? `<pre class="shell">${shell.html}</pre>` : ""}
+    ${last ? `<div class="answer">${closingNote[currentLang]}</div>` : ""}`;
+  exchange.querySelector(".prompt__text").textContent = question; // visitor text, never as HTML
+  lastPrompt.before(exchange);
+  exchange.scrollIntoView({ block: "nearest" });
+  if (shell.exit) setClosed(true);
+  idle();
+}
+
 async function ask(question, typeIt, last = false) {
   question = question.trim();
   if (!question) return;
@@ -347,6 +497,9 @@ async function ask(question, typeIt, last = false) {
     typingQuestion = false;
     if (!done) return;
   }
+
+  const shell = runCommand(question);
+  if (shell) return shellReply(question, shell, last);
 
   const exchange = document.createElement("div");
   exchange.className = "exchange";
@@ -379,6 +532,7 @@ lastPrompt.addEventListener("submit", (e) => {
   const kind = injectionIn(question) ?? (typedTimes.length >= FLOOD_COUNT ? "flood" : null);
   if (kind) return gameOver(kind, question);
   typedCount++;
+  typedHistory.push(question);
   const last = typedCount >= MAX_TYPED;
   if (last) setClosed(true);
   ask(question, false, last);
@@ -397,7 +551,7 @@ suggestions.querySelectorAll("button").forEach((btn) =>
 // Any of these ends the session with a game-over screen; a reload brings the page back.
 
 const PASTE_LIMIT = 1000; // pasting more than this is a length (boundary) test; the field holds 200
-const FLOOD_COUNT = 4; // typed questions ...
+const FLOOD_COUNT = 6; // typed questions or commands ...
 const FLOOD_MS = 5000; // ... within this window
 
 const techniques = {

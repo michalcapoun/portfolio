@@ -191,6 +191,20 @@ button:focus-visible {
   scroll-margin-top: 1em;
 }
 
+/* Output of the fake shell */
+.shell {
+  margin: 0.8em 0 0;
+  padding-left: 2ch;
+  font: inherit;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.shell__dir {
+  color: var(--accent);
+  font-weight: 700;
+}
+
 .game-over {
   margin-top: 1.7em;
 }
