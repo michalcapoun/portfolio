@@ -174,6 +174,7 @@ async function print() {
   const live = startRun();
   document.querySelectorAll(".exchange").forEach((el) => el.remove());
   input.value = typed.data = "";
+  suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
 
   const [cmd, cmdText] = textNodes(command)[0];
   const lines = textNodes(output);
@@ -341,7 +342,12 @@ lastPrompt.addEventListener("submit", (e) => {
   e.preventDefault();
   ask(input.value, false);
 });
-suggestions.querySelectorAll("button").forEach((btn) => btn.addEventListener("click", () => ask(btn.textContent, true)));
+suggestions.querySelectorAll("button").forEach((btn) =>
+  btn.addEventListener("click", () => {
+    btn.disabled = true;
+    ask(btn.textContent, true);
+  })
+);
 
 ["pointerdown", "keydown", "wheel", "touchstart"].forEach((e) =>
   addEventListener(e, () => (fast = true), { passive: true })

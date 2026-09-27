@@ -171,6 +171,14 @@ button:focus-visible {
 .suggestions button::after { content: "]"; }
 .suggestions button:hover { color: var(--fg); }
 
+/* An already asked suggestion stays visible but can't be picked again */
+.suggestions button:disabled {
+  color: var(--dim);
+  opacity: 0.5;
+  text-decoration: line-through;
+  cursor: default;
+}
+
 /* A visitor's question and its prewritten answer */
 .exchange {
   margin-top: 1.7em;
