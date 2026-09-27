@@ -469,6 +469,8 @@ function runCommand(input) {
       [prevCwd, cwd] = [cwd, parts];
       return out("");
     }
+    case "git": return out("fatal: not a git repository (or any of the parent directories): .git");
+    case "less": case "more":
     case "cat": {
       if (!paths.length) return out(cs ? "cat: chybí název souboru" : "cat: missing file name");
       return out(paths.map((p) => {
@@ -493,6 +495,24 @@ function runCommand(input) {
     case "exit": case "logout": return { html: `logout\n\n${cs ? "[Proces dokončen]" : "[Process completed]"}`, exit: true };
     default: return null;
   }
+}
+
+// Programs this "machine" doesn't have, and single words that aren't questions, fail like zsh does.
+// Words the prewritten answers know (kontakt, portfolio, cv…) still get an answer.
+const NOT_INSTALLED = ["npm", "npx", "node", "python", "python3", "pip", "vim", "vi", "nano", "emacs", "ssh", "ping",
+  "top", "htop", "ps", "kill", "apt", "apt-get", "brew", "docker", "make", "java", "go", "cargo", "yarn", "code", "telnet"];
+
+function unknownCommand(input) {
+  const [first] = input.split(/\s+/);
+  if (/^\.{0,2}\//.test(first)) {
+    const [, node] = resolve(first);
+    if (node === undefined) return `zsh: no such file or directory: ${esc(first)}`;
+    return `zsh: permission denied: ${esc(first)}`;
+  }
+  if (NOT_INSTALLED.includes(first.toLowerCase())) return `zsh: command not found: ${esc(first)}`;
+  const oneWord = /^[a-z0-9._~+-]+$/i.test(input);
+  if (oneWord && !answers.some((a) => a.match.test(normalize(input)))) return `zsh: command not found: ${esc(input)}`;
+  return null;
 }
 
 // Shell output appears at once, like in a real terminal: no thinking, no streaming.
@@ -532,6 +552,8 @@ async function ask(question, typeIt, last = false) {
   const where = cwd;
   const shell = runCommand(question);
   if (shell) return shellReply(question, shell, last, where);
+  const failed = unknownCommand(question);
+  if (failed) return shellReply(question, { html: failed }, last, where);
 
   const exchange = document.createElement("div");
   exchange.className = "exchange";
