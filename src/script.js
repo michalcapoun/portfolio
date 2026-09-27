@@ -246,7 +246,7 @@ async function printPortraits(live) {
 // Matched by keywords against the question (lowercase, without diacritics); first match wins.
 // Only facts that are on this page — anything else falls back to "write me".
 
-const EMAIL = '<a href="mailto:michalcapoun%2Bportfolio@gmail.com">michalcapoun@gmail.com</a>';
+const EMAIL = '<a href="mailto:michalcapoun@gmail.com">michalcapoun@gmail.com</a>';
 const LINKEDIN = '<a href="https://www.linkedin.com/in/michalcapoun/" target="_blank" rel="noopener noreferrer">';
 const contactRows = `
   <dl class="group">
