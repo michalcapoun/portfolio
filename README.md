@@ -14,6 +14,7 @@ Osobní portfolio.
 - Úvodní otázka má pět znění a při každém otevření se vybere jiné než minule (pamatuje se v localStorage); odpověď je pro všechna stejná
 - Na širokých obrazovkách (od 1200 px) se vedle odpovědi vykreslí můj ASCII portrét, ve světlém motivu s obráceným stínováním; na mobilu je schovaný
 - Do spodního promptu se dá psát: otázky (nebo klik na navrženou otázku) dostanou předem napsanou odpověď vybranou podle klíčových slov; co stránka nezná, na to odkáže na e-mail. Všechno běží ve stránce, bez serveru
+- Prompt zároveň funguje jako malý shell nad obsahem portfolia: `ls` (i `-l`, `-a`), `cd`, `cat`, `pwd`, `whoami`, `echo`, `date`, `history`, `clear`, `help`, `exit`; soubory `about.txt`, `tools.txt`, `contact.txt` a `projects/*/README.md` jsou jen pro čtení
 - Když návštěvník stránku „testuje“ (vloží HTML/JS nebo šablonu, vloží přes 1000 znaků, upraví limity promptu v DevTools nebo pošle 4 otázky za 5 s), portfolio zmizí a zbyde jen „Dobrý pokus, ale bugy tu hledám já“, pojmenovaná technika a rozloučení; po obnovení stránky je vše zpět. Pozná se to podle chování a HTML parseru prohlížeče, ne podle klíčových slov
 - Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
 - Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
