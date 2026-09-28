@@ -151,6 +151,9 @@ button:focus-visible {
   gap: 1em;
 }
 
+/* Keeps its line while the role is printed, so nothing around it moves */
+.intro__name p { min-height: 1lh; }
+
 .banner {
   margin: 0;
   font: inherit;
@@ -170,7 +173,7 @@ button:focus-visible {
 @media (min-width: 1200px) {
   .intro__top {
     display: flex;
-    align-items: flex-start; /* the role prints after the name; aligned to the bottom, the name would rise as it grows */
+    align-items: center; /* name and role centred beside the taller portrait */
     justify-content: space-between;
     gap: 32px;
   }
