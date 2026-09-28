@@ -314,14 +314,14 @@ const answers = [
     en: "<p>Write me an e-mail or message me on LinkedIn:</p>" + contactRows,
   },
   {
-    match: /prax|zkusenost|zivotopis|\bcv\b|resume|experience|kolik let|firm|zamestn|pozic/,
-    cs: `<p>Celou pracovní historii najdeš na mém ${LINKEDIN}LinkedInu</a>. K testování jsem se dostal přes IT support a teď se věnuji testování mobilních aplikací, ručně i automatizovaně.</p>`,
-    en: `<p>My full work history is on my ${LINKEDIN}LinkedIn</a>. I got into testing through IT support and now I focus on mobile app testing, both manual and automated.</p>`,
-  },
-  {
     match: /nastroj|stack|technolog|appium|playwright|typescript|postman|swagger|proxyman|azure|automatiz|tool|framework/,
     cs: "<p>Automatizuji v TypeScriptu – primárně s Appium, zkušenosti mám i s Playwright. Pro mobilní platformy UIAutomator2 a XCUITest, pro API Postman a Swagger, síť analyzuji v Proxyman. Při diagnostice backendových chyb používám Azure Application Insights.</p>",
     en: "<p>I automate in TypeScript — primarily with Appium, with some experience in Playwright. For mobile platforms UIAutomator2 and XCUITest, for API Postman and Swagger, network analysis in Proxyman. For diagnosing backend errors I use Azure Application Insights.</p>",
+  },
+  {
+    match: /prax|zkusenost|zivotopis|\bcv\b|resume|experience|kolik let|firm|zamestn|pozic/,
+    cs: `<p>Celou pracovní historii najdeš na mém ${LINKEDIN}LinkedInu</a>. K testování jsem se dostal přes IT support a teď se věnuji testování mobilních aplikací, ručně i automatizovaně.</p>`,
+    en: `<p>My full work history is on my ${LINKEDIN}LinkedIn</a>. I got into testing through IT support and now I focus on mobile app testing, both manual and automated.</p>`,
   },
   {
     match: /testuj|testovan|co delas|prace|pracuj|mobil|aplikac|\bqa\b|what do you (do|test)|job|work|role/,
