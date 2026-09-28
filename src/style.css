@@ -134,16 +134,9 @@ button:focus-visible {
 .thinking { margin-top: 1.7em; }
 .thinking__spinner { color: var(--accent-2); }
 
-/* The answer is indented under a marker, like a model's reply */
+/* The answer is indented under its prompt, like a model's reply */
 .output {
-  position: relative;
   padding-left: 2ch;
-}
-
-.output__mark {
-  position: absolute;
-  left: 0;
-  color: var(--accent-2);
 }
 
 /* Name in block letters with the role under it; shrinks to fit narrow screens (57 columns wide) */
