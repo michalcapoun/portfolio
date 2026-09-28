@@ -114,9 +114,15 @@ button:focus-visible {
    TERMINAL
    ================================ */
 
+/* One centred column; the toggles share it so they sit at its right edge */
+.controls,
 .term {
   box-sizing: content-box; /* max-width caps the text column; the side padding sits outside it */
   max-width: 88ch;
+  margin-inline: auto;
+}
+
+.term {
   padding: 24px max(16px, 5vw) 64px;
 }
 
