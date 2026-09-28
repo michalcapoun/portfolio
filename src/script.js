@@ -15,7 +15,7 @@ const translations = {
     "thinking": "Thinking…",
     "prompt.work": "What have you worked on?",
     "prompt.contact": "How can I reach you?",
-    "role": "QA tester · web and mobile apps, mostly automated and AI-assisted",
+    "role": "QA tester · automation with AI",
     "about.p1": "I've been into computers since elementary school — I built my first one from spare parts. Through IT support, I found my way to software testing, where I discovered what I enjoy: systematically finding problems before they reach users.",
     "about.p2": "I currently test web and mobile applications, mostly with automation and the help of AI. I'm interested in the whole process: understanding how something should work, all the way to verifying that a fix actually works.",
     "work.now": "now",
