@@ -148,7 +148,6 @@ button:focus-visible {
 
 /* Name in block letters with the role under it; shrinks to fit narrow screens (57 columns wide) */
 .intro {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -163,19 +162,27 @@ button:focus-visible {
   color: var(--strong);
 }
 
-/* ASCII portrait right of the name; only where there is room for it */
+/* ASCII portrait beside the name, as tall as it, with the role under both; only where there is room */
 .portrait {
   display: none;
 }
 
 @media (min-width: 1200px) {
+  .intro {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    align-items: end;
+    column-gap: 40px;
+  }
+
+  .intro p { grid-column: 1 / -1; }
+
   .portrait {
-    position: absolute;
-    top: 0;
-    left: calc(100% + 40px);
+    grid-column: 2;
+    grid-row: 1;
     margin: 0;
     font: inherit;
-    font-size: clamp(5px, calc((100vw - 900px) / 60), 8px);
+    font-size: 0.27em; /* 52 rows as tall as the 14 rows of the banner */
     line-height: 1;
     color: var(--fg);
   }
