@@ -102,7 +102,9 @@ const output = document.querySelector(".output");
 const lastPrompt = document.querySelector(".prompt--last");
 const input = document.querySelector(".prompt__input");
 const suggestions = document.querySelector(".suggestions");
-const portraits = [...document.querySelectorAll(".portrait")].map((el) => [el, el.textContent]);
+const role = document.querySelector(".intro p");
+const banner = document.querySelector(".banner");
+const art = [...document.querySelectorAll(".banner, .portrait")].map((el) => [el, el.textContent]);
 // The input is mirrored as text before the caret, the block cursor (covering the character
 // under the caret, like a terminal) and text after it.
 const typed = document.createTextNode("");
@@ -150,14 +152,14 @@ let printed = []; // [textNode, fullText] of the current run
 // Put back full text, e.g. before switching language mid-print.
 const restore = () => {
   printed.forEach(([node, text]) => (node.data = text));
-  portraits.forEach(([el, text]) => (el.textContent = text));
+  art.forEach(([el, text]) => (el.textContent = text));
 };
 
 const textNodes = (el) => {
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
   const nodes = [];
   for (let n; (n = walker.nextNode()); ) {
-    if (n.data.trim() && !n.parentElement.closest(".portrait")) nodes.push([n, n.data]);
+    if (n.data.trim() && !n.parentElement.closest(".banner, .portrait")) nodes.push([n, n.data]);
   }
   return nodes;
 };
@@ -245,11 +247,17 @@ async function print() {
   suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
 
   const [cmd, cmdText] = textNodes(command)[0];
+  const roleLines = textNodes(role);
   const lines = textNodes(output);
-  printed = [[cmd, cmdText], ...lines];
+  printed = [[cmd, cmdText], ...roleLines, ...lines];
   printed.forEach(([node]) => (node.data = ""));
-  portraits.forEach(([el]) => (el.textContent = ""));
+  art.forEach(([el, text]) => (el.textContent = blank(text)));
   lastPrompt.hidden = suggestions.hidden = thinking.hidden = true;
+
+  // name and portrait are drawn first, then the role
+  drawArt(art.filter(([el]) => el !== banner), live); // the portrait runs alongside everything else
+  if (!(await drawArt(art.filter(([el]) => el === banner), live))) return;
+  if (!(await stream(roleLines, live))) return;
 
   // empty prompt, idle cursor for a moment, then the question is typed by hand
   moveCursor(cmd);
@@ -258,21 +266,25 @@ async function print() {
   cursor.classList.add("cursor--busy");
   if (!(await typeInto(cmd, cmdText, live))) return;
   if (!(await think(command.closest(".prompt"), live))) return;
-  printPortraits(live); // runs alongside the text
   if (!(await stream(lines, live))) return;
   idle();
 }
 
-// The portrait prints line by line, both theme variants in step.
-async function printPortraits(live) {
-  const rows = portraits.map(([el, text]) => [el, text.split("\n")]);
+// Undrawn rows are a single space, so the art keeps its height and nothing below it jumps.
+const blank = (text) => text.replace(/[^\n]+/g, " ");
+
+// ASCII art prints line by line; both portrait variants in step.
+async function drawArt(entries, live) {
+  const rows = entries.map(([el, text]) => [el, text.split("\n")]);
   for (let i = 1; i <= rows[0][1].length; i++) {
-    if (!live()) return;
+    if (!live()) return false;
     if (fast) break;
-    rows.forEach(([el, lines]) => (el.textContent = lines.slice(0, i).join("\n")));
+    rows.forEach(([el, lines]) => (el.textContent = lines.map((line, j) => (j < i ? line : " ")).join("\n")));
     await wait(35);
   }
-  if (live()) portraits.forEach(([el, text]) => (el.textContent = text));
+  if (!live()) return false;
+  entries.forEach(([el, text]) => (el.textContent = text));
+  return true;
 }
 
 // PREWRITTEN ANSWERS
