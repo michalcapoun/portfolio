@@ -10,7 +10,7 @@ Osobní portfolio.
 
 ## Funkce
 
-- Stránka vypadá jako rozhovor s AI v terminálu: po otevření se po řádcích vykreslí moje jméno velkým blokovým písmem a pak přijdou tři otázky — o mně, na čem jsem pracoval (zkušenosti, nástroje, projekty) a kontakt. Každá se napíše do promptu, chvíli se „přemýšlí“ a odpověď se vypíše po znacích; na konci bliká kurzor pod poslední odpovědí. Druhou a třetí odpověď stránka při výpisu sleduje, dokud návštěvník nescrollne nebo neklikne
+- Stránka vypadá jako rozhovor s AI v terminálu: po otevření se po řádcích vykreslí moje jméno velkým blokovým písmem a pak přijdou tři otázky — o mně, na čem jsem pracoval (zkušenosti a projekty) a kontakt. Každá se napíše do promptu, chvíli se „přemýšlí“ a odpověď se vypíše po znacích; na konci bliká kurzor pod poslední odpovědí. Druhou a třetí odpověď stránka při výpisu sleduje, dokud návštěvník nescrollne nebo neklikne
 - První otázka má devět znění a při každém otevření se vybere jiné než minule (pamatuje se v localStorage); odpověď je pro všechna stejná
 - Na širokých obrazovkách (od 1200 px) se vedle jména vykreslí můj ASCII portrét, ve světlém motivu s obráceným stínováním; na mobilu je schovaný
 - Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
