@@ -338,6 +338,12 @@ const answers = [
     cs: () => `<p>${translations.cs["about.p1"]}</p>`,
     en: () => `<p>${translations.en["about.p1"]}</p>`,
   },
+  {
+    // last, so "díky, a jaké nástroje…" still gets the tools
+    match: /\bdik|dekuj|thank|thx/,
+    cs: `<p>Není zač. Kdyby tě zajímalo ještě něco, zeptej se – nebo mi rovnou napiš na ${EMAIL}.</p>`,
+    en: `<p>You're welcome. Ask away if there's anything else – or write me at ${EMAIL}.</p>`,
+  },
 ];
 const closingNote = {
   cs: `<p class="dim">Tohle byla poslední otázka, kterou tu zvládnu. Na další ti rád odpovím osobně – ${EMAIL}.</p>`,
