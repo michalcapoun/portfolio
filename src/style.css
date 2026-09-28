@@ -315,6 +315,9 @@ h2 { color: var(--accent); }
 }
 
 .row dt { color: var(--dim); }
+
+/* Experience: a wider label column for the dates */
+.row--date { grid-template-columns: 16ch minmax(0, 1fr); }
 .row dd { overflow-wrap: anywhere; }
 
 .project {
@@ -354,6 +357,7 @@ h2 { color: var(--accent); }
 @media (max-width: 640px) {
   body { font-size: 14px; }
   .row { grid-template-columns: 13ch minmax(0, 1fr); }
+  .row--date { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .project { grid-template-columns: minmax(0, 1fr); gap: 0.1em; }
 }
 
