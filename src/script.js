@@ -334,7 +334,7 @@ const answers = [
     en: () => projectRows(translations.en["projects.portfolio"], translations.en["projects.tracer"]),
   },
   {
-    match: /kdo|o sobe|predstav|zacal|cesta|jak ses|pocitac|who|about|yourself|story|start/,
+    match: /kdo|o sobe|predstav|zacal|cesta|jak ses|pocitac|\bwho\b|about you|^about\b|yourself|story|did you start|started|get into|got into/,
     cs: () => `<p>${translations.cs["about.p1"]}</p>`,
     en: () => `<p>${translations.en["about.p1"]}</p>`,
   },
