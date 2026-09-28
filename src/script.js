@@ -13,6 +13,8 @@ const storage = {
 const translations = {
   en: {
     "thinking": "Thinking…",
+    "prompt.work": "What have you worked on?",
+    "prompt.contact": "How can I reach you?",
     "role": "QA tester · mobile app testing, manual and automated",
     "about.title": "About",
     "about.p1": "I've been into computers since elementary school — I built my first one from spare parts. Through IT support, I found my way to software testing, where I discovered what I enjoy: systematically finding problems before they reach users.",
@@ -90,15 +92,14 @@ themeButton.addEventListener("click", () => {
 });
 
 // TERMINAL PRINTING
-// The question is typed into the prompt, a spinner "thinks", the answer streams, then the cursor
-// blinks in the bottom prompt, where visitors can ask their own questions (prewritten answers below).
+// The name is drawn, then for each part a question is typed into its prompt, a spinner "thinks" and
+// the answer streams. Then the cursor blinks in the bottom prompt, where visitors can ask their own questions (prewritten answers below).
 // Without JS all text is simply visible. Any click, key, wheel or touch finishes printing at once.
 
 const CPS = 450; // output speed in characters per second
-const command = document.querySelector(".prompt__text");
 const thinking = document.querySelector(".thinking");
 const spinner = document.querySelector(".thinking__spinner");
-const output = document.querySelector(".output");
+const steps = [...document.querySelectorAll(".step")];
 const lastPrompt = document.querySelector(".prompt--last");
 const input = document.querySelector(".prompt__input");
 const suggestions = document.querySelector(".suggestions");
@@ -246,12 +247,16 @@ async function print() {
   usedSuggestions.clear();
   suggestions.querySelectorAll("button").forEach((btn) => (btn.disabled = false));
 
-  const [cmd, cmdText] = textNodes(command)[0];
   const roleLines = textNodes(role);
-  const lines = textNodes(output);
-  printed = [[cmd, cmdText], ...roleLines, ...lines];
+  const parts = steps.map((step) => ({
+    step,
+    cmd: textNodes(step.querySelector(".prompt__text"))[0],
+    lines: textNodes(step.querySelector(".output")),
+  }));
+  printed = [...roleLines, ...parts.flatMap(({ cmd, lines }) => [cmd, ...lines])];
   printed.forEach(([node]) => (node.data = ""));
   art.forEach(([el, text]) => (el.textContent = blank(text)));
+  steps.forEach((step) => (step.hidden = true));
   lastPrompt.hidden = suggestions.hidden = thinking.hidden = true;
 
   // name and portrait are drawn first, then the role
@@ -259,14 +264,19 @@ async function print() {
   if (!(await drawArt(art.filter(([el]) => el === banner), live))) return;
   if (!(await stream(roleLines, live))) return;
 
-  // empty prompt, idle cursor for a moment, then the question is typed by hand
-  moveCursor(cmd);
-  cursor.classList.remove("cursor--busy");
-  if (!fast) await wait(500);
-  cursor.classList.add("cursor--busy");
-  if (!(await typeInto(cmd, cmdText, live))) return;
-  if (!(await think(command.closest(".prompt"), live))) return;
-  if (!(await stream(lines, live))) return;
+  // each part: empty prompt, idle cursor for a moment, the question typed by hand, then the answer.
+  // The first part starts at the top; later ones are followed until the visitor scrolls or clicks.
+  for (const [i, { step, cmd: [cmd, cmdText], lines }] of parts.entries()) {
+    step.hidden = false;
+    if (i && !fast) step.scrollIntoView({ block: "nearest" }); // fast: skipped, or no animation at all
+    moveCursor(cmd);
+    cursor.classList.remove("cursor--busy");
+    if (!fast) await wait(500);
+    cursor.classList.add("cursor--busy");
+    if (!(await typeInto(cmd, cmdText, live))) return;
+    if (!(await think(step.querySelector(".prompt"), live))) return;
+    if (!(await stream(lines, live, i > 0))) return;
+  }
   idle();
 }
 
