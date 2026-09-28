@@ -88,7 +88,8 @@ themeButton.addEventListener("click", () => {
 // TERMINAL PRINTING
 // The name is drawn, then for each part a question is typed into its prompt, a spinner "thinks" and
 // the answer streams. Then the cursor disappears.
-// Without JS all text is simply visible. Any click, key, wheel or touch finishes printing at once.
+// The page stays where the visitor scrolls it. Without JS all text is simply visible.
+// A click or key finishes printing at once; scrolling does not.
 
 const CPS = 450; // output speed in characters per second
 const thinking = document.querySelector(".thinking");
@@ -114,7 +115,6 @@ const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").match
 
 let run = 0;
 let fast = false;
-let userSkipped = false; // the visitor clicked, scrolled or pressed a key during this run: stop following output
 let printed = []; // [textNode, fullText] of the current run
 
 // Put back full text, e.g. before switching language mid-print.
@@ -160,8 +160,7 @@ async function think(promptEl, live) {
   return true;
 }
 
-// follow: keep the cursor in view while printing, like a terminal scrolling with its output
-async function stream(nodes, live, follow = false) {
+async function stream(nodes, live) {
   let t = performance.now();
   for (const [node, text] of nodes) {
     moveCursor(node);
@@ -173,7 +172,6 @@ async function stream(nodes, live, follow = false) {
       const now = performance.now();
       node.data = text.slice(0, node.data.length + Math.max(1, Math.round(((now - t) * CPS) / 1000)));
       t = now;
-      if (follow && !userSkipped) cursor.scrollIntoView({ block: "nearest" });
     }
   }
   return live();
@@ -183,7 +181,6 @@ function startRun() {
   restore();
   const id = ++run;
   fast = reducedMotion();
-  userSkipped = false;
   return () => id === run;
 }
 
@@ -207,17 +204,15 @@ async function print() {
   if (!(await stream(roleLines, live))) return;
 
   // each part: empty prompt, idle cursor for a moment, the question typed by hand, then the answer.
-  // The first part starts at the top; later ones are followed until the visitor scrolls or clicks.
-  for (const [i, { step, cmd: [cmd, cmdText], lines }] of parts.entries()) {
+  for (const { step, cmd: [cmd, cmdText], lines } of parts) {
     step.hidden = false;
-    if (i && !fast) step.scrollIntoView({ block: "nearest" }); // fast: skipped, or no animation at all
     moveCursor(cmd);
     cursor.classList.remove("cursor--busy");
     if (!fast) await wait(500);
     cursor.classList.add("cursor--busy");
     if (!(await typeInto(cmd, cmdText, live))) return;
     if (!(await think(step.querySelector(".prompt"), live))) return;
-    if (!(await stream(lines, live, i > 0))) return;
+    if (!(await stream(lines, live))) return;
   }
   cursor.remove();
 }
@@ -239,9 +234,9 @@ async function drawArt(entries, live) {
   return true;
 }
 
-["pointerdown", "keydown", "wheel", "touchstart"].forEach((e) =>
-  addEventListener(e, () => (fast = userSkipped = true), { passive: true })
-);
+// click, not pointerdown: a touch that scrolls is not a click. Capture runs before the language
+// button's own handler restarts printing.
+["click", "keydown"].forEach((e) => addEventListener(e, () => (fast = true), true));
 
 langButton.addEventListener("click", () => {
   restore();
