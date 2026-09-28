@@ -14,6 +14,7 @@ const translations = {
   en: {
     "thinking": "Thinking…",
     "prompt.work": "What have you worked on?",
+    "prompt.projects": "Any projects of your own?",
     "prompt.contact": "How can I reach you?",
     "role": "QA tester · automation with AI",
     "about.p1": "I've been into computers since elementary school — I built my first one from spare parts. Through IT support, I found my way to software testing, where I discovered what I enjoy: systematically finding problems before they reach users.",
