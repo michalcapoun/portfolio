@@ -222,16 +222,16 @@ async function print() {
   cursor.classList.remove("cursor--busy");
 }
 
-// Undrawn rows are a single space, so the art keeps its height and nothing below it jumps.
-const blank = (text) => text.replace(/[^\n]+/g, " ");
+// Undrawn rows are spaces of the same length, so the art keeps its size and nothing around it moves.
+const blank = (text) => text.replace(/[^\n]/g, " ");
 
 // ASCII art prints line by line; both portrait variants in step.
 async function drawArt(entries, live) {
-  const rows = entries.map(([el, text]) => [el, text.split("\n")]);
+  const rows = entries.map(([el, text]) => [el, text.split("\n"), blank(text).split("\n")]);
   for (let i = 1; i <= rows[0][1].length; i++) {
     if (!live()) return false;
     if (fast) break;
-    rows.forEach(([el, lines]) => (el.textContent = lines.map((line, j) => (j < i ? line : " ")).join("\n")));
+    rows.forEach(([el, lines, blanks]) => (el.textContent = lines.map((line, j) => (j < i ? line : blanks[j])).join("\n")));
     await wait(35);
   }
   if (!live()) return false;
