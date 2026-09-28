@@ -299,8 +299,8 @@ const projectRows = (portfolio, tracer) => `
 
 const answers = [
   {
-    match: /jsi (ai|a\.i\.|robot|bot|clovek|skutecn)|are you (an? )?(ai|bot|robot|human|real)/,
-    cs: "<p>Nejsem. Stránka jen vypadá jako AI – odpovědi jsem napsal předem já a vybírají se podle klíčových slov.</p>",
+    match: /(jsi|je to|to je) (ai|a\.i\.|robot|bot|clovek|skutecn|umela inteligence|chatgpt)|(are you|is (this|it)) (an? )?(ai|bot|robot|human|real|chatgpt)/,
+    cs: "<p>Ne. Stránka jen vypadá jako AI – odpovědi jsem napsal předem já a vybírají se podle klíčových slov.</p>",
     en: "<p>No. This page only looks like an AI – I wrote the answers myself and they're picked by keywords.</p>",
   },
   {
