@@ -87,7 +87,7 @@ themeButton.addEventListener("click", () => {
 
 // TERMINAL PRINTING
 // The name is drawn, then for each part a question is typed into its prompt, a spinner "thinks" and
-// the answer streams. Then the cursor blinks on a new line under the last answer.
+// the answer streams. Then the cursor disappears.
 // Without JS all text is simply visible. Any click, key, wheel or touch finishes printing at once.
 
 const CPS = 450; // output speed in characters per second
@@ -219,8 +219,7 @@ async function print() {
     if (!(await think(step.querySelector(".prompt"), live))) return;
     if (!(await stream(lines, live, i > 0))) return;
   }
-  steps.at(-1).after(cursor); // on its own line, not inside the last link
-  cursor.classList.remove("cursor--busy");
+  cursor.remove();
 }
 
 // Undrawn rows are spaces of the same length, so the art keeps its size and nothing around it moves.
