@@ -88,7 +88,7 @@ themeButton.addEventListener("click", () => {
 // TERMINAL PRINTING
 // The name is drawn, then for each part a question is typed into its prompt, a spinner "thinks" and
 // the answer streams. Then the cursor disappears.
-// Printing stops at the bottom of the viewport and goes on as the visitor scrolls down.
+// Each part starts once its prompt has been scrolled fully into view, then prints to the end.
 // Without JS all text is simply visible. A click or key finishes printing at once.
 
 const CPS = 450; // output speed in characters per second
@@ -112,12 +112,6 @@ const moveCursor = (node) => {
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 const nextFrame = () => new Promise(requestAnimationFrame);
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// Waits while el is below the viewport. Returns false once a newer run has taken over.
-async function inView(el, live) {
-  while (live() && !fast && el.getBoundingClientRect().bottom > innerHeight) await nextFrame();
-  return live();
-}
 
 let run = 0;
 let fast = false;
@@ -143,7 +137,6 @@ async function typeInto(node, text, live) {
   for (const ch of text) {
     if (!live()) return false;
     if (fast) break;
-    if (!(await inView(cursor, live))) return false;
     node.data += ch;
     await wait(25 + Math.random() * 35);
   }
@@ -159,7 +152,6 @@ async function think(promptEl, live) {
   for (const frame of "⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏") {
     if (!live()) return false;
     if (fast) break;
-    if (!(await inView(thinking, live))) return false;
     spinner.textContent = frame;
     await wait(80);
   }
@@ -176,9 +168,9 @@ async function stream(nodes, live) {
       if (!live()) return false;
       if (fast) { node.data = text; break; }
       await nextFrame();
-      if (!(await inView(cursor, live))) return false;
+      if (!live()) return false;
       const now = performance.now();
-      // frame time capped, so text held back (below the viewport, background tab) doesn't come out at once
+      // frame time capped, so returning from a background tab doesn't print everything at once
       node.data = text.slice(0, node.data.length + Math.max(1, Math.round((Math.min(now - t, 50) * CPS) / 1000)));
       t = now;
     }
@@ -217,11 +209,13 @@ async function print() {
     step.hidden = false;
     moveCursor(cmd);
     cursor.classList.remove("cursor--busy");
-    if (!(await inView(cursor, live))) return;
+    const prompt = step.querySelector(".prompt");
+    while (live() && !fast && prompt.getBoundingClientRect().bottom > innerHeight) await nextFrame();
+    if (!live()) return;
     if (!fast) await wait(500);
     cursor.classList.add("cursor--busy");
     if (!(await typeInto(cmd, cmdText, live))) return;
-    if (!(await think(step.querySelector(".prompt"), live))) return;
+    if (!(await think(prompt, live))) return;
     if (!(await stream(lines, live))) return;
   }
   cursor.remove();
