@@ -115,6 +115,7 @@ button:focus-visible {
    ================================ */
 
 .term {
+  box-sizing: content-box; /* max-width caps the text column; the side padding sits outside it */
   max-width: 88ch;
   padding: 24px max(16px, 5vw) 64px;
 }
