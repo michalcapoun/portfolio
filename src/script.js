@@ -23,6 +23,7 @@ const translations = {
     "tools.automation": "automation",
     "tools.mobile": "mobile",
     "tools.network": "network",
+    "tools.other": "other",
     "work.title": "Experience",
     "work.now": "now",
     "work.course": "Coding course",
@@ -424,6 +425,7 @@ function files() {
       `${"API".padEnd(14)}Postman, Swagger`,
       `${label("tools.network")}Proxyman`,
       `${"backend".padEnd(14)}Azure Application Insights`,
+      `${label("tools.other")}SQL, Jira, Confluence, Azure DevOps, Firebase`,
     ].join("\n"),
     "contact.txt": [
       `${"e-mail".padEnd(14)}${EMAIL}`,
