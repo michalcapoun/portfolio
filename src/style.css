@@ -148,11 +148,14 @@ button:focus-visible {
 
 /* Name in block letters with the role under it; shrinks to fit narrow screens (57 columns wide) */
 .intro {
+  margin-bottom: 1.7em;
+  container-type: inline-size; /* the name sizes itself to its width */
+}
+
+.intro__name {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  margin-bottom: 1.7em;
-  container-type: inline-size; /* the name and portrait size themselves to its width */
 }
 
 .banner {
@@ -163,14 +166,14 @@ button:focus-visible {
   color: var(--strong);
 }
 
-/* ASCII portrait beside the name, as tall as it; only where there is room */
+/* ASCII portrait beside the name and role; only where there is room */
 .portrait {
   display: none;
 }
 
-/* Name and portrait fill the column exactly, so nothing sticks out past the prompts: with the
-   portrait as tall as the name (51 rows vs 14), the two are 57 + 100 * 14/51 columns of 0.6em,
-   about 51em, plus the gap. */
+/* Name and portrait fill the column exactly, so nothing sticks out past the prompts. The portrait
+   has a fixed size: a whole-pixel font keeps its rows even in every browser (Safari rounds line
+   heights down). 100 columns of 0.6 * 5px = 300px; the name takes the rest, 57 columns of 0.6em. */
 @media (min-width: 1200px) {
   .intro__top {
     display: flex;
@@ -179,12 +182,13 @@ button:focus-visible {
     gap: 32px;
   }
 
-  .banner { font-size: calc((100cqi - 32px) / 51); }
+  .banner { font-size: calc((100cqi - 32px - 300px) / 34.2); }
 
   .portrait {
+    flex: none;
     margin: 0;
     font: inherit;
-    font-size: calc((100cqi - 32px) / 51 * 14 / 51);
+    font-size: 5px;
     line-height: 1;
     color: var(--fg);
   }
