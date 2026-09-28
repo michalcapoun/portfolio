@@ -10,12 +10,9 @@ Osobní portfolio.
 
 ## Funkce
 
-- Stránka vypadá jako rozhovor s AI v terminálu: po otevření se po řádcích vykreslí moje jméno velkým blokovým písmem a pak přijdou tři otázky — o mně, na čem jsem pracoval (zkušenosti, nástroje, projekty) a kontakt. Každá se napíše do promptu, chvíli se „přemýšlí“ a odpověď se vypíše po znacích; na konci bliká kurzor v prázdném promptu. Druhou a třetí odpověď stránka při výpisu sleduje, dokud návštěvník nescrollne nebo neklikne
+- Stránka vypadá jako rozhovor s AI v terminálu: po otevření se po řádcích vykreslí moje jméno velkým blokovým písmem a pak přijdou tři otázky — o mně, na čem jsem pracoval (zkušenosti, nástroje, projekty) a kontakt. Každá se napíše do promptu, chvíli se „přemýšlí“ a odpověď se vypíše po znacích; na konci bliká kurzor pod poslední odpovědí. Druhou a třetí odpověď stránka při výpisu sleduje, dokud návštěvník nescrollne nebo neklikne
 - První otázka má devět znění a při každém otevření se vybere jiné než minule (pamatuje se v localStorage); odpověď je pro všechna stejná
 - Na širokých obrazovkách (od 1200 px) se vedle jména vykreslí můj ASCII portrét, ve světlém motivu s obráceným stínováním; na mobilu je schovaný
-- Do spodního promptu se dá psát: otázky (nebo klik na navrženou otázku) dostanou předem napsanou odpověď vybranou podle klíčových slov; co stránka nezná, na to odkáže na e-mail. Všechno běží ve stránce, bez serveru
-- Prompt zároveň napodobuje terminál (zsh) nad obsahem portfolia: soubory `about.txt`, `tools.txt`, `contact.txt` a `projects/*/README.md` jen pro čtení; příkazy `ls` (`-l`, `-a`), `cd` (i `cd -`), `cat`/`less`, `tree`, `head`, `tail`, `wc`, `grep`, `man michal`, `echo $HOME`, `env`, `which`, `pwd`, `whoami`, `uname`, `uptime`, `history`, `!!`, `clear`, `exit`; neznámé příkazy hlásí `zsh: command not found`. Klávesy ↑/↓ (historie), Tab (doplňování), Ctrl+C/L/U/D; blokový kurzor jde posouvat šipkami, prompt ukazuje aktuální složku a stránka sleduje výpis
-- Když návštěvník stránku „testuje“ (vloží HTML/JS nebo šablonu, vloží přes 1000 znaků, upraví limity promptu v DevTools nebo pošle 4 otázky za 5 s), portfolio zmizí a zbyde jen „Dobrý pokus, ale bugy tu hledám já“, pojmenovaná technika a rozloučení; po obnovení stránky je vše zpět. Pozná se to podle chování a HTML parseru prohlížeče, ne podle klíčových slov
 - Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
 - Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
 - Přepínání jazyka (CS / EN), volba se pamatuje v localStorage; po přepnutí se text vypíše znovu
