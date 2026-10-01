@@ -12,9 +12,8 @@ Osobní portfolio.
 
 - Stránka vypadá jako rozhovor s AI v terminálu: po otevření se po řádcích vykreslí moje jméno velkým blokovým písmem a pak přijdou čtyři otázky — o mně, zkušenosti, vlastní projekty a kontakt. Každá se napíše do promptu, chvíli se „přemýšlí“ a odpověď se vypíše po znacích; na konci bliká kurzor pod poslední odpovědí. Odpovědi od druhé dál stránka při výpisu sleduje, dokud návštěvník nescrollne nebo neklikne
 - První otázka má devět znění a při každém otevření se vybere jiné než minule (pamatuje se v localStorage); odpověď je pro všechna stejná
-- Na širokých obrazovkách (od 1200 px) se vedle jména vykreslí můj ASCII portrét, ve světlém motivu s obráceným stínováním; na mobilu je schovaný
+- Na širokých obrazovkách (od 1200 px) se vedle jména vykreslí můj ASCII portrét; na mobilu je schovaný
 - Kliknutí, klávesa, scroll nebo dotyk dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
-- Přepínání tmavého / světlého motivu, volba se pamatuje v localStorage (výchozí je tmavý)
 - Přepínání jazyka (CS / EN), volba se pamatuje v localStorage; po přepnutí se text vypíše znovu
 - Pozdrav v konzoli prohlížeče pro návštěvníky, kteří otevřou DevTools
 - Responzivní rozložení (mobil i desktop)

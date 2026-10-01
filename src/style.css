@@ -1,6 +1,5 @@
 /* ================================
-   THEME (high contrast in the spirit of the VS Code High Contrast themes;
-   dark by default, set on <html data-theme>)
+   THEME (high contrast in the spirit of the VS Code High Contrast themes; dark only)
    ================================ */
 
 :root {
@@ -13,18 +12,6 @@
   --accent-2: #e0a0ff;
   --link: #ffd24a;
   --line: #6fc3df;
-}
-
-:root[data-theme="light"] {
-  color-scheme: light;
-  --bg: #ffffff;
-  --fg: #000000;
-  --strong: #000000;
-  --dim: #474747;
-  --accent: #0f4a85;
-  --accent-2: #6b1d94;
-  --link: #8a3b00;
-  --line: #0f4a85;
 }
 
 /* ================================
@@ -83,7 +70,7 @@ button:focus-visible {
 }
 
 /* ================================
-   CONTROLS (language, theme)
+   CONTROLS (language)
    ================================ */
 
 .controls {
@@ -114,7 +101,7 @@ button:focus-visible {
    TERMINAL
    ================================ */
 
-/* One centred column; the toggles share it so they sit at its right edge */
+/* One centred column; the language toggle shares it so it sits at its right edge */
 .controls,
 .term {
   box-sizing: content-box; /* max-width caps the text column; the side padding sits outside it */
@@ -188,17 +175,13 @@ button:focus-visible {
   .banner { font-size: calc((100cqi - 32px - 300px) / 34.2); }
 
   .portrait {
+    display: block;
     flex: none;
     margin: 0;
     font: inherit;
     font-size: 5px;
     line-height: 1;
     color: var(--fg);
-  }
-
-  :root:not([data-theme="light"]) .portrait--dark,
-  :root[data-theme="light"] .portrait--light {
-    display: block;
   }
 }
 

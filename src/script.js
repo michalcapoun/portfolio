@@ -64,26 +64,7 @@ const applyLanguage = (lang) => {
   langButton.textContent = lang === "cs" ? "EN" : "CS";
   langButton.setAttribute("aria-label", lang === "cs" ? "Switch to English" : "Přepnout do češtiny");
   document.documentElement.lang = lang;
-  updateThemeButton();
 };
-
-// THEME SWITCHER
-
-const themeButton = document.querySelector(".theme-button");
-const root = document.documentElement;
-
-// The button names the theme it switches to.
-function updateThemeButton() {
-  const toLight = root.dataset.theme !== "light";
-  const labels = { cs: ["světlý", "tmavý"], en: ["light", "dark"] }[currentLang];
-  themeButton.textContent = toLight ? labels[0] : labels[1];
-}
-
-themeButton.addEventListener("click", () => {
-  root.dataset.theme = root.dataset.theme === "light" ? "dark" : "light";
-  storage.set("selected-theme", root.dataset.theme);
-  updateThemeButton();
-});
 
 // TERMINAL PRINTING
 // The name is drawn, then for each part a question is typed into its prompt, a spinner "thinks" and
@@ -224,7 +205,7 @@ async function print() {
 // Undrawn rows are spaces of the same length, so the art keeps its size and nothing around it moves.
 const blank = (text) => text.replace(/[^\n]/g, " ");
 
-// ASCII art prints line by line; both portrait variants in step.
+// ASCII art prints line by line.
 async function drawArt(entries, live) {
   const rows = entries.map(([el, text]) => [el, text.split("\n"), blank(text).split("\n")]);
   for (let i = 1; i <= rows[0][1].length; i++) {
