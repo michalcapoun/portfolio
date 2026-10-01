@@ -1,6 +1,8 @@
 # michalcapoun.cz
 
-Osobní portfolio.
+[English](README.en.md)
+
+Jsem Michal Čapoun, QA Automation Engineer, a tohle je můj osobní web: kdo jsem, na čem jsem pracoval, vlastní projekty a kontakt.
 
 **Živě:** [michalcapoun.cz](https://michalcapoun.cz)
 
@@ -10,7 +12,7 @@ Osobní portfolio.
 
 ## Funkce
 
-- Stránka vypadá jako rozhovor s AI v terminálu: po otevření se po řádcích vykreslí moje jméno velkým blokovým písmem a pak přijdou čtyři otázky — o mně, zkušenosti, vlastní projekty a kontakt. Každá se napíše do promptu, chvíli se „přemýšlí“ a odpověď se vypíše po znacích; po poslední odpovědi kurzor zmizí. Další otázka se začne psát, až je její prompt celý vidět — tedy až k ní návštěvník doscrolluje
+- Stránka vypadá jako rozhovor s AI v terminálu: vykreslí se moje jméno blokovým písmem a pak přijdou čtyři otázky — o mně, zkušenosti, vlastní projekty a kontakt. Každá se napíše do promptu a odpověď se vypíše po znacích, jakmile k ní návštěvník doscrolluje
 - První otázka má devět znění a při každém otevření se vybere jiné než minule (pamatuje se v localStorage); odpověď je pro všechna stejná
 - Na širokých obrazovkách (od 1200 px) se vedle jména vykreslí můj ASCII portrét; na mobilu je schovaný
 - Kliknutí nebo klávesa dopíše text okamžitě; s vypnutými animacemi v systému se vypíše hned; bez JS je text rovnou vidět
