@@ -2,7 +2,7 @@
 
 [Česky](README.md)
 
-I'm Michal Čapoun, a QA Automation Engineer, and this is my personal website: who I am, what I've worked on, my own projects and how to reach me.
+I'm a QA Automation Engineer and this is my personal website: who I am, what I've worked on, my own projects and how to reach me.
 
 **Live:** [michalcapoun.cz](https://michalcapoun.cz)
 
