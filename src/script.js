@@ -22,7 +22,7 @@ const translations = {
     "work.now": "now",
     "work.cornerstone": "QA strategy and automated tests (E2E, API) in CI/CD for web and mobile, AI for test design.",
     "work.cyberfox": "Manual and automated testing of mobile apps (Appium), E2E scenarios and acceptance criteria, API tests in Postman, data checks in SQL.",
-    "work.assist": "Web app calculating car sales bonuses for Renault. Java, Spring Boot, SQL, AWS.",
+    "work.assist": "Development of a web app calculating car sales bonuses for Renault. Java, Spring Boot, SQL, AWS.",
     "work.bluepool": "Testing web and mobile apps, tests in Playwright, Appium and Postman.",
     "projects.portfolio": "This portfolio. Plain HTML, CSS and JavaScript, no frameworks.",
     "projects.tracer": "Personal archive of trips planned in Mapy.com. Vue 3, TypeScript, Supabase.",
