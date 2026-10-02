@@ -13,7 +13,7 @@ const storage = {
 const translations = {
   en: {
     "thinking": "Thinking…",
-    "prompt.work": "What have you worked on?",
+    "prompt.work": "Where have you worked?",
     "prompt.projects": "Any projects of your own?",
     "prompt.contact": "How can I reach you?",
     "role": "QA Automation Engineer",
