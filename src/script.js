@@ -18,7 +18,7 @@ const translations = {
     "prompt.contact": "How can I reach you?",
     "role": "QA Automation Engineer",
     "about.p1": "I test web and mobile applications, mostly with automation. I work with AI every day: I give it the context and let it design tests, write automation or analyse a bug. What gets tested and whether the result is right is my call.",
-    "about.p2": "I've been into computers since elementary school — I built my first one from spare parts. Through IT support, I found my way to software testing and discovered what I enjoy: systematically finding problems before they reach users.",
+    "about.p2": "Through IT support, I found my way to software testing and discovered what I enjoy: systematically finding problems before they reach users.",
     "work.now": "now",
     "work.cornerstone": "QA strategy and automated tests (E2E, API) in CI/CD for web and mobile, AI for test design.",
     "work.cyberfox": "Manual and automated testing of mobile apps and websites (Appium), E2E scenarios and acceptance criteria, API tests in Postman, data checks in SQL.",
