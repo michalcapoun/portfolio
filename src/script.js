@@ -21,7 +21,7 @@ const translations = {
     "about.p2": "Through IT support, I found my way to software testing and discovered what I enjoy: systematically finding problems before they reach users.",
     "work.now": "now",
     "work.cornerstone": "QA strategy and automated tests (E2E, API) in CI/CD for web and mobile, AI for test design.",
-    "work.cyberfox": "Manual and automated testing of mobile apps and websites (Appium), E2E scenarios and acceptance criteria, API tests in Postman, data checks in SQL.",
+    "work.cyberfox": "Manual and automated testing of mobile apps (Appium), E2E scenarios and acceptance criteria, API tests in Postman, data checks in SQL.",
     "work.assist": "Web app calculating car sales bonuses for Renault. Java, Spring Boot, SQL, AWS.",
     "work.bluepool": "Testing web and mobile apps, tests in Playwright, Appium and Postman.",
     "projects.portfolio": "This portfolio. Plain HTML, CSS and JavaScript, no frameworks.",
