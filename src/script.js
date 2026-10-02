@@ -53,7 +53,8 @@ const PROMPTS = [
 }
 
 const langButton = document.querySelector(".lang-button");
-let currentLang = storage.get("selected-lang") || "cs";
+// A stored choice wins; otherwise Czech for browsers that list Czech or Slovak, English for the rest.
+let currentLang = storage.get("selected-lang") || (navigator.languages.some((l) => /^(cs|sk)/.test(l)) ? "cs" : "en");
 
 const applyLanguage = (lang) => {
   document.querySelectorAll("[data-i18n]").forEach((el) => {

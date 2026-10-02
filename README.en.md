@@ -16,7 +16,8 @@ Plain HTML, CSS and JavaScript. No frameworks, no build, no dependencies — apa
 - The first question has nine wordings and each visit picks a different one than last time (remembered in localStorage); the answer is the same for all of them
 - On wide screens (from 1200 px) my ASCII portrait is drawn next to the name; it is hidden on phones
 - A click or a key press prints the rest at once; with animations turned off in the system the text is printed straight away; without JS the text is simply visible
-- Language switch (CS / EN), the choice is remembered in localStorage; the text is printed again after switching
+- The language follows the browser: Czech if the visitor's languages include Czech or Slovak, English otherwise
+- Language switch (CS / EN), the choice is remembered in localStorage and takes precedence; the text is printed again after switching
 - A greeting in the browser console for visitors who open DevTools
 - Responsive layout (phone and desktop)
 - Google Analytics (G-7GPX0KYLXE)
