@@ -78,7 +78,6 @@ const thinking = document.querySelector(".thinking");
 const spinner = document.querySelector(".thinking__spinner");
 const steps = [...document.querySelectorAll(".step")];
 const role = document.querySelector(".intro p");
-const banner = document.querySelector(".banner");
 const art = [...document.querySelectorAll(".banner, .portrait")].map((el) => [el, el.textContent]);
 // Block cursor, like a terminal's
 const cursor = document.createElement("span");
@@ -182,8 +181,7 @@ async function print() {
   thinking.hidden = true;
 
   // name and portrait are drawn first, then the role
-  drawArt(art.filter(([el]) => el !== banner), live); // the portrait runs alongside everything else
-  if (!(await drawArt(art.filter(([el]) => el === banner), live))) return;
+  if (!(await drawArt(art, live))) return;
   if (!(await stream(roleLines, live))) return;
 
   // each part: empty prompt, idle cursor for a moment, the question typed by hand, then the answer.
@@ -206,13 +204,18 @@ async function print() {
 // Undrawn rows are spaces of the same length, so the art keeps its size and nothing around it moves.
 const blank = (text) => text.replace(/[^\n]/g, " ");
 
-// ASCII art prints line by line.
+// ASCII art prints line by line. The first entry (the name) sets the pace; a taller one (the portrait) draws
+// several rows per tick, so all of them finish together.
 async function drawArt(entries, live) {
   const rows = entries.map(([el, text]) => [el, text.split("\n"), blank(text).split("\n")]);
-  for (let i = 1; i <= rows[0][1].length; i++) {
+  const ticks = rows[0][1].length;
+  for (let i = 1; i <= ticks; i++) {
     if (!live()) return false;
     if (fast) break;
-    rows.forEach(([el, lines, blanks]) => (el.textContent = lines.map((line, j) => (j < i ? line : blanks[j])).join("\n")));
+    rows.forEach(([el, lines, blanks]) => {
+      const drawn = Math.ceil((i * lines.length) / ticks);
+      el.textContent = lines.map((line, j) => (j < drawn ? line : blanks[j])).join("\n");
+    });
     await wait(35);
   }
   if (!live()) return false;
