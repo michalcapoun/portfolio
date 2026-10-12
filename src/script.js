@@ -141,10 +141,11 @@ async function think(promptEl, live) {
   return true;
 }
 
-async function stream(nodes, live) {
+// The role under the name prints without the cursor; it only belongs to the prompts and their answers.
+async function stream(nodes, live, withCursor = true) {
   let t = performance.now();
   for (const [node, text] of nodes) {
-    moveCursor(node);
+    if (withCursor) moveCursor(node);
     while (node.data.length < text.length) {
       if (!live()) return false;
       if (fast) { node.data = text; break; }
@@ -182,7 +183,7 @@ async function print() {
 
   // name and portrait are drawn first, then the role
   if (!(await drawArt(art, live))) return;
-  if (!(await stream(roleLines, live))) return;
+  if (!(await stream(roleLines, live, false))) return;
 
   // each part: empty prompt, idle cursor for a moment, the question typed by hand, then the answer.
   for (const { step, cmd: [cmd, cmdText], lines } of parts) {
